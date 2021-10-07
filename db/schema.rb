@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_082947) do
+ActiveRecord::Schema.define(version: 2021_10_07_083225) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 2021_10_07_082947) do
     t.integer "prefecture_id"
     t.integer "user_id"
     t.string "image_id"
+    t.float "evaluation"
+    t.text "body1"
+    t.text "body2"
+    t.text "body3"
+    t.string "city"
     t.index ["prefecture_id"], name: "index_posts_on_prefecture_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
