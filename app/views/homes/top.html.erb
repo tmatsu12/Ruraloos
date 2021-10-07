@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <p id="notice"><%= flash[:notice] %></p>
+
+  <div class="row">
+
+    <div class="main-visual">
+      <div class="main-visual-content d-flex justify-content-center align-items-center flex-column">
+        <h1 class="font-weight-bold mb-3"><%= image_tag "favicon.ico", size: '55x55' %> <span class="mx-auto">Ruraloos</span> <%= image_tag "favicon.ico", size: '55x55' %></h1>
+        <h3>地方移住を希望する人のための情報共有アプリ</h3>
+        <a class="btn btn-dark btn-lg rounded-pill mt-3 go-map", href="#map-container">住んでみたい地域を選ぶ</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+      <div class="sub-visual">
+        <div class="sub-visual-content text-center d-flex align-items-center px-5">
+          <h3>
+            <p>「田舎に住んでみたいな」と思ったあなた</p>
+            <p>このアプリでは住んでみたい地域についての意見を聞き質問できます</p>
+            <p>田舎暮らしはいいことばかりではありません</p>
+            <p>先輩達のリアルな声を聞いてどこに移住するのか考えていきましょう！</p>
+          </h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="mx-auto pt-5">
+      <div id="map-container"></div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+  $(function(){
+    $(".go-map").on("click", function() {
+      $("html,body").animate({scrollTop:$('#map-container').offset().top},'slow');
+      return false;
+  });
+  });
+</script>
+
+<script>
+  $(function(){
+      var areas = [
+          {code : 1, name: "北海道地方", color: "#7f7eda", hoverColor: "#b3b2ee", prefectures: [1]},
+          {code : 2, name: "東北地方",   color: "#759ef4", hoverColor: "#98b9ff", prefectures: [2,3,4,5,6,7]},
+          {code : 3, name: "関東地方",   color: "#7ecfea", hoverColor: "#b7e5f4", prefectures: [8,9,10,11,12,13,14]},
+          {code : 4, name: "中部地方",   color: "#7cdc92", hoverColor: "#aceebb", prefectures: [15,16,17,18,19,20,21,22,23]},
+          {code : 5, name: "近畿地方",   color: "#ffe966", hoverColor: "#fff19c", prefectures: [24,25,26,27,28,29,30]},
+          {code : 6, name: "中国地方",   color: "#ffcc66", hoverColor: "#ffe0a3", prefectures: [31,32,33,34,35]},
+          {code : 7, name: "四国地方",   color: "#fb9466", hoverColor: "#ffbb9c", prefectures: [36,37,38,39]},
+          {code : 8, name: "九州地方",   color: "#ff9999", hoverColor: "#ffbdbd", prefectures: [40,41,42,43,44,45,46]},
+          {code : 9, name: "沖縄地方",   color: "#eb98ff", hoverColor: "#f5c9ff", prefectures: [47]},
+      ];
+
+      var areaLinks = {
+  		"北海道地方" : "/region/hokkaido",
+  		"東北地方" : "/region/tohoku",
+  		"関東地方" : "/region/kanto",
+  		"中部地方" : "/region/chubu",
+  		"近畿地方" : "/region/kinki",
+  		"中国地方" : "/region/chugoku",
+  		"四国地方" : "/region/shikoku",
+  		"九州地方" : "/region/kyusyu",
+  		"沖縄地方" : "/region/okinawa",
+  	};
+
+      $("#map-container").japanMap({
+              areas  : areas,
+              selection : "area",
+              borderLineWidth: 0.25,
+              drawsBoxLine : false,
+              movesIslands : true,
+              showsAreaName : true,
+              width: 800,
+              font : "MS Mincho",
+              fontSize : 16,
+              fontColor : "areaColor",
+              fontShadowColor : "black",
+              onSelect : function(data){
+              location.href = areaLinks[data.area.name];
+          }
+      });
+  });
+</script>
