@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_082229) do
+ActiveRecord::Schema.define(version: 2021_10_07_082416) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "prefecture_id"
+    t.index ["prefecture_id"], name: "index_posts_on_prefecture_id"
   end
 
   create_table "prefectures", force: :cascade do |t|
