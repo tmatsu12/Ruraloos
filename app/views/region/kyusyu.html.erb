@@ -1,0 +1,56 @@
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-9 mt-5 d-flex align-content-start flex-wrap">
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 39) do %>
+          <%= image_tag 'kyusyu/fukuoka.jpg', size: "240x190" %>
+          <p class="text-center">福岡県(<%= Prefecture.find(39).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 40) do %>
+          <%= image_tag 'kyusyu/saga.jpg', size: "240x190" %>
+          <p class="text-center">佐賀県(<%= Prefecture.find(40).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 41) do %>
+          <%= image_tag 'kyusyu/nagasaki.jpg', size: "240x190" %>
+          <p class="text-center">長崎県(<%= Prefecture.find(41).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 42) do %>
+          <%= image_tag 'kyusyu/kumamoto.jpg', size: "240x190" %>
+          <p class="text-center">熊本県(<%= Prefecture.find(42).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 43) do %>
+          <%= image_tag 'kyusyu/ooita.jpg', size: "240x190" %>
+          <p class="text-center">大分県(<%= Prefecture.find(43).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 44) do %>
+          <%= image_tag 'kyusyu/miyazaki.jpg', size: "240x190" %>
+          <p class="text-center">宮崎県(<%= Prefecture.find(44).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+      <div class="mb-3 mr-2">
+        <%= link_to posts_path(prefecture_id: 45) do %>
+          <%= image_tag 'kyusyu/kagoshima.jpg', size: "240x190" %>
+          <p class="text-center">鹿児島県(<%= Prefecture.find(45).posts.count %>件の投稿）</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-3 mt-5">
+      <%= render "users/sidebar", user:current_user %>
+      </div>
+
+  </div>
+
+</div>
