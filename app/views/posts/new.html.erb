@@ -3,6 +3,7 @@
     <div class="col-9 mt-5">
 
       <%= render "posts/errors", obj:@post %>
+
         <%= form_with model:@post, local:true do |f| %>
           <div class="form-group">
             <%= f.label :タイトル %><span class="text-danger">(必須)</span><br />
