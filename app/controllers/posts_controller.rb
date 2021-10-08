@@ -54,6 +54,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id])
+    @prefecture = @post.prefecture
+    @user = @post.user
+  end
+
   private
 
   def post_params
