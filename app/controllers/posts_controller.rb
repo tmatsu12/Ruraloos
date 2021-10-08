@@ -19,4 +19,17 @@ class PostsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+
+  def create
+    @post = Post.new(post_params)
+    @prefecture = @post.prefecture
+    @post.user_id = current_user.id
+    if @post.save
+      redirect_to post_path(@post)
+    else
+      @user = current_user
+      @prefecture = Prefecture.find(session[:prefecture])
+      render :new
+    end
+  end
 end
