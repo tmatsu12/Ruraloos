@@ -49,7 +49,64 @@
           });
           </script>
 
+          <table class="table mt-4 table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【生活面について】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body %></td>
+              </tr>
+            </tbody>
+          </table>
 
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【仕事面について】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body1 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【人間関係面について】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body2 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【その他】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body3 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary mb-2 rounded-pill" %>
+          <br>
+          <% if @post.user == current_user %>
+          <%= link_to "編集", edit_post_path(@post), class: "btn btn-success my-3 rounded-pill" %>
+          <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger my-3 rounded-pill" %>
+          <% end %>
 
 
     </div>
