@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def self.guest
+  def self.guest # チェリー本「クラスメソッドの定義について：そのクラスに関連は深いものの、各インスタンスに含まれるデータは使わないメソッドを定義したい場合もある」
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲスト"
