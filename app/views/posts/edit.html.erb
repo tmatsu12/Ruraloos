@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9 mt-5">
+
+      <%= render "posts/errors", obj:@post %>
+        <%= form_with model:@post, local:true do |f| %>
+
+          <div class="form-group">
+            <%= f.label :タイトル %><span class="text-danger">(必須)</span><br />
+            <%= f.text_field :title, class: "col-9 form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :どこに住んでますか？、又は住んでましたか？ %><span class="text-danger">(必須)</span><br />
+            <%= f.text_field :city, class: "col-9 form-control", placeholder: "市町村名" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :画像 %><br />
+            <%= f.attachment_field :image %>
+          </div>
+
+          <div class="form-group" id="star">
+            <%= f.label :総合的な満足度 %>：<%= @post.evaluation %>点（変更前）<span class="text-danger">(必須)</span><br/>
+            <%= f.hidden_field :evaluation %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :【生活面について】 %><br />
+            <%= f.text_area :body, rows: 4, class: "col-9 form-control", placeholder: "食事、家賃、レジャー、土地柄など" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :【仕事面について】 %><br />
+            <%= f.text_area :body1, rows: 4, class: "col-9 form-control", placeholder: "仕事の見つけやすさ、盛んな業種など" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :【人間関係面について】 %><br />
+            <%= f.text_area :body2, rows: 4, class: "col-9 form-control", placeholder: "地域づきあいの濃密さなど" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :【その他】 %><br />
+            <%= f.text_area :body3, rows: 4, class: "col-9 form-control", placeholder: "自由に書きましょう！" %>
+          </div>
+
+          <%= f.hidden_field :prefecture_id, value: @post.prefecture_id %>
+
+          <div class="actions">
+            <%= f.submit '更新',class: "btn btn-success rounded-pill" %>
+          </div>
+
+        <% end %>
+
+        <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary mt-3 rounded-pill" %>
+
+
+    </div>
+
+    <div class="col-3 mt-5">
+      <%= render partial: "users/sidebar", locals: {user:@user} %>
+    </div>
+
+
+  </div>
+
+</div>
+
+<script>
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'post[evaluation]',
+    half: true,
+  });
+</script>
