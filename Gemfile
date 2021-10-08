@@ -77,10 +77,10 @@ gem 'seed-fu'
 
 gem 'geocoder'
 
-gem 'dotenv-rails'
-
 gem 'rails-i18n'
 
 gem 'kaminari', '~> 1.2.1'
 
 gem 'rubocop-airbnb'
+
+gem 'dotenv-rails'
