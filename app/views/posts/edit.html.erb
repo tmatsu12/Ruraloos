@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9 mt-5">
+
+      <%= render "posts/errors", obj:@post %>
+        <%= form_with model:@post, local:true do |f| %>
+
+        <% end %>
+        <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary mt-3 rounded-pill" %>
+
+
+    </div>
+    <div class="col-3 mt-5">
+    </div>
+
+
+  </div>
+
+</div>
+
