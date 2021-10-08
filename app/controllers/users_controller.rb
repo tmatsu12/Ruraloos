@@ -18,4 +18,10 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :profile_image, :prefecture1_id, :prefecture2_id)
+  end
 end
