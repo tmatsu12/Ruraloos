@@ -1,0 +1,119 @@
+<div class="container">
+  <p id="notice"><%= flash[:notice] %></p>
+  <div class="row">
+    <div class="col-9 mt-5">
+
+
+        <h1 class="border-bottom border-danger"><%= @post.title %></h1>
+
+          <p class="mt-3">どのあたりに住んでいるか、又は住んでいたか：<%= @post.city %></p>
+
+          <div id='map'></div>
+
+          <style>
+          #map {
+            height: 300px;
+            width: 100%;
+          }
+          </style>
+
+          <script>
+          let map
+
+          function initMap(){
+            geocoder = new google.maps.Geocoder()
+
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
+              zoom: 10,
+            });
+
+            marker = new google.maps.Marker({
+              position:  {lat: <%= @latlng[0] %>, lng: <%= @latlng[1] %>},
+              map: map
+            });
+          }
+          </script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap"async defer></script>
+
+          <div id="star-rate-<%= @post.id %>" class="mt-3">総合的な満足度：<%= @post.evaluation %>点</div>
+          <script>
+          $('#star-rate-<%= @post.id %>').raty({
+            size: 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: <%= @post.evaluation %>,
+          });
+          </script>
+
+          <table class="table mt-4 table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【生活面について】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【仕事面について】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body1 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【人間関係面について】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body2 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table table-bordered">
+            <thead class="thead-light">
+              <tr>
+                <th>【その他】</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><%= @post.body3 %></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary mb-2 rounded-pill" %>
+          <br>
+          <% if @post.user == current_user %>
+          <%= link_to "編集", edit_post_path(@post), class: "btn btn-success my-3 rounded-pill" %>
+          <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger my-3 rounded-pill" %>
+          <% end %>
+
+
+    </div>
+
+    <div class="col-3 mt-5">
+      <%= render partial: "users/sidebar_show", locals: {user:@user, prefecture:@prefecture} %>
+    </div>
+
+  </div>
+</div>
