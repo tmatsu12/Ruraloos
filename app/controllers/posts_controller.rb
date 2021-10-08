@@ -32,4 +32,11 @@ class PostsController < ApplicationController
       render :new
     end
   end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:title, :city, :body, :prefecture_id, :image, :evaluation, :body1, :body2, :body3)
+  end
+
 end
