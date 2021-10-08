@@ -28,4 +28,3 @@ Geocoder.configure(
   ],
   api_key:  ENV['GOOGLEMAP'] ,
   use_https: true
-)
