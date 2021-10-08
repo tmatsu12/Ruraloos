@@ -60,6 +60,18 @@ class PostsController < ApplicationController
     @user = @post.user
   end
 
+  def update
+    @post = Post.find(params[:id])
+    @prefecture = @post.prefecture
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+      flash[:notice] = "投稿を更新しました"
+    else
+      @user = @post.user
+      render :edit
+    end
+  end
+
   private
 
   def post_params
