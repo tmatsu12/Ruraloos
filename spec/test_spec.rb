@@ -39,3 +39,36 @@ describe 'エラー②：フレンドリーフォワーディングの確認（�
       fill_in 'user[password_confirmation]', with: user.password_confirmation
       click_button "新規登録"
     end
+
+    it '新規登録後に新規投稿画面に遷移する' do
+      expect(current_path).to eq '/posts/new?prefecture_id=' + prefecture.id.to_s
+      # expect(current_path).to eq "/"
+    end
+  end
+
+  context '新規投稿を押下後に簡単ログインした場合' do
+    let(:user) { create(:user) }
+
+    before do
+      click_link "簡単ログイン"
+    end
+
+    it '簡単ログイン後に新規投稿画面に遷移する' do
+      expect(current_path).to eq '/posts/new?prefecture_id=' + prefecture.id.to_s
+    end
+  end
+
+  context '新規投稿を押下後にログインした場合' do
+    let!(:user) { create(:user) }
+
+    before do
+      fill_in 'user[email]', with: user.email
+      fill_in 'user[password]', with: user.password
+      click_button "ログイン"
+    end
+
+    it 'ログイン後に新規投稿画面に遷移する' do
+      expect(current_path).to eq '/posts/new?prefecture_id=' + prefecture.id.to_s
+    end
+  end
+end
