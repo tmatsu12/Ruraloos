@@ -14,4 +14,10 @@ class PostCommentsController < ApplicationController
       render 'error'
     end
   end
+
+  private
+
+  def post_comment_params
+    params.require(:post_comment).permit(:comment, :parent_id)
+  end
 end
