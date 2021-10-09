@@ -26,4 +26,12 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :profile_image, :prefecture1_id, :prefecture2_id)
   end
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    if @user != current_user
+      flash[:notice] = "他のユーザーの情報は変更できません"
+      redirect_to user_path(current_user)
+    end
+  end
 end
