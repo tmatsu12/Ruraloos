@@ -25,7 +25,7 @@ describe 'エラー②：フレンドリーフォワーディングの確認（�
 
   before do
     visit '/posts?prefecture_id=' + prefecture.id.to_s
-    click_link "新規に投稿する"
+    click_link "#{prefecture.name}に関する新規投稿"
   end
 
   context '新規投稿を押下後に新規登録した場合' do
@@ -88,7 +88,7 @@ describe 'エラー③：１回エラーになってからもう一度新規投�
   context '空白で投稿してエラーを発生させた後の投稿成功のテスト' do
     before do
       visit '/posts?prefecture_id=' + prefecture.id.to_s
-      click_link '新規に投稿する'
+      click_link "#{prefecture.name}に関する新規投稿"
       click_button '投稿'
       fill_in 'post[title]', with: post.title
       fill_in 'post[city]', with: post.city
