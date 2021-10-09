@@ -84,3 +84,25 @@ describe 'エラー③：１回エラーになってからもう一度新規投�
     fill_in 'user[password]', with: user.password
     click_button "ログイン"
   end
+
+  context '空白で投稿してエラーを発生させた後の投稿成功のテスト' do
+    before do
+      visit '/posts?prefecture_id=' + prefecture.id.to_s
+      click_link '新規に投稿する'
+      click_button '投稿'
+      fill_in 'post[title]', with: post.title
+      fill_in 'post[city]', with: post.city
+    end
+
+    # エラー後も新規投稿ページのリンクが変わらないかどうかは重要ではないことが分かった
+
+    it '自分の新しい投稿が正しく保存される' do
+      expect{ click_button '投稿' }.to change{ Post.count }.by(1)
+    end
+
+    it 'リダイレクト先が投稿詳細画面になっている' do
+      click_button '投稿'
+      expect(current_path).to eq '/posts/' + Post.last.id.to_s
+    end
+  end
+end
