@@ -42,8 +42,8 @@ class PostsController < ApplicationController
     end
   end
 
-
   def create
+
     @post = Post.new(post_params)
     @prefecture = @post.prefecture
     @post.user_id = current_user.id

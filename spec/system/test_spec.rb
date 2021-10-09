@@ -15,7 +15,7 @@ describe 'エラー①：ユーザー新規登録のテスト' do
 
   context '新規登録成功のテスト' do
     it '外部キー入力を求められることなく正しく新規登録される' do
-      expect { click_button "新規登録" }.to change{ User.count }.by(1)
+      expect { click_button "新規登録" }.to change { User.count }.by(1)
     end
   end
 end
@@ -97,7 +97,7 @@ describe 'エラー③：１回エラーになってからもう一度新規投�
     # エラー後も新規投稿ページのリンクが変わらないかどうかは重要ではないことが分かった
 
     it '自分の新しい投稿が正しく保存される' do
-      expect{ click_button '投稿' }.to change{ Post.count }.by(1)
+      expect { click_button '投稿' }.to change { Post.count }.by(1)
     end
 
     it 'リダイレクト先が投稿詳細画面になっている' do
