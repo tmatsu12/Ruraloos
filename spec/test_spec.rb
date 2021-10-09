@@ -121,3 +121,11 @@ describe 'エラー④：コメントに対する返信のテスト' do # ブラ
     fill_in 'post_comment[comment]', with: Faker::Lorem.characters(number: 10)
     click_button 'コメントする'
   end
+
+  context 'コメントを入力後に返信を送信するテスト' do
+    it '返信ボタンを押下後に返信フォームが表示される' do
+      click_on "返信"
+      expect(page).to have_content '返信をここに'
+    end
+  end
+end
