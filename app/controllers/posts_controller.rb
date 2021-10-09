@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy], notice: "ログインしてください（簡単ログインが便利です）"
 
   def index
     @user = current_user
