@@ -108,6 +108,28 @@
           <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger my-3 rounded-pill" %>
           <% end %>
 
+          <div class="comment_error">
+            <%= render 'posts/errors', obj: @post_comment %>
+          </div>
+
+          <div class="post_<%= @post.id %>">
+            <%= render "post_comments/count", post: @post %>
+          </div>
+
+          <%= form_with model:[@post, @post_comment] do |f| %>
+            <div class="form-group">
+              <%= f.text_area :comment, rows: 4, class: "col-9 form-control mt-3", placeholder: "コメントをここに（まずはログインしましょう！）" %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit 'コメントする',class: "btn btn-secondary rounded-pill" %>
+            </div>
+          <% end %>
+
+          <div class="post_comments">
+            <%= render "post_comments/index", post: @post %>
+          </div>
+
     </div>
 
     <div class="col-3 mt-5">
