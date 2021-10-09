@@ -116,14 +116,16 @@
             <%= render "post_comments/count", post: @post %>
           </div>
 
-          <%= form_with model:[@post, @post_comment] do |f| %>
-            <div class="form-group">
-              <%= f.text_area :comment, rows: 4, class: "col-9 form-control mt-3", placeholder: "コメントをここに（まずはログインしましょう！）" %>
-            </div>
+          <% if user_signed_in? %>
+            <%= form_with model:[@post, @post_comment] do |f| %>
+              <div class="form-group">
+                <%= f.text_area :comment, rows: 4, class: "col-9 form-control mt-3", placeholder: "コメントをここに" %>
+              </div>
 
-            <div class="actions">
-              <%= f.submit 'コメントする',class: "btn btn-secondary rounded-pill" %>
-            </div>
+              <div class="actions">
+                <%= f.submit 'コメントする',class: "btn btn-secondary rounded-pill" %>
+              </div>
+            <% end %>
           <% end %>
 
           <div class="post_comments">
