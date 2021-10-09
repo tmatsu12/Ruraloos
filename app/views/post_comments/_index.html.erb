@@ -21,6 +21,12 @@
     </div>
   <% end %>
 
+  <% if post_comment.replies.any? %>
+    <% post_comment.replies.each do |reply| %>
+      <%= render partial: 'post_comments/reply', locals: { reply: reply } %>
+    <% end %>
+  <% end %>
 
+  <div id="reply-form-<%= post_comment.id %>"></div>
 
 <% end %>
