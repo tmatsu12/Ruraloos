@@ -11,7 +11,10 @@ class PostCommentsController < ApplicationController
     @post_comment = PostComment.new(post_comment_params)
     @post_comment.post_id = @post.id
     @post_comment.user_id = current_user.id
-    unless @post_comment.save
+    if @post_comment.save
+      @post.create_notification_comment!(current_user, @post_comment.id)
+      render :index
+    else
       render 'error'
     end
   end
