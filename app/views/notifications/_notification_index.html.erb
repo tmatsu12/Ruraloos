@@ -8,7 +8,9 @@
     	  	<%= attachment_image_tag notification.visiter, :profile_image, fallback: "no_image.png", size: "35x35" %><%= notification.visiter.name %>さん
     	  <% end %>
     	  があなたにコメントしました。　<%= time_ago_in_words(notification.created_at) %><br>
-    	  <p class="moderate-font text-center" style="color: #C0C0C0;"><%= PostComment.find_by(id: notification.post_comment_id).comment %></p>
+    	  <%= link_to post_path(notification.post_id) do %>
+    	    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= PostComment.find_by(id: notification.post_comment_id).comment %></p>
+    	  <% end %>
     	</div>
     </div>
   </div>
