@@ -2,18 +2,21 @@
 
 <% @notifications.each do |notification| %>
   <% if notification.checked == false %>
-  <div class="card pt-2 mb-3">
+  <div class="card p-1 mb-3">
     <div class="row">
-      <div class="ml-3">
+      <div class="col-12">
     	  <%= link_to user_path(notification.visiter) do %>
     	  	<%= attachment_image_tag notification.visiter, :profile_image, fallback: "no_image.png", size: "35x35" %><%= notification.visiter.name %>さん
     	  <% end %>
-    	  があなたにコメントしました。　<%= time_ago_in_words(notification.created_at) %><br>
+    	  があなたにコメントしました。　<%= time_ago_in_words(notification.created_at) %>前
+    	</div>
+    	<div class="col-9 mt-2">
     	  <%= link_to post_path(notification.post_id) do %>
-    	    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= PostComment.find_by(id: notification.post_comment_id).comment %></p>
+    	    <p class="moderate-font" style="color: #C0C0C0;"><%= PostComment.find_by(id: notification.post_comment_id).comment %></p>
     	  <% end %>
-    	  <br>
-    	  <p class="text-right"><%= link_to "既読にする", notification_path(notification), method: :patch %></p>
+    	</div>
+    	<div class="col-3 mt-2">
+    	  <p><%= link_to "既読にする", notification_path(notification), method: :patch %></p>
     	</div>
     </div>
   </div>
