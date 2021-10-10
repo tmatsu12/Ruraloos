@@ -1,4 +1,4 @@
-<% post.post_comments.each do |post_comment| %>
+<% post.post_comments.order(created_at: :desc).each do |post_comment| %>
   <% if !post_comment.parent_id %>
     <div class="card mt-3">
       <div class="row">
