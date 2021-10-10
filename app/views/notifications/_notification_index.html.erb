@@ -1,6 +1,7 @@
-<h1 class="border-bottom border-danger">通知(<%= @notifications.count %>件)</h1>
+<h1 class="border-bottom border-danger">通知(<%= @notifications.where(checked: false).count %>件)</h1>
 
 <% @notifications.each do |notification| %>
+  <% if notification.checked == false %>
   <div class="card mb-3">
     <div class="row">
       <div class="ml-3">
@@ -14,5 +15,6 @@
     	</div>
     </div>
   </div>
+  <% end %>
 <% end %>
 
