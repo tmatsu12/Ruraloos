@@ -5,9 +5,17 @@
 
     <div class="col-9 mt-5">
 
-      <h1 class="border-bottom border-danger">ユーザー情報</h1>
+      <h1 class="border-bottom border-danger">
+        ユーザー情報
+      </h1>
 
-      <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-4", fallback: "no_image.png", size: "200x200" %>
+      <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-1 position-relative", fallback: "no_image.png", size: "200x200" %>
+
+      <% if unchecked_notifications.any? %>
+        <%= link_to notifications_path, remote: true do %>
+          <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"></i>
+        <% end %>
+      <% end %>
 
       <p class="mt-2">名前：<%= @user.name %></p>
       <% if @user.prefecture2 %>
