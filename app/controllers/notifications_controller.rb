@@ -7,9 +7,9 @@ class NotificationsController < ApplicationController
   end
 
   def update
-    @notifications.where(checked: false).each do |notification|
-      notification.update_attributes(checked: true)
-    end
+    notification = Notification.find(params[:id])
+    notification.update_attributes(checked: true)
+    redirect_to request.referer
   end
 
   # def destroy_all

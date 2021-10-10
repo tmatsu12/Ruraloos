@@ -2,7 +2,7 @@
 
 <% @notifications.each do |notification| %>
   <% if notification.checked == false %>
-  <div class="card mb-3">
+  <div class="card pt-2 mb-3">
     <div class="row">
       <div class="ml-3">
     	  <%= link_to user_path(notification.visiter) do %>
@@ -12,6 +12,7 @@
     	  <%= link_to post_path(notification.post_id) do %>
     	    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= PostComment.find_by(id: notification.post_comment_id).comment %></p>
     	  <% end %>
+    	  <p class="text-end"><%= link_to "既読にする", notification_path(notification), method: :patch %></p>
     	</div>
     </div>
   </div>
