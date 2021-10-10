@@ -12,7 +12,8 @@
     	  <%= link_to post_path(notification.post_id) do %>
     	    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= PostComment.find_by(id: notification.post_comment_id).comment %></p>
     	  <% end %>
-    	  <p class="text-end"><%= link_to "既読にする", notification_path(notification), method: :patch %></p>
+    	  <br>
+    	  <p class="text-right"><%= link_to "既読にする", notification_path(notification), method: :patch %></p>
     	</div>
     </div>
   </div>
