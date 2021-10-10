@@ -35,6 +35,11 @@
 
     <div class="col-5 mt-5" id="notification_area">
       <h1 class="border-bottom border-danger">自己紹介</h1>
+      <% if @user.introduction %>
+        <p><%= @user.introduction %></p>
+      <% else %>
+        <p>まだ未入力です</p>
+      <% end %>
     </div>
 
     <div class="col-3 offset-md-1 mt-3">
