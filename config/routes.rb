@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   get 'search' => "searchs#search"
   get '/about' => 'homes#about'
+  resources :notifications, only: :index
 end
