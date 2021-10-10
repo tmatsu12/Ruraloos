@@ -1,1 +1,1 @@
-document.querySelector("#notification_area").innerHTML = ("<%= j(render 'post_comments/reply_form', post_comment: @post_comment) %>");
+document.querySelector("#notification_area").innerHTML = ("<%= j(render 'notifications/notification_index', notifications: @notifications) %>");

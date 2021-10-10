@@ -1,0 +1,11 @@
+<h1 class="border-bottom border-danger">通知(<%= @notifications.count %>件)</h1>
+
+<% @notifications.each do |notification| %>
+  <div class="card mt-3">
+    <div class="row">
+      <div class="col-md-2 ml-3 mr-0 my-3">
+    	  <%= link_to user_path(post_comment.user) do %>
+    	  	<%= attachment_image_tag post_comment.user, :profile_image, fallback: "no_image.png", size: "35x35" %><br>
+        	<%= post_comment.user.name %>
+    	  <% end %>
+    	</div>
