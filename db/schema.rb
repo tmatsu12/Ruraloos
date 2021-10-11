@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_10_000547) do
+ActiveRecord::Schema.define(version: 2021_10_10_225617) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer "visiter_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_10_10_000547) do
     t.integer "prefecture1_id"
     t.integer "prefecture2_id"
     t.string "profile_image_id"
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["prefecture1_id"], name: "index_users_on_prefecture1_id"
     t.index ["prefecture2_id"], name: "index_users_on_prefecture2_id"

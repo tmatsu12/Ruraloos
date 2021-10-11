@@ -4,7 +4,9 @@
     <%= attachment_image_tag user, :profile_image, class:"rounded-lg position-relative", fallback: "no_image.png", size: "150x150" %>
   <% end %>
   <% if unchecked_notifications.any? %>
+    <% if user == current_user %>
       <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"></i>
+    <% end %>
   <% end %>
 
   <p class="mt-2">名前：<%= user.name %></p>
