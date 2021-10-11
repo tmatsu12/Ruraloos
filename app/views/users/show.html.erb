@@ -9,7 +9,7 @@
         ユーザー情報
       </h1>
 
-      <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x200" %>
+      <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x250" %>
 
       <% if unchecked_notifications.any? %>
         <% if @user == current_user %>
