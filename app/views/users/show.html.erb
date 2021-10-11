@@ -12,8 +12,10 @@
       <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x200" %>
 
       <% if unchecked_notifications.any? %>
-        <%= link_to notifications_path, remote: true do %>
-          <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"><br><span style="font-size:18px;">click!</span></i>
+        <% if @user == current_user %>
+          <%= link_to notifications_path, remote: true do %>
+            <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"><br><span style="font-size:18px;">click!</span></i>
+          <% end %>
         <% end %>
       <% end %>
 
