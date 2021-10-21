@@ -22,7 +22,7 @@
 また、自分の住んでいる地域への移住を促進したい人が、移住を検討している人に魅力を発信することでアピールすることができます。
 
 ## 設計書
-<...>
+https://docs.google.com/spreadsheets/d/12vmDUvk9DnIxvdSTvy-FUXT6FdFGmMZMeTtDEVJZgz0/edit?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1a_vUPd7vdDsOCu1KyNnjjT7fMnrHqLz43_Om3dcwibk/edit?usp=sharing
