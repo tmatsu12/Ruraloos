@@ -25,4 +25,5 @@ class User < ApplicationRecord
   # validates :prefecture2_id, presence: true
 
   validates :name, length: { maximum: 20 }
+  validates :introduction, length: { maximum: 800 }
 end
