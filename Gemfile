@@ -84,3 +84,7 @@ gem 'rails-i18n'
 gem 'kaminari', '~> 1.2.1'
 
 gem 'rubocop-airbnb'
+
+group :production do
+  gem 'mysql2'
+end
