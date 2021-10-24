@@ -5,37 +5,37 @@
     <div class="col-9 mt-5 d-flex align-content-start flex-wrap">
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 1) do %>
-          <%= image_tag 'tohoku/aomori.jpg', size: "240x190" %>
+          <%= image_tag "aomori.jpg", size: "240x190" %>
           <p class="text-center">青森県(<%= Prefecture.find(1).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 2) do %>
-          <%= image_tag 'tohoku/iwate.jpg', size: "240x190" %>
+          <%= image_tag "iwate.jpg", size: "240x190" %>
           <p class="text-center">岩手県(<%= Prefecture.find(2).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 3) do %>
-          <%= image_tag 'tohoku/miyagi.jpg', size: "240x190" %>
+          <%= image_tag "miyagi.jpg", size: "240x190" %>
           <p class="text-center">宮城県(<%= Prefecture.find(3).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 4) do %>
-          <%= image_tag 'tohoku/akita.jpg', size: "240x190" %>
+          <%= image_tag "akita.jpg", size: "240x190" %>
           <p class="text-center">秋田県(<%= Prefecture.find(4).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 5) do %>
-          <%= image_tag 'tohoku/yamagata.jpg', size: "240x190" %>
+          <%= image_tag "yamagata.jpg", size: "240x190" %>
           <p class="text-center">山形県(<%= Prefecture.find(5).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 6) do %>
-          <%= image_tag 'tohoku/fukushima.jpg', size: "240x190" %>
+          <%= image_tag "fukushima.jpg", size: "240x190" %>
           <p class="text-center">福島県(<%= Prefecture.find(6).posts.count %>件の投稿）</p>
         <% end %>
       </div>
