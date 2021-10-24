@@ -5,31 +5,31 @@
     <div class="col-9 mt-5 d-flex align-content-start flex-wrap">
       <div class="mb-3 mr-2">
         <%= link_to posts_path(prefecture_id: 30) do %>
-          <%= image_tag 'chugoku/tottori.jpg', size: "240x190" %>
+          <%= image_tag "tottori.jpg", size: "240x190" %>
           <p class="text-center">鳥取県(<%= Prefecture.find(30).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-2">
         <%= link_to posts_path(prefecture_id: 31) do %>
-          <%= image_tag 'chugoku/shimane.jpg', size: "240x190" %>
+          <%= image_tag "shimane.jpg", size: "240x190" %>
           <p class="text-center">島根県(<%= Prefecture.find(31).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-2">
         <%= link_to posts_path(prefecture_id: 32) do %>
-          <%= image_tag 'chugoku/okayama.jpg', size: "240x190" %>
+          <%= image_tag "okayama.jpg", size: "240x190" %>
           <p class="text-center">岡山県(<%= Prefecture.find(32).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-2">
         <%= link_to posts_path(prefecture_id: 33) do %>
-          <%= image_tag 'chugoku/hiroshima.jpg', size: "240x190" %>
+          <%= image_tag "hiroshima.jpg", size: "240x190" %>
           <p class="text-center">広島県(<%= Prefecture.find(33).posts.count %>件の投稿）</p>
         <% end %>
       </div>
       <div class="mb-3 mr-2">
         <%= link_to posts_path(prefecture_id: 34) do %>
-          <%= image_tag 'chugoku/yamaguchi.jpg', size: "240x190" %>
+          <%= image_tag "yamaguchi.jpg", size: "240x190" %>
           <p class="text-center">山口県(<%= Prefecture.find(34).posts.count %>件の投稿）</p>
         <% end %>
       </div>
