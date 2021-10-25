@@ -21,6 +21,9 @@
 地方移住を検討している人が、移住先についての情報を入手し、住民や元住民に質問することができます。
 また、自分の住んでいる地域への移住を促進したい人が、移住を検討している人に魅力を発信することでアピールすることができます。
 
+## サイトのURL
+https://ruraloos.com
+
 ## 設計書
 https://docs.google.com/spreadsheets/d/12vmDUvk9DnIxvdSTvy-FUXT6FdFGmMZMeTtDEVJZgz0/edit?usp=sharing
 
