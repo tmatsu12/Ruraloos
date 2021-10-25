@@ -6,7 +6,7 @@
 
       <h1 class="border-bottom border-danger"><%= @prefecture.name %>(<%= @posts.count %>件の投稿)</h1>
 
-      <h5 class="mt-3 mb-3">住んでいる(いた)人 (<%= @residents.count %>人)</h5>
+      <h5 class="mt-3 mb-3">住んでいる/いた人 (<%= @residents.count %>人)</h5>
       <% if @residents.exists? %>
         <div class="d-flex flex-wrap">
           <% @residents.each do |resident| %>
