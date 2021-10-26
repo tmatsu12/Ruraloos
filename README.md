@@ -30,9 +30,6 @@ https://docs.google.com/spreadsheets/d/12vmDUvk9DnIxvdSTvy-FUXT6FdFGmMZMeTtDEVJZ
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1a_vUPd7vdDsOCu1KyNnjjT7fMnrHqLz43_Om3dcwibk/edit?usp=sharing
 
-## GitHubのURL
-https://github.com/tmatsu12/Ruraloos
-
 ## 開発で苦労した点（技術面）
 https://qiita.com/TakuMatsunaga
 
