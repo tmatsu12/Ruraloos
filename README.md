@@ -33,6 +33,9 @@ https://docs.google.com/spreadsheets/d/1a_vUPd7vdDsOCu1KyNnjjT7fMnrHqLz43_Om3dcw
 ## GitHubのURL
 https://github.com/tmatsu12/Ruraloos
 
+## 開発で苦労した点（技術面）
+https://qiita.com/TakuMatsunaga
+
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
