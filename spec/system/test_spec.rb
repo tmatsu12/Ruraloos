@@ -3,7 +3,7 @@ require 'rails_helper'
 # 基本的にlet!とcreateで統一するが、必要に応じてbuildを使う
 
 describe 'エラー①：ユーザー新規登録のテスト' do
-  let(:user) { build(:user) }
+  let!(:user) { build(:user) }
 
   before do
     visit new_user_registration_path
