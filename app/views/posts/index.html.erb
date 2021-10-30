@@ -81,6 +81,10 @@
         <p>まだ投稿はありません</p>
       <% end %>
 
+      <div class="mt-5">
+        <%= paginate @posts %>
+      </div>
+
     </div>
 
 
@@ -90,7 +94,5 @@
     </div>
 
   </div>
-
-  <%= paginate @posts %>
 
 </div>

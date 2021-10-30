@@ -17,7 +17,7 @@
 
       <div class="sub-visual">
         <div class="sub-visual-content">
-          <h3 class="pt-5 text-center font-weight-bold">新規投稿</h3>
+          <h2 class="pt-5 text-center font-weight-bold">新規投稿</h2>
           <div class="d-flex justify-content-center align-items-center mb-4">
             <% @posts.each do |post| %>
               <div class="mt-5 mx-3" >
@@ -52,8 +52,8 @@
                 </div>
               </div>
             <% end %>
-
           </div>
+          <p class="text-center"><%= link_to "全ての投稿を見る", all_posts_posts_path, class: "font-weight-bold text-white", style: "font-size:18px;" %></p>
         </div>
       </div>
 
