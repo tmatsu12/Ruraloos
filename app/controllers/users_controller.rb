@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def show
-    @user = User.find(params[:id])
-    @posts = @user.posts
+    if user_signed_in?
+      @user = User.find(params[:id])
+      @posts = @user.posts
+    else
+      flash[:notice] = "ログインして下さい（簡単ログインが便利です！）"
+      redirect_to new_user_session_path
+    end
   end
 
   def edit

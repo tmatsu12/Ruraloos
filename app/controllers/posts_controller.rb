@@ -10,6 +10,11 @@ class PostsController < ApplicationController
     @wannalivings = @prefecture.wannalivings
   end
 
+  def all_posts
+    @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
+    @user = current_user
+  end
+
   def new
     if user_signed_in?
       @prefecture = Prefecture.find(params[:prefecture_id])

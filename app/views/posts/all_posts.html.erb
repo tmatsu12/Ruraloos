@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-9 mt-5">
+      <h1 class="border-bottom">全ての投稿(<%= @posts.count %>件)</h1>
+      <% @posts.each do |post| %>
+        <div class="card pl-3 mt-1">
+          <div class="row">
+            <div class="col-9 mt-2">
+              <%= link_to post_path(post) do %>
+                <p class="text-dark">タイトル：<%= post.title %></p>
+                <p class="text-dark">場所：<%= post.prefecture.name %><%= post.city %>、投稿日：<%= post.updated_at.strftime('%Y/%m/%d') %></p>
+              <% end %>
+            </div>
+            <div class="col-3 mt-3">
+              <% if user_signed_in? %>
+                <% if post.user == current_user %>
+                  <%= link_to "編集", edit_post_path(post), class: "btn btn-success mr-2 rounded-pill" %>
+                  <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger rounded-pill" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div class="mt-5">
+        <%= paginate @posts %>
+      </div>
+    </div>
+
+    <div class="col-3 mt-5">
+      <%= render partial: "users/sidebar_all_posts", locals: {user:@user} %>
+    </div>
+
+  </div>
+
+
+
+</div>
