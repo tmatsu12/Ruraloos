@@ -4,7 +4,7 @@
     <div class="col-9 mt-5">
       <h1 class="border-bottom">全ての投稿(<%= @posts.count %>件)</h1>
       <% @posts.each do |post| %>
-        <div class="card pl-3">
+        <div class="card pl-3 mt-1">
           <div class="row">
             <div class="col-9 mt-2">
               <%= link_to post_path(post) do %>
