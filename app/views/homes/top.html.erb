@@ -20,7 +20,7 @@
           <h3 class="pt-5 text-center font-weight-bold">新規投稿</h3>
           <div class="d-flex justify-content-center align-items-center mb-4">
             <% @posts.each do |post| %>
-              <div class="mt-3 mx-3" >
+              <div class="mt-5 mx-3" >
                 <div class="card" style="width: 16rem" >
                   <%= attachment_image_tag post, :image, class: "card-img-top", style: "width: 100%", fallback: "No_Picture.png" %>
                   <div class="card-body">
