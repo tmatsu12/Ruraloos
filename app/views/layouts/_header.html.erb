@@ -7,7 +7,7 @@
       <% end %>
 
       <% if user_signed_in? %>
-        <p class="text-white">ようこそ<%= link_to current_user.name + "さん", user_path(current_user) %></p>
+        <p class="mt-1 text-white"><span class="text-dark">ようこそ</span><%= link_to current_user.name + "さん", user_path(current_user) %></p>
       <% end %>
 
       <div id="sp-menu">
