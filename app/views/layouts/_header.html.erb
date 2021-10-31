@@ -1,9 +1,9 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<header class="shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
       <%= link_to root_path do %>
         <%= image_tag "favicon.ico", size: '40x40' %>
-        <span class="navbar-brand ml-1">Ruraloos</span>
+        <span class="navbar-brand ml-1 text-white">Ruraloos</span>
       <% end %>
 
       <% if user_signed_in? %>
