@@ -1,3 +1,4 @@
+<div class="general-visual">
 <div class="container">
   <div class="row">
     <div class="col-9 mt-5">
@@ -50,7 +51,7 @@
             <%= f.submit '投稿',class: "btn btn-success rounded-pill" %>
           </div>
         <% end %>
-        <%= link_to "#{@prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @prefecture.id), class: "btn btn-primary rounded-pill mt-3" %>
+        <%= link_to "#{@prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @prefecture.id), class: "btn btn-primary rounded-pill mt-3 mb-3" %>
 
 
     </div>
@@ -62,6 +63,7 @@
 
   </div>
 
+</div>
 </div>
 
 <script>
