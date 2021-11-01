@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       @posts = @user.posts
     else
-      flash[:notice] = "ログインして下さい（簡単ログインが便利です！）"
+      flash[:notice] = "ログインして下さい（ゲストログインが便利です！）"
       redirect_to new_user_session_path
     end
   end
