@@ -1,3 +1,4 @@
+<div class="general-visual">
 <div class="container">
 
   <div class="row">
@@ -9,7 +10,6 @@
       <h1 class="border-bottom border-danger">ユーザー情報の編集</h1>
 
       <%= form_with model:@user, local:true do |f| %>
-
         <% if @user.name == "ゲスト" %>
           <div class="form-group">
             <%= f.label :名前 %><br>
@@ -21,7 +21,6 @@
             <%= f.text_field :name, class: "form-control col-5" %>
           </div>
         <% end %>
-
         <% if @user.name == "ゲスト" %>
           <div class="form-group">
             <%= f.label :プロフィール画像 %><br>
@@ -53,8 +52,7 @@
           <%= f.submit "更新", class: "btn btn-success rounded-pill" %>
         </div>
 
-        <%= link_to "キャンセル", user_path(@user), class: "btn btn-secondary rounded-pill mt-3" %>
-
+        <%= link_to "キャンセル", user_path(@user), class: "btn btn-secondary rounded-pill mt-3 mb-3" %>
       <% end %>
 
 
@@ -65,4 +63,5 @@
     </div>
 
   </div>
+</div>
 </div>
