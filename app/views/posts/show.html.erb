@@ -35,7 +35,7 @@
             });
           }
           </script>
-          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP1'] %>&callback=initMap"async defer></script>
+          <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLEMAP'] %>&callback=initMap"async defer></script>
 
           <div id="star-rate-<%= @post.id %>" class="mt-3">総合的な満足度：<%= @post.evaluation %>点</div>
           <script>
