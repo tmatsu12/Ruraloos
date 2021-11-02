@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     if user_signed_in?
       @prefecture = Prefecture.find(params[:prefecture_id])
       session[:prefecture] = params[:prefecture_id]
-      @post = Post.new
+      @post = Post.new(prefecture_id: @prefecture.id)
       @user = current_user
     else
       flash[:notice] = "ログインして下さい（ゲストログインが便利です！）"

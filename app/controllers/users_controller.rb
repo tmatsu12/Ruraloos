@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     if user_signed_in?
       @user = User.find(params[:id])
-      @posts = @user.posts
+      @posts = @user.posts.order(updated_at: :desc)
     else
       flash[:notice] = "ログインして下さい（ゲストログインが便利です！）"
       redirect_to new_user_session_path
