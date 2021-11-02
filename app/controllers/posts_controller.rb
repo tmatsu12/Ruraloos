@@ -62,9 +62,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
     @prefecture = @post.prefecture
     @user = @post.user
+    # binding.pry
   end
 
   def update
