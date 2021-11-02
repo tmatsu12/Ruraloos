@@ -10,14 +10,14 @@
     <%= f.text_field :city, class: "col-9 form-control", placeholder: "市町村名" %>
   </div>
 
-  <div class="form-group">
+  <div class="form-group item_image_btn">
     <%= f.label :画像 %><br />
     <%= f.attachment_field :image %>
   </div>
 
-  <div class="form-group" id="star">
+  <div class="form-group" id="star-rate-<%= post.id %>">
     <%= f.label :総合的な満足度 %><span class="text-danger">(必須)</span><br/>
-    <%= f.hidden_field :evaluation, id: :review_star %>
+    <%= f.hidden_field :evaluation, id: 'star' %>
   </div>
 
   <div class="form-group">
