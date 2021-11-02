@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   root 'homes#top'
+  get '/about' => 'homes#about'
+  devise_for :users
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-  devise_for :users
   get '/region/:region' => 'homes#region', as: "region"
   resources :posts do
     collection do
@@ -13,6 +14,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show, :edit, :update]
   get 'search' => "searchs#search"
-  get '/about' => 'homes#about'
   resources :notifications, only: [:index, :update]
 end
