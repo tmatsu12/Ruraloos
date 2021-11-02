@@ -102,7 +102,14 @@
             </tbody>
           </table>
 
-          <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary mb-2 rounded-pill" %>
+          <div id="post_<%= @post.id %>" class="d-flex">
+
+            <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary mb-2 rounded-pill" %>
+
+            <div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div>
+
+          </div>
+
           <br>
           <% if @post.user == current_user %>
           <%= link_to "編集", edit_post_path(@post), class: "btn btn-success my-3 rounded-pill" %>
