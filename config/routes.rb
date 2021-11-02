@@ -17,3 +17,4 @@ Rails.application.routes.draw do
   get 'search' => "searchs#search"
   resources :notifications, only: [:index, :update]
 end
+
