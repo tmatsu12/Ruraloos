@@ -1,0 +1,19 @@
+<!--ログインしていないと、favorited_by?メソッドが使えないので、詳細ページに行けずエラーとなる-->
+<% if user_signed_in? %>
+  <% if post.favorited_by?(current_user) %>
+    <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
+      <i class="fas fa-heart like-btn ml-5 mt-2" ></i><span class="text-dark"><%= post.favorites.count %>いいね</span>
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(post), method: :post, remote: true do %>
+      <i class="fas fa-heart unlike-btn ml-5 mt-2" ></i><span class="text-dark"><%= post.favorites.count %>いいね</span>
+    <% end %>
+  <% end %>
+<% else %>
+<!--ログインしていない場合はいいねを押せないので、表示するだけにする-->
+  <% if post.favorites.count == 0 %>
+    <i class="fas fa-heart unlike-btn ml-2 mt-2" ></i><span class="text-dark mt-2"><%= post.favorites.count %></span>
+  <% else %>
+    <i class="fas fa-heart like-btn ml-2 mt-2" ></i><span class="text-dark mt-2"><%= post.favorites.count %></span>
+  <% end %>
+<% end %>
