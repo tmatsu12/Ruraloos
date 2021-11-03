@@ -12,7 +12,15 @@ class PostsController < ApplicationController
 
   def all_posts
     @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
-    @user = current_user
+  end
+
+  def sort
+    if params[:option].to_i == 1
+      @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
+    else
+      @posts = Kaminari.paginate_array(Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))).page(params[:page]).per(25)
+    end
+    render :all_posts
   end
 
   def new
