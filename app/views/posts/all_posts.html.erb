@@ -2,10 +2,36 @@
   <div class="container">
     <div class="row">
       <div class="col-9 mt-5">
-        <h1 class="border-bottom">全ての投稿(<%= @posts.count %>件)</h1>
-        <div class="row row-cols-3">
+        <div class="d-flex justify-content-between">
+          <h1 class="border-bottom">全ての投稿(<%= @posts.count %>件)</h1>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <% if params[:option].to_i == 1 %>
+              <label class="active">
+                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light active mb-3" %>
+              </label>
+              <label>
+                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light mb-3" %>
+              </label>
+            <% elsif params[:option].to_i == 2 %>
+              <label>
+                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light mb-3" %>
+              </label>
+              <label class="active">
+                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light active mb-3" %>
+              </label>
+            <% else %>
+              <label>
+                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light mb-3" %>
+              </label>
+              <label>
+                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light mb-3" %>
+              </label>
+            <% end %>
+          </div>
+        </div>
+        <div class="row row-cols-3" id="card-areas">
           <% @posts.each do |post| %>
-            <div class="col-4 mb-3" >
+            <div class="col-4 mb-3">
               <%= render partial: "posts/post_cards", locals: {post: post} %>
             </div>
           <% end %>
@@ -15,7 +41,7 @@
         </div>
       </div>
       <div class="col-3 mt-5">
-        <%= render partial: "users/sidebar", locals: {user:@user} %>
+        <%= render partial: "users/sidebar" %>
       </div>
     </div>
   </div>
