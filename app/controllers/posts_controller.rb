@@ -19,6 +19,7 @@ class PostsController < ApplicationController
       @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
     else
       @posts = Kaminari.paginate_array(Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))).page(params[:page]).per(25)
+      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
     end
     render :all_posts
   end
