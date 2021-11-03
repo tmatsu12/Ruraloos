@@ -2,46 +2,40 @@
   <div class="container">
     <p id="notice"><%= flash[:notice] %></p>
     <div class="row">
-      <div class="col-3 mt-5">
-        <h1 class="border-bottom border-danger">ユーザー情報</h1>
-        <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x250" %>
-        <% if unchecked_notifications.any? %>
-          <% if @user == current_user %>
-            <%= link_to notifications_path, remote: true do %>
-              <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"><br><span style="font-size:18px;">click!</span></i>
+      <div class="col-9 mt-5">
+        <div class="d-flex">
+          <div class="col-4">
+            <h1 class="border-bottom border-danger">ユーザー情報</h1>
+            <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x250" %>
+            <% if unchecked_notifications.any? %>
+              <% if @user == current_user %>
+                <%= link_to notifications_path, remote: true do %>
+                  <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"><br><span style="font-size:18px;">click!</span></i>
+                <% end %>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
-        <p class="mt-2">名前：<%= @user.name %></p>
-        <% if @user.prefecture2 %>
-          <p>住んでいる（いた）県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id) %></p>
-        <% else %>
-          <p>住んでいる（いた）県：未入力</p>
-        <% end %>
-        <% if @user.prefecture1 %>
-          <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id) %></p>
-        <% else %>
-          <p>住んでみたい県：未入力</p>
-        <% end %>
-        <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary w-100 rounded-pill" %>
-      </div>
-
-      <div class="col-5 mt-5" id="notification_area">
-        <h1 class="border-bottom border-danger">自己紹介</h1>
-        <% if @user.introduction != "" %>
-          <p><%= @user.introduction %></p>
-        <% else %>
-          <p>まだ未入力です</p>
-        <% end %>
-      </div>
-
-      <div class="col-3 offset-md-1 mt-3">
-        <%= render partial: "users/sidebar", locals: {user:@user} %>
-      </div>
-    </div>
-
-    <div class="row pb-4">
-      <div class="col-9">
+            <p class="mt-2">名前：<%= @user.name %></p>
+            <% if @user.prefecture2 %>
+              <p>住んでいる（いた）県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id) %></p>
+            <% else %>
+              <p>住んでいる（いた）県：未入力</p>
+            <% end %>
+            <% if @user.prefecture1 %>
+              <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id) %></p>
+            <% else %>
+              <p>住んでみたい県：未入力</p>
+            <% end %>
+            <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary w-100 rounded-pill" %>
+          </div>
+          <div class="col-7" id="notification_area">
+            <h1 class="border-bottom border-danger">自己紹介</h1>
+            <% if @user.introduction != "" %>
+              <p><%= @user.introduction %></p>
+            <% else %>
+              <p>まだ未入力です</p>
+            <% end %>
+          </div>
+        </div>
         <% if @posts %>
           <h3 class="mt-5 border-bottom border-secondary">投稿(<%= @posts.count %>件)</h3>
           <div class="row row-cols-3">
@@ -54,6 +48,12 @@
         <% else %>
           <p>まだ投稿はありません</p>
         <% end %>
+        <div class="mt-5">
+          <%= paginate @posts %>
+        </div>
+      </div>
+      <div class="col-3 mt-3">
+        <%= render partial: "users/sidebar", locals: {user:@user} %>
       </div>
     </div>
   </div>

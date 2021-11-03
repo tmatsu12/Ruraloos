@@ -1,34 +1,6 @@
-<% if user_signed_in? %>
-  <% if user == current_user %>
-    <h2 class="my-3">About me</h2>
-  <% else %>
-    <h2 class="my-3">投稿者</h2>
-  <% end %>
-  <%= link_to user_path(user) do %>
-    <%= attachment_image_tag user, :profile_image, class:"rounded-lg position-relative", fallback: "no_image.png", size: "150x188" %>
-    <% if unchecked_notifications.any? %>
-      <% if user == current_user %>
-        <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"></i>
-      <% end %>
-    <% end %>
-  <% end %>
-  <p class="mt-2">名前：<%= user.name %></p>
-  <% if user.prefecture2 %>
-    <p>住んでいる（いた）県：<%= link_to user.prefecture2.name, posts_path(prefecture_id: user.prefecture2.id) %></p>
-  <% else %>
-    <p>住んでいる（いた）県：未入力</p>
-  <% end %>
-  <% if user.prefecture1 %>
-    <p>住んでみたい県：<%= link_to user.prefecture1.name, posts_path(prefecture_id: user.prefecture1.id) %></p>
-  <% else %>
-    <p>住んでみたい県：未入力</p>
-  <% end %>
-<% else %>
-  <p>まだログインしていません</p>
-<% end %>
 
 <%= form_with url: search_path, method: :get, local: true do |f| %>
-  <div class="form-group mt-4">
+  <div class="form-group mt-5">
     <%= f.text_field :content, required: true, class: "form-control", placeholder: "市町村名で検索！" %>
   </div>
   <div class="form-group d-flex">
