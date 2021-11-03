@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-9 mt-5">
-        <h3 class="border-bottom border-success">検索結果：<%= @content %></h3>
+        <h3 class="border-bottom border-success">検索結果：<%= Prefecture.find(@prefecture_id).name %><%= @content %></h3>
         <% if @records.exists? %>
           <div class="row row-cols-3">
             <% @records.each do |post| %>
