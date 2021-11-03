@@ -3,19 +3,8 @@
   <div class="card-body">
     <h5 class="card-title"><%= post.title %></h5>
     <div id="star-rate-<%= post.id %>">満足度：</div>
-    <script>
-    $('#star-rate-<%= post.id %>').raty({
-      size: 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      half: true,
-      readOnly: true,
-      score: <%= post.evaluation %>,
-    });
-    </script>
     <p class="card-text mt-3">地域：<%= post.city %></p>
-    <p class="card-text mt-2"><%= post.body.truncate(20) %></p>
+    <p class="card-text mt-2"><%= post.body.truncate(25) %></p>
     <div class="d-flex">
       <%= link_to "この投稿を読む", post_path(post), class: "btn btn-primary rounded-pill" %>
       <% if post.favorites.count == 0 %>
@@ -34,3 +23,15 @@
     </small>
   </div>
 </div>
+
+<script>
+$('#star-rate-<%= post.id %>').raty({
+  size: 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  half: true,
+  readOnly: true,
+  score: <%= post.evaluation %>,
+});
+</script>

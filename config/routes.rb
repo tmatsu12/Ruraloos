@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :posts do
     resource :favorites, only: [:create, :destroy]
     collection do
-      get :all_posts
+      get :all_posts, as: "all"
     end
     resources :post_comments, only: [:new, :create, :destroy]
   end

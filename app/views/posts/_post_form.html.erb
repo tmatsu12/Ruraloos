@@ -5,9 +5,15 @@
     <%= f.text_field :title, class: "col-9 form-control", placeholder: "(例):〇〇に〇〇年間住んでいました！" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :どこに住んでますか？、又は住んでましたか？ %><span class="text-danger">(必須)</span><br />
-    <%= f.text_field :city, class: "col-9 form-control", placeholder: "市町村名" %>
+  <div class="d-flex">
+    <div class="form-group mr-5">
+      <%= f.label :どの県の投稿ですか？ %><span class="text-danger">(必須)</span><br>
+      <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
+    </div>
+    <div class="form-group ml-5">
+      <%= f.label :市町村名を入力してください %><span class="text-danger">(必須)</span><br>
+      <%= f.text_field :city, class: "form-control", placeholder: "市町村名" %>
+    </div>
   </div>
 
   <div class="form-group item_image_btn">
@@ -40,11 +46,8 @@
     <%= f.text_area :body3, rows: 4, class: "col-9 form-control", placeholder: "自由に書きましょう！" %>
   </div>
 
-  <%= f.hidden_field :prefecture_id, value: post.prefecture.id %>
-
   <div class="actions d-flex">
     <%= f.submit '投稿',class: "btn btn-success rounded-pill my-3 mr-3" %>
-    <%= link_to "#{@prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @prefecture.id), class: "btn btn-primary rounded-pill my-3" %>
   </div>
 
 <% end %>
