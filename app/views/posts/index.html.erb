@@ -1,71 +1,60 @@
 <div class="general-visual">
-<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-9 mt-5">
+        <h1 class="border-bottom border-danger"><%= @prefecture.name %>(<%= @posts.count %>件の投稿)</h1>
+        <h5 class="mt-3 mb-3">住んでいる/いた人 (<%= @residents.count %>人)</h5>
+        <% if @residents.exists? %>
+          <div class="d-flex flex-wrap">
+            <% @residents.each do |resident| %>
+              <div class="text-center mr-2">
+                <%= link_to user_path(resident) do %>
+                  <%= attachment_image_tag resident, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br />
+                  <p><%= resident.name %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>まだいません</p>
+        <% end %>
+        <h5 class="mt-3 mb-3">住んでみたい人 (<%= @wannalivings.count %>人)</h5>
+        <% if @wannalivings.exists? %>
+          <div class="d-flex flex-wrap">
+            <% @wannalivings.each do |wannaliving| %>
+              <div class="text-center mr-2">
+                <%= link_to user_path(wannaliving) do %>
+                  <%= attachment_image_tag wannaliving, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br>
+                  <p><%= wannaliving.name %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>まだいません</p>
+        <% end %>
 
-  <div class="row">
-
-    <div class="col-9 mt-5">
-
-      <h1 class="border-bottom border-danger"><%= @prefecture.name %>(<%= @posts.count %>件の投稿)</h1>
-
-      <h5 class="mt-3 mb-3">住んでいる/いた人 (<%= @residents.count %>人)</h5>
-      <% if @residents.exists? %>
-        <div class="d-flex flex-wrap">
-          <% @residents.each do |resident| %>
-            <div class="text-center mr-2">
-              <%= link_to user_path(resident) do %>
-                <%= attachment_image_tag resident, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br />
-                <p><%= resident.name %></p>
-              <% end %>
-            </div>
-          <% end %>
+        <h3 class="mt-4 border-bottom border-success">投稿</h3>
+        <% if @posts.exists? %>
+          <div class="row row-cols-3">
+            <% @posts.each do |post| %>
+              <div class="col-4 mb-3" >
+                <%= render partial: "posts/post_cards", locals: {post: post} %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>まだ投稿はありません</p>
+        <% end %>
+        <div class="mt-5">
+          <%= paginate @posts %>
         </div>
-      <% else %>
-        <p>まだいません</p>
-      <% end %>
+      </div>
 
-      <h5 class="mt-3 mb-3">住んでみたい人 (<%= @wannalivings.count %>人)</h5>
-      <% if @wannalivings.exists? %>
-        <div class="d-flex flex-wrap">
-          <% @wannalivings.each do |wannaliving| %>
-            <div class="text-center mr-2">
-              <%= link_to user_path(wannaliving) do %>
-                <%= attachment_image_tag wannaliving, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br>
-                <p><%= wannaliving.name %></p>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p>まだいません</p>
-      <% end %>
-
-      <h3 class="mt-4 border-bottom border-success">投稿</h3>
-      <% if @posts.exists? %>
-          <!--<div class="card-group">-->
-            <div class="row row-cols-3">
-              <% @posts.each do |post| %>
-                <div class="col-4 mb-3" >
-                  <%= render partial: "posts/post_cards", locals: {post: post} %>
-                </div>
-              <% end %>
-            </div>
-
-      <% else %>
-        <p>まだ投稿はありません</p>
-      <% end %>
-
-      <div class="mt-5">
-        <%= paginate @posts %>
+      <div class="col-3 mt-5">
+        <%= render partial: "users/sidebar_index", locals: {user:@user, prefecture:@prefecture} %>
       </div>
 
     </div>
-
-
-    <div class="col-3 mt-5">
-      <%= render partial: "users/sidebar_index", locals: {user:@user, prefecture:@prefecture} %>
-    </div>
-
   </div>
-
-</div>
 </div>

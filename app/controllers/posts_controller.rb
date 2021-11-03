@@ -17,9 +17,7 @@ class PostsController < ApplicationController
 
   def new
     if user_signed_in?
-      @prefecture = Prefecture.find(params[:prefecture_id])
-      session[:prefecture] = params[:prefecture_id]
-      @post = Post.new(prefecture_id: @prefecture.id)
+      @post = Post.new
       @user = current_user
     else
       flash[:notice] = "ログインして下さい（ゲストログインが便利です！）"
@@ -28,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    # 投稿をshowページで削除後マイページに飛ぶが、そこから左上の戻るボタンで戻るとエラーになってしまうのでその対策
+    #投稿を詳細ページで削除後マイページに飛ぶが、そこから左上の戻るボタンで詳細ページに戻るとエラーになってしまうのでその対策で例外処理
     begin
       @post = Post.find(params[:id])
       @post_comment = PostComment.new
@@ -39,38 +37,32 @@ class PostsController < ApplicationController
         results = Geocoder.search(@address)
         @latlng = results.first.coordinates
       rescue
-        @latlng = [40.7828, -73.9653] # NewYork
+        @latlng = [40.7828, -73.9653] #おかしな地名が入力された場合はNewYorkを表示
         flash[:notice] = "#{@prefecture.name}内の市町村ですか？市町村名を間違っていませんか？"
       end
     rescue
-      redirect_to posts_path(prefecture_id: session[:prefecture])
+      redirect_to all_posts_path
     end
   end
 
   def create
-
     @post = Post.new(post_params)
-    @prefecture = @post.prefecture
     @post.user_id = current_user.id
     if @post.save
       redirect_to post_path(@post)
     else
       @user = current_user
-      @prefecture = Prefecture.find(session[:prefecture])
       render :new
     end
   end
 
   def edit
     @post = Post.find_by(id: params[:id])
-    @prefecture = @post.prefecture
     @user = @post.user
-    # binding.pry
   end
 
   def update
     @post = Post.find(params[:id])
-    @prefecture = @post.prefecture
     if @post.update(post_params)
       redirect_to post_path(@post)
       flash[:notice] = "投稿を更新しました"

@@ -1,90 +1,60 @@
 <div class="general-visual">
-<div class="container">
-  <p id="notice"><%= flash[:notice] %></p>
-
-  <div class="row">
-
-    <div class="col-3 mt-5">
-
-      <h1 class="border-bottom border-danger">
-        ユーザー情報
-      </h1>
-
-      <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x250" %>
-
-      <% if unchecked_notifications.any? %>
-        <% if @user == current_user %>
-          <%= link_to notifications_path, remote: true do %>
-            <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"><br><span style="font-size:18px;">click!</span></i>
+  <div class="container">
+    <p id="notice"><%= flash[:notice] %></p>
+    <div class="row">
+      <div class="col-3 mt-5">
+        <h1 class="border-bottom border-danger">ユーザー情報</h1>
+        <%= attachment_image_tag @user, :profile_image, class:"rounded-lg mt-3 position-relative", fallback: "no_image.png", size: "200x250" %>
+        <% if unchecked_notifications.any? %>
+          <% if @user == current_user %>
+            <%= link_to notifications_path, remote: true do %>
+              <i class="fa fa-bell fa-2x position-absolute top-0 end-0 translate-middle" style="color: red;" size: "200x200"><br><span style="font-size:18px;">click!</span></i>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-
-      <p class="mt-2">名前：<%= @user.name %></p>
-      <% if @user.prefecture2 %>
-        <p>住んでいる（いた）県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id) %></p>
-      <% else %>
-        <p>住んでいる（いた）県：未入力</p>
-      <% end %>
-      <% if @user.prefecture1 %>
-        <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id) %></p>
-      <% else %>
-        <p>住んでみたい県：未入力</p>
-      <% end %>
-
-      <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary w-100 rounded-pill" %>
-
-    </div>
-
-    <div class="col-5 mt-5" id="notification_area">
-      <h1 class="border-bottom border-danger">自己紹介</h1>
-      <% if @user.introduction != "" %>
-        <p><%= @user.introduction %></p>
-      <% else %>
-        <p>まだ未入力です</p>
-      <% end %>
-    </div>
-
-    <div class="col-3 offset-md-1 mt-3">
-      <%= render "users/sidebar_user" %>
-    </div>
-
-  </div>
-
-  <div class="row pb-4">
-
-    <div class="col-9">
-
-      <% if @posts %>
-        <h3 class="mt-5 border-bottom border-secondary">投稿(<%= @posts.count %>件)</h3>
-        <% @posts.each do |post| %>
-          <div class="card pl-3 mt-1">
-            <div class="row">
-              <div class="col-9 mt-2">
-                <%= link_to post_path(post) do %>
-                  <p class="text-dark">タイトル：<%= post.title %></p>
-                  <p class="text-dark">場所：<%= post.prefecture.name %><%= post.city %>、投稿日：<%= post.updated_at.strftime('%Y/%m/%d') %></p>
-                <% end %>
-              </div>
-              <div class="col-3 mt-3">
-                <% if post.user == current_user %>
-                  <%= link_to "編集", edit_post_path(post), class: "btn btn-success mr-2 rounded-pill" %>
-                  <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger rounded-pill" %>
-                <% end %>
-              </div>
-            </div>
-          </div>
+        <p class="mt-2">名前：<%= @user.name %></p>
+        <% if @user.prefecture2 %>
+          <p>住んでいる（いた）県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id) %></p>
+        <% else %>
+          <p>住んでいる（いた）県：未入力</p>
         <% end %>
-      <% else %>
-        <p>まだ投稿はありません</p>
-      <% end %>
+        <% if @user.prefecture1 %>
+          <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id) %></p>
+        <% else %>
+          <p>住んでみたい県：未入力</p>
+        <% end %>
+        <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary w-100 rounded-pill" %>
+      </div>
 
+      <div class="col-5 mt-5" id="notification_area">
+        <h1 class="border-bottom border-danger">自己紹介</h1>
+        <% if @user.introduction != "" %>
+          <p><%= @user.introduction %></p>
+        <% else %>
+          <p>まだ未入力です</p>
+        <% end %>
+      </div>
+
+      <div class="col-3 offset-md-1 mt-3">
+        <%= render "users/sidebar_user" %>
+      </div>
     </div>
 
+    <div class="row pb-4">
+      <div class="col-9">
+        <% if @posts %>
+          <h3 class="mt-5 border-bottom border-secondary">投稿(<%= @posts.count %>件)</h3>
+          <div class="row row-cols-3">
+            <% @posts.each do |post| %>
+              <div class="col-4 mb-3" >
+                <%= render partial: "posts/post_cards", locals: {post: post} %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>まだ投稿はありません</p>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-
-
-
-</div>
 </div>
