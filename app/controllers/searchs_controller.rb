@@ -1,6 +1,6 @@
 class SearchsController < ApplicationController
   def search
-    @user = current_user
+    # @user = current_user
     @content = params[:content]
     @prefecture_id = params[:prefecture_id]
     @method = params[:method]
@@ -11,9 +11,17 @@ class SearchsController < ApplicationController
 
   def search_for(content, prefecture_id , method)
     if method == 'perfect'
-      Post.where(prefecture_id: prefecture_id) || Post.where(city: content)
+      if content != nil
+        Post.where(city: content)
+      else
+        Post.where(prefecture_id: prefecture_id)
+      end
     else
-      Post.where(prefecture_id: prefecture_id) || Post.where('city LIKE ?', "%#{content}%")
+      if content != nil
+        Post.where('city LIKE ?', "%#{content}%")
+      else
+        Post.where(prefecture_id: prefecture_id)
+      end
     end
   end
 end
