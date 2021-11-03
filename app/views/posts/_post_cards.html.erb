@@ -3,7 +3,7 @@
   <div class="card-body">
     <h5 class="card-title"><%= post.title %></h5>
     <div id="star-rate-<%= post.id %>">満足度：</div>
-    <p class="card-text mt-3">地域：<%= post.city %></p>
+    <p class="card-text mt-3">地域：<%= post.prefecture.name %><%= post.city %></p>
     <p class="card-text mt-2"><%= post.body.truncate(25) %></p>
     <div class="d-flex">
       <%= link_to "この投稿を読む", post_path(post), class: "btn btn-primary rounded-pill" %>
