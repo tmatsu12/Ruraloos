@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:new, :create, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
-  get 'search' => "searchs#search"
+  get '/search' => "searchs#search"
+  resources :news, only: [:index]
   resources :notifications, only: [:index, :update] do
     collection do
       delete :destroy_all
