@@ -4,6 +4,7 @@ class FavoritesController < ApplicationController
     unless current_user == @post.user
       favorite = current_user.favorites.new(post_id: @post.id)
       favorite.save
+      @post.create_notification_like!(current_user)
     end
   end
 
