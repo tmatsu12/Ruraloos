@@ -7,7 +7,7 @@
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 46) do %>
           <%= image_tag "okinawa.jpg", size: "240x190" %>
-          <p class="text-center">沖縄県(<%= Prefecture.find(46).posts.count %>件の投稿）</p>
+          <p class="text-center link">沖縄県(<%= Prefecture.find(46).posts.count %>件の投稿）</p>
         <% end %>
       </div>
     </div>

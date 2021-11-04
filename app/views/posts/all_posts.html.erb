@@ -7,25 +7,25 @@
           <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <% if params[:option].to_i == 1 %>
               <label class="active">
-                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light active mb-3" %>
+                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light btn-text active mb-3" %>
               </label>
               <label>
-                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light mb-3" %>
+                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light btn-text mb-3" %>
               </label>
             <% elsif params[:option].to_i == 2 %>
               <label>
-                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light mb-3" %>
+                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light btn-text mb-3" %>
               </label>
               <label class="active">
-                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light active mb-3" %>
+                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light btn-text active mb-3" %>
               </label>
             <% else %>
             <!--params[:option]がnilの時は0と解釈されるようだ-->
               <label>
-                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light mb-3" %>
+                <%= link_to "新着順", sort_posts_path(option: 1), method: :post, class: "btn btn-light btn-text mb-3" %>
               </label>
               <label>
-                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light mb-3" %>
+                <%= link_to "いいね順", sort_posts_path(option: 2), method: :post, class: "btn btn-light btn-text mb-3" %>
               </label>
             <% end %>
           </div>

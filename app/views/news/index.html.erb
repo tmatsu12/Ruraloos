@@ -1,6 +1,9 @@
 <div class="general-visual">
   <div class="container pt-5">
-    <h2 class="border-bottom mb-3">地方移住に関する最新のニュース</h2>
+    <div class="d-flex justify-content-between">
+      <h2 class="border-bottom mb-3">地方移住に関する最新のニュース</h2>
+      <h5>Powered by <%= link_to "https://newsapi.org" do %><span class="link">News API</span><% end %></h5>
+    </div>
     <%= render partial: "data", collection: @news, as: "news" %>
   </div>
 </div>

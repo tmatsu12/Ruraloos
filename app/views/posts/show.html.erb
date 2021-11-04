@@ -7,7 +7,7 @@
 
         <h1 class="border-bottom border-danger"><%= @post.title %>　<%= link_to "投稿者：#{@user.name}さん", user_path(@user), class: "text-reset", style: "font-size:16px;" %></h1>
 
-          <p class="mt-3">どのあたりに住んでいるか、又は住んでいたか：<%= @post.city %></p>
+          <p class="mt-3">どのあたりに住んでいるか、又は住んでいたか：<%= @post.prefecture.name %><%= @post.city %></p>
 
           <div id='map'></div>
 
@@ -103,10 +103,10 @@
           </table>
 
           <div id="post_<%= @post.id %>" class="d-flex">
-            <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary rounded-pill mb-3 mr-3" %>
+            <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary btn-text rounded-pill mb-3 mr-3" %>
             <% if @post.user == current_user %>
-              <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success mb-3 mr-3 rounded-pill" %>
-              <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger mb-3 rounded-pill" %>
+              <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success btn-text mb-3 mr-3 rounded-pill" %>
+              <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger btn-text mb-3 rounded-pill" %>
             <% end %>
             <div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div>
           </div>
@@ -126,7 +126,7 @@
               </div>
 
               <div class="actions">
-                <%= f.submit 'コメントする',class: "btn btn-secondary mb-3 rounded-pill" %>
+                <%= f.submit 'コメントする',class: "btn btn-secondary btn-text mb-3 rounded-pill" %>
               </div>
             <% end %>
           <% end %>
