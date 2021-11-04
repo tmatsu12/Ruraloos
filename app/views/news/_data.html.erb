@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title"><span class="text-reset"><%= news.title.truncate(50) %></span></h5>
+        <h5 class="card-title"><span class="link"><%= news.title.truncate(50) %></span></h5>
         <p class="card-text"><small class="text-muted"><%= news.author %>　<%= time_ago_in_words(news.publishedAt) %>前</small></p>
       </div>
     </div>

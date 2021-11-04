@@ -5,9 +5,9 @@
 
     <div class="main-visual">
       <div class="main-visual-content d-flex justify-content-center align-items-center flex-column">
-        <h1 class="font-weight-bold mb-3"><%= image_tag "favicon.ico", size: '55x55' %> <span class="mx-auto">Ruraloos</span> <%= image_tag "favicon.ico", size: '55x55' %></h1>
+        <h1 class="mb-3"><%= image_tag "favicon.ico", size: '55x55' %> <span class="mx-auto font-weight-bold ruraloos">Ruraloos</span> <%= image_tag "favicon.ico", size: '55x55' %></h1>
         <h3>地方移住に関心がある人のためのレビューサイト</h3>
-        <a class="btn btn-dark btn-lg rounded-pill mt-3 go-map", href="#map-container">住んでみたい地域を選ぶ</a>
+        <a class="btn btn-dark btn-lg rounded-pill mt-3 go-map btn-text", href="#map-container">住んでみたい地域を選ぶ</a>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
               </div>
             <% end %>
           </div>
-          <p class="text-center"><%= link_to "全ての投稿を見る", all_posts_path, class: "font-weight-bold text-white", style: "font-size:18px;" %></p>
+          <p class="text-center"><%= link_to "全ての投稿を見る", all_posts_path, class: "btn btn-header btn-text", style: "font-size:18px;" %></p>
         </div>
       </div>
 

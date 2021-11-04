@@ -16,16 +16,16 @@
             <% end %>
             <p class="mt-2">名前：<%= @user.name %></p>
             <% if @user.prefecture2 %>
-              <p>住んでいる（いた）県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id) %></p>
+              <p>住んでいる（いた）県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id), class: "link" %></p>
             <% else %>
               <p>住んでいる（いた）県：未入力</p>
             <% end %>
             <% if @user.prefecture1 %>
-              <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id) %></p>
+              <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id), class: "link" %></p>
             <% else %>
               <p>住んでみたい県：未入力</p>
             <% end %>
-            <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary w-100 rounded-pill" %>
+            <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary btn-text w-100 rounded-pill" %>
           </div>
           <div class="col-7" id="notification_area">
             <h1 class="border-bottom border-danger">自己紹介</h1>

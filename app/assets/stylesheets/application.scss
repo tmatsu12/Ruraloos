@@ -16,9 +16,20 @@
  @import "bootstrap";
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
+ @import url('https://fonts.googleapis.com/css2?family=Mate+SC&family=Special+Elite&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Mate+SC&family=Special+Elite&display=swap');
 
- html{
-   font-family: 'Noto Sans JP', sans-serif;
+ .ruraloos{
+   font-family: 'Special Elite', cursive;
+ }
+
+ .sidebar{
+   font-family: 'Mate SC', serif;
+ }
+
+ h1,h2,h3,h4,h5,.btn-text{
+   font-family: 'Kaisei Opti', serif;
  }
 
  .navbar{
@@ -48,7 +59,6 @@
  .main-visual-content{
   width:100%;
   height:100%;
-  font-family: 'Noto Sans JP', sans-serif;
   background-color: rgba(255,255,255,0.7);
  }
 
@@ -87,7 +97,6 @@
   width:100%;
   height:100%;
   color:#000;
-  font-family: 'Noto Sans JP', sans-serif;
   background-color: rgba(255,255,255,0.3);
  }
 
@@ -96,6 +105,7 @@
   background-color:white;
   text-align:center;
   margin-bottom:0px;
+  font-family: 'Kaisei Opti', serif;
  }
 
  #notice1{
@@ -103,6 +113,7 @@
   background-color:white;
   text-align:center;
   margin-bottom:0px;
+  font-family: 'Kaisei Opti', serif;
  }
 
  .like-btn{
@@ -126,12 +137,17 @@
 
  #error_explanation {
   color: red;
+  font-family: 'Kaisei Opti', serif;
 }
 
 .post-cards{
     min-height: 560px;
 }
 
+.link{
+    text-decoration:none;
+    color:#0b564f;
+}
 
 /* ---------------------------- */
 /* ---- ハンバーガーアイコン ---- */

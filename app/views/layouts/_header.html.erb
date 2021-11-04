@@ -3,25 +3,25 @@
     <div class="container">
       <%= link_to root_path do %>
         <%= image_tag "favicon.ico", size: '40x40' %>
-        <span class="navbar-brand ml-1 text-white">Ruraloos</span>
+        <span class="navbar-brand ml-1 text-white ruraloos">Ruraloos</span>
       <% end %>
 
       <% if user_signed_in? %>
-        <p class="mt-2"><span class="text-white">ようこそ</span><%= link_to current_user.name + "さん", user_path(current_user), class: "text-white" %></p>
+        <h5 class="text-white mt-2">ようこそ<%= current_user.name %>さん</h5>
       <% end %>
 
       <div class="mt-2">
         <ul class="list-inline">
         <% if user_signed_in? %>
-          <li class="list-inline-item"><%= link_to '新規投稿', new_post_path, class: 'btn btn-header' %></li>
-          <li class="list-inline-item"><%= link_to '全ての投稿', all_posts_path, class: 'btn btn-header' %></li>
-          <li class="list-inline-item"><%= link_to 'マイページ', user_path(current_user), class: 'btn btn-header' %></li>
-          <li class="list-inline-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'btn btn-header' %></li>
+          <li class="list-inline-item"><%= link_to '新規投稿', new_post_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to '全ての投稿', all_posts_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to 'マイページ', user_path(current_user), class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'btn btn-header btn-text' %></li>
         <% else %>
-          <li class="list-inline-item"><%= link_to 'About', about_path, class: 'btn btn-header' %></li>
-          <li class="list-inline-item"><%= link_to '全ての投稿', all_posts_path, class: 'btn btn-header' %></li>
-          <li class="list-inline-item"><%= link_to '新規登録', new_user_registration_path, class: 'btn btn-header' %></li>
-          <li class="list-inline-item"><%= link_to 'ログイン', new_user_session_path , class: 'btn btn-header'%></li>
+          <li class="list-inline-item"><%= link_to 'About', about_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to '全ての投稿', all_posts_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to '新規登録', new_user_registration_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to 'ログイン', new_user_session_path , class: 'btn btn-header btn-text'%></li>
         <% end %>
         </ul>
       </div>

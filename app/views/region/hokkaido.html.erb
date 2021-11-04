@@ -7,7 +7,7 @@
       <div class="mb-3 mr-3">
         <%= link_to posts_path(prefecture_id: 0) do %>
           <%= image_tag "hokkaido.jpg", size: "240x190" %>
-          <p class="text-center">北海道(<%= Prefecture.find(0).posts.count %>件の投稿）</p>
+          <p class="text-center link">北海道(<%= Prefecture.find(0).posts.count %>件の投稿）</p>
         <% end %>
       </div>
     </div>
