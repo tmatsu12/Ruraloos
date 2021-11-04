@@ -16,6 +16,10 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show, :edit, :update]
   get 'search' => "searchs#search"
-  resources :notifications, only: [:index, :update]
+  resources :notifications, only: [:index, :update] do
+    collection do
+      delete :destroy_all
+    end
+  end
 end
 
