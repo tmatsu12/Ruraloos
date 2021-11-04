@@ -86,6 +86,8 @@ gem 'kaminari', '~> 1.2.1'
 
 gem 'rubocop-airbnb'
 
+gem 'news-api'
+
 group :production do
   gem 'mysql2'
 end

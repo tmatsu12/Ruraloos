@@ -1,0 +1,20 @@
+<%= link_to news.url do %>
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <% if news.urlToImage.present? %>
+        <%= image_tag news.urlToImage, width: '100%', height: '100%' %>
+      <% else %>
+        <%= image_tag "No_Picture.png", width: '100%', height: '100%' %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><span class="text-reset"><%= news.title.truncate(50) %></span></h5>
+        <p class="card-text"><small class="text-muted"><%= news.author %>　<%= time_ago_in_words(news.publishedAt) %>前</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
