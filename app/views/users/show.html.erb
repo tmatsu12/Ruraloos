@@ -29,7 +29,7 @@
           </div>
           <div class="col-7" id="notification_area">
             <h1 class="border-bottom border-danger">自己紹介</h1>
-            <% if @user.introduction != nil %>
+            <% if @user.introduction %>
               <p><%= @user.introduction %></p>
             <% else %>
               <p>まだ未入力です。</p>
