@@ -13,13 +13,13 @@
       <div class="mt-2">
         <ul class="list-inline">
         <% if user_signed_in? %>
-          <li class="list-inline-item"><%= link_to '新規投稿', new_post_path, class: 'btn btn-header btn-text' %></li>
-          <li class="list-inline-item"><%= link_to '全ての投稿', all_posts_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to '質問', new_post_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to '全ての質問', all_posts_path, class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to 'マイページ', user_path(current_user), class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'btn btn-header btn-text' %></li>
         <% else %>
           <li class="list-inline-item"><%= link_to 'About', about_path, class: 'btn btn-header btn-text' %></li>
-          <li class="list-inline-item"><%= link_to '全ての投稿', all_posts_path, class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to '全ての質問', all_posts_path, class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to '新規登録', new_user_registration_path, class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to 'ログイン', new_user_session_path , class: 'btn btn-header btn-text'%></li>
         <% end %>

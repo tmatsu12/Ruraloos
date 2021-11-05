@@ -19,8 +19,12 @@
                 </div>
                 <% if post_comment.evaluation != 0 %>
                   <span class="ml-3"><%= post_comment.evaluation %>点</span>
+                <% else %>
+                  <span class="ml-3 mt-1">未評価</span>
                 <% end %>
-                <%= f.submit '評価する', class: "btn btn-success btn-text rounded-pill ml-4" %>
+                <% if post.user == current_user %>
+                  <%= f.submit '評価する', class: "btn btn-success btn-text rounded-pill ml-4" %>
+                <% end %>
               </div>
                 <script>
                   $('#star-rate-<%= post_comment.id %>').raty({
@@ -38,7 +42,7 @@
 
         </div>
         <div class="col-md-3">
-            <p class="mt-3 mb-2"><%= post_comment.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+            <p class="mt-3 mb-2"><%= post_comment.updated_at.strftime("%Y/%m/%d %H:%M") %></p>
             <% if user_signed_in? %>
       	      <%= link_to '返信', new_post_post_comment_path(post, parent_id: post_comment.id), remote: true, class: "btn btn-info rounded-pill btn-text" %>
       	    <% end %>

@@ -1,6 +1,7 @@
 class PostCommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:update]
+  # before_action :ensure_correct_user, only: [:update]
+  # ensure_correct_userを断念。回答の評価は@post.user=current_userの時に可能だが、ensure_correct_userのせいで評価をupdateできなくなる
 
   def new
     @post = Post.find(params[:post_id])
@@ -43,12 +44,12 @@ class PostCommentsController < ApplicationController
     params.require(:post_comment).permit(:comment, :parent_id, :evaluation)
   end
 
-  def ensure_correct_user
-    @post = Post.find(params[:post_id])
-    @post_comment = PostComment.find(params[:id])
-    if @post.user != current_user
-      flash[:notice] = "質問者以外は評価できません"
-      redirect_to request.referer
-    end
-  end
+  # def ensure_correct_user
+  #   @post = Post.find(params[:post_id])
+  #   @post_comment = PostComment.find(params[:id])
+  #   if @post_comment.user != current_user
+  #     flash[:notice] = "他のユーザーの情報は変更できません"
+  #     redirect_to request.referer
+  #   end
+  # end
 end
