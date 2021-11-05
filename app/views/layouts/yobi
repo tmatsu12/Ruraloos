@@ -1,0 +1,17 @@
+postのnew.html.erbより
+
+<div class="form-group" id="star-rate-<%= post.id %>">
+    <%= f.label :総合的な満足度 %><span class="text-danger">(必須)</span><br/>
+    <%= f.hidden_field :evaluation, id: 'star' %>
+  </div>
+
+  <script>
+  $('#star-rate-<%= @post.id %>').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'post[evaluation]',
+    half: true,
+  });
+</script>
