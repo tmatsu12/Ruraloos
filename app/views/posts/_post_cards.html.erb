@@ -1,5 +1,6 @@
 <div class="card post-cards" style="width: 16rem" >
-  <%= attachment_image_tag post, :image, class: "card-img-top", style: "width: 100%", fallback: "No_Picture.png" %>
+  <%#= attachment_image_tag post, :image, class: "card-img-top", style: "width: 100%", fallback: "No_Picture.png" %>
+  <%= render partial: "posts/post_image", locals: { prefecture_id: post.prefecture.id } %>
   <div class="card-body">
     <h5 class="card-title"><%= post.title %></h5>
     <div id="star-rate-<%= post.id %>">満足度：</div>
