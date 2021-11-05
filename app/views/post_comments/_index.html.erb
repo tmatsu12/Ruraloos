@@ -10,29 +10,29 @@
       	</div>
       	<div class="col-md-6">
       	  <div class="card-body">
-      	    <p><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
+      	    <p class="mb-5"><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
       	    <span>役に立ちましたか？</span>
       	    <%= form_with(model:[post, post_comment], local: true) do |f| %>
       	      <div class="d-flex">
                 <div class="form-group" id="star-rate-<%= post_comment.id %>">
                   <%= f.hidden_field :evaluation, id: 'star' %>
                 </div>
-                <% if post_comment.evaluation != nil %>
+                <% if post_comment.evaluation != 0 %>
                   <span class="ml-3"><%= post_comment.evaluation %>点</span>
                 <% end %>
-                <%= f.submit '更新する', class: "btn btn-success btn-text rounded-pill ml-4" %>
+                <%= f.submit '評価する', class: "btn btn-success btn-text rounded-pill ml-4" %>
               </div>
-              <script>
-                $('#star-rate-<%= post_comment.id %>').raty({
-                  size     : 36,
-                  starOff:  '<%= asset_path('star-off.png') %>',
-                  starOn : '<%= asset_path('star-on.png') %>',
-                  starHalf: '<%= asset_path('star-half.png') %>',
-                  scoreName: 'post_comment[evaluation]',
-                  score: <%= post_comment.evaluation %>,
-                  half: true,
-                });
-              </script>
+                <script>
+                  $('#star-rate-<%= post_comment.id %>').raty({
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post_comment[evaluation]',
+                    score: <%= post_comment.evaluation %>,
+                    half: true,
+                  });
+                </script>
             <% end %>
           </div>
 
@@ -40,9 +40,10 @@
         <div class="col-md-3">
             <p class="mt-3 mb-2"><%= post_comment.created_at.strftime("%Y/%m/%d %H:%M") %></p>
             <% if user_signed_in? %>
-      	      <%= link_to '返信', new_post_post_comment_path(post, parent_id: post_comment.id), remote: true, class: "btn btn-primary rounded-pill btn-text" %>
+      	      <%= link_to '返信', new_post_post_comment_path(post, parent_id: post_comment.id), remote: true, class: "btn btn-info rounded-pill btn-text" %>
       	    <% end %>
       	    <% if current_user == post_comment.user %>
+              <%= link_to '削除', post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, remote: true, class: "btn btn-danger rounded-pill btn-text" %>
               <%= link_to '削除', post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, remote: true, class: "btn btn-danger rounded-pill btn-text" %>
       	    <% end %>
       	</div>

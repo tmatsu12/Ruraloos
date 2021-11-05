@@ -14,14 +14,10 @@ class Post < ApplicationRecord
 
   validates :title, presence: true
   validates :city, presence: true
-  validates :evaluation, presence: true
   validates :body, presence: true
   validates :title, length: { maximum: 25 }
   validates :city, length: { maximum: 20 }
   validates :body, length: { maximum: 1000 }
-  validates :body1, length: { maximum: 1000 }
-  validates :body2, length: { maximum: 1000 }
-  validates :body3, length: { maximum: 1000 }
 
   def create_notification_comment!(current_user, post_comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
