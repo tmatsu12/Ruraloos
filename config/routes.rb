@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       get :all_posts, as: "all"
       post :sort, as: "sort"
     end
-    resources :post_comments, only: [:new, :create, :destroy]
+    resources :post_comments, only: [:new, :create, :update, :destroy]
   end
   resources :users, only: [:show, :edit, :update]
   get '/search' => "searchs#search"

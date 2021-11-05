@@ -1,5 +1,6 @@
 class PostCommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:update]
 
   def new
     @post = Post.find(params[:post_id])
@@ -18,6 +19,14 @@ class PostCommentsController < ApplicationController
     end
   end
 
+  def update
+    @post = Post.find(params[:post_id])
+    @post_comment = PostComment.find(params[:id])
+    @post_comment.update(post_comment_params)
+    redirect_to request.referer
+  end
+
+
   def destroy
     @post = Post.find(params[:post_id])
     post_comment = @post.post_comments.find(params[:id])
@@ -27,6 +36,15 @@ class PostCommentsController < ApplicationController
   private
 
   def post_comment_params
-    params.require(:post_comment).permit(:comment, :parent_id)
+    params.require(:post_comment).permit(:comment, :parent_id, :evaluation)
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:post_id])
+    @post_comment = PostComment.find(params[:id])
+    if @post.user != current_user
+      flash[:notice] = "質問者以外は評価できません"
+      redirect_to request.referer
+    end
   end
 end
