@@ -19,13 +19,17 @@ class PostCommentsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:post_id])
+    @post_comment = PostComment.find(params[:id])
+  end
+
   def update
     @post = Post.find(params[:post_id])
     @post_comment = PostComment.find(params[:id])
     @post_comment.update(post_comment_params)
-    redirect_to request.referer
+    redirect_to post_path(@post)
   end
-
 
   def destroy
     @post = Post.find(params[:post_id])

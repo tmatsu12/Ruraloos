@@ -11,7 +11,7 @@
       	<div class="col-md-6">
       	  <div class="card-body">
       	    <p class="mb-5"><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
-      	    <span>役に立ちましたか？</span>
+      	    <span>役に立ちましたか？(質問者が評価できます)</span>
       	    <%= form_with(model:[post, post_comment], local: true) do |f| %>
       	      <div class="d-flex">
                 <div class="form-group" id="star-rate-<%= post_comment.id %>">
@@ -43,7 +43,7 @@
       	      <%= link_to '返信', new_post_post_comment_path(post, parent_id: post_comment.id), remote: true, class: "btn btn-info rounded-pill btn-text" %>
       	    <% end %>
       	    <% if current_user == post_comment.user %>
-              <%= link_to '削除', post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, remote: true, class: "btn btn-danger rounded-pill btn-text" %>
+              <%= link_to '編集', edit_post_post_comment_path(post_comment.post_id, post_comment.id), class: "btn btn-success rounded-pill btn-text" %>
               <%= link_to '削除', post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, remote: true, class: "btn btn-danger rounded-pill btn-text" %>
       	    <% end %>
       	</div>
