@@ -12,16 +12,6 @@
   </div>
 </div>
 
-<script>
-$('#star-rate-<%= @post.id %>').raty({
-  size: 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  starHalf: '<%= asset_path('star-half.png') %>',
-  half: true,
-  score: <%= @post.evaluation %>,
-  scoreName: 'post[evaluation]',
-});
-</script>
+
 
 
