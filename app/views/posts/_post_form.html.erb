@@ -2,52 +2,31 @@
 
   <div class="form-group">
     <%= f.label :タイトル %><span class="text-danger">(必須)</span><br />
-    <%= f.text_field :title, class: "col-9 form-control", placeholder: "(例):〇〇に〇〇年間住んでいました！" %>
+    <%= f.text_field :title, class: "col-9 form-control" %>
   </div>
 
   <div class="d-flex">
     <div class="form-group mr-5">
-      <%= f.label :どの県の投稿ですか？ %><span class="text-danger">(必須)</span><br>
+      <%= f.label :どの県についての質問ですか？ %><span class="text-danger">(必須)</span><br>
       <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい', class: "form-control" %>
     </div>
-    <div class="form-group ml-5">
-      <%= f.label :市町村名を入力してください %><span class="text-danger">(必須)</span><br>
+    <div class="form-group">
+      <%= f.label :どのあたりについての質問ですか？ %><span class="text-danger">(必須)</span><br>
       <%= f.text_field :city, class: "form-control", placeholder: "市町村名" %>
     </div>
   </div>
 
-  <div class="form-group item_image_btn">
-    <%= f.label :画像 %><br />
-    <%= f.attachment_field :image %>
-  </div>
-
-  <div class="form-group" id="star-rate-<%= post.id %>">
-    <%= f.label :総合的な満足度 %><span class="text-danger">(必須)</span><br/>
-    <%= f.hidden_field :evaluation, id: 'star' %>
-  </div>
-
   <div class="form-group">
-    <%= f.label :【生活面について】 %><br />
-    <%= f.text_area :body, rows: 4, class: "col-9 form-control", placeholder: "食事、家賃、レジャー、土地柄など" %>
+    <%= f.label :質問内容 %><span class="text-danger">(必須)</span><br />
+    <%= f.text_area :body, rows: 10, class: "col-9 form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :【仕事面について】 %><br />
-    <%= f.text_area :body1, rows: 4, class: "col-9 form-control", placeholder: "仕事の見つけやすさ、盛んな業種など" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :【人間関係面について】 %><br />
-    <%= f.text_area :body2, rows: 4, class: "col-9 form-control", placeholder: "地域づきあいの濃密さなど" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :【その他】 %><br />
-    <%= f.text_area :body3, rows: 4, class: "col-9 form-control", placeholder: "自由に書きましょう！" %>
-  </div>
-
-  <div class="actions d-flex">
-    <%= f.submit '投稿',class: "btn btn-success btn-text rounded-pill my-3 mr-3" %>
+  <div class="actions">
+    <% if post.body.nil? %>
+      <%= f.submit '質問する',class: "btn btn-success btn-text rounded-pill my-3 mr-3" %>
+    <% else %>
+      <%= f.submit '更新する',class: "btn btn-success btn-text rounded-pill my-3 mr-3" %>
+    <% end %>
   </div>
 
 <% end %>
