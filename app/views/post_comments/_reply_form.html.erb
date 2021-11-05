@@ -2,7 +2,7 @@
     <%= form_with(model: [@post, @post_comment]) do |f| %>
       <%= f.hidden_field :parent_id %>
       <div class="form-group">
-        <%= f.label '返信' %>
+        <h5 class="mt-2">返信</h5>
         <%= f.text_area :comment, rows: 4, class: 'form-control', placeholder: "返信をここに" %>
       </div>
       <%= f.submit '送信', class: 'btn btn-primary btn-text rounded-pill' %>
