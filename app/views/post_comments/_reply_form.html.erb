@@ -3,7 +3,7 @@
       <%= f.hidden_field :parent_id %>
       <div class="form-group">
         <%= f.label '返信' %>
-        <%= f.text_area :comment, class: 'form-control', placeholder: "返信をここに" %>
+        <%= f.text_area :comment, rows: 4, class: 'form-control', placeholder: "返信をここに" %>
       </div>
       <%= f.submit '送信', class: 'btn btn-primary btn-text rounded-pill' %>
       <%= link_to 'キャンセル', post_path(@post), class: 'btn btn-secondary btn-text rounded-pill' %>
