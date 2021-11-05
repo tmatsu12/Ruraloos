@@ -34,7 +34,7 @@
         <% end %>
 
         <div class="form-group">
-          <%= f.label :住んでいる（いた）県 %><br>
+          <%= f.label :住んだことのある県 %><br>
           <%= f.collection_select :prefecture2_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
         </div>
 
