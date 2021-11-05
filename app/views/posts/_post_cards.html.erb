@@ -3,11 +3,10 @@
   <%= render partial: "posts/post_image", locals: { prefecture_id: post.prefecture.id } %>
   <div class="card-body">
     <h5 class="card-title"><%= post.title %></h5>
-    <div id="star-rate-<%= post.id %>">満足度：</div>
     <p class="card-text mt-3">地域：<%= post.prefecture.name %><%= post.city %></p>
-    <p class="card-text mt-2"><%= post.body.truncate(25) %></p>
+    <p class="card-text mt-2"><%= safe_join(post.body.truncate(25).split("\n"),tag(:br)) %></p>
     <div class="d-flex">
-      <%= link_to "この投稿を読む", post_path(post), class: "btn btn-primary btn-text rounded-pill" %>
+      <%= link_to "この質問を見る", post_path(post), class: "btn btn-primary btn-text rounded-pill" %>
       <% if post.favorites.count == 0 %>
         <i class="fas fa-heart unlike-btn ml-2 mt-2" ></i><span class="text-dark mt-2"><%= post.favorites.count %></span>
       <% else %>
@@ -25,14 +24,3 @@
   </div>
 </div>
 
-<script>
-$('#star-rate-<%= post.id %>').raty({
-  size: 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  starHalf: '<%= asset_path('star-half.png') %>',
-  half: true,
-  readOnly: true,
-  score: <%= post.evaluation %>,
-});
-</script>

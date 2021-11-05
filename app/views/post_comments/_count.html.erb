@@ -1,4 +1,4 @@
-<%= image_tag "comments.png", size: '60x45' %>　<%= post.post_comments.where(parent_id: nil).count %>件のコメント（コメントにはログインが必要です！）
+<%= image_tag "comments.png", size: '60x45' %>　<%= post.post_comments.where(parent_id: nil).count %>件の回答（ログインが必要です！）
 <% unless user_signed_in? %>
   <p></p>
 <% end %>
