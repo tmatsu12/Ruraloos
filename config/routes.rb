@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     collection do
       get :all_posts, as: "all"
-      post :sort, as: "sort"
+      post :sort_all_posts, as: "sort_all"
+      post :sort_prefecture_posts, as: "sort_prefecture"
     end
     resources :post_comments, only: [:new, :create, :edit, :update, :destroy]
   end

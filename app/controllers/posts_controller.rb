@@ -5,16 +5,17 @@ class PostsController < ApplicationController
   def index
     @user = current_user
     @prefecture = Prefecture.find(params[:prefecture_id])
+    session[:prefecture_id] = params[:prefecture_id] #sort_prefecture_postsアクションで使うため
     @posts = @prefecture.posts.page(params[:page]).order(updated_at: :desc)
-    @residents = @prefecture.user_prefectures.where(status: 0)
-    @wannalivings = @prefecture.user_prefectures.where(status: 1)
+    @residents = @prefecture.user_prefectures.where(status: "livepast")
+    @wannalivings = @prefecture.user_prefectures.where(status: "livefuture")
   end
 
   def all_posts
     @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
   end
 
-  def sort
+  def sort_all_posts
     if params[:option].to_i == 1
       @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
     else
@@ -22,6 +23,26 @@ class PostsController < ApplicationController
       #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
     end
     render :all_posts
+  end
+
+  def sort_prefecture_posts
+    @prefecture = Prefecture.find(session[:prefecture_id])
+    @residents = @prefecture.user_prefectures.where(status: 0)
+    @wannalivings = @prefecture.user_prefectures.where(status: 1)
+    if params[:option].to_i == 1
+      @posts = @prefecture.posts.all.page(params[:page]).order(updated_at: :desc).per(25)
+    else
+      temp_ids = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
+      temp_array = []
+      temp_ids.each do |temp_id|
+        if Post.find(temp_id).prefecture.id == @prefecture.id
+          temp_array << temp_id
+        end
+      end
+      @posts = Kaminari.paginate_array(Post.find(temp_array)).page(params[:page]).per(25)
+      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
+    end
+    render :index
   end
 
   def new
