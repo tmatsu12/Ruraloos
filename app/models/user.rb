@@ -11,13 +11,14 @@ class User < ApplicationRecord
     end
   end
 
-  belongs_to :prefecture1, class_name: "Prefecture", optional: true
-  belongs_to :prefecture2, class_name: "Prefecture", optional: true
+  # belongs_to :prefecture1, class_name: "Prefecture", optional: true
+  # belongs_to :prefecture2, class_name: "Prefecture", optional: true
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :user_prefectures, dependent: :destroy
 
   attachment :profile_image
 

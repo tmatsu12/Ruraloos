@@ -4,12 +4,11 @@ ja:
       user: ユーザー
       post: 投稿
       post_comment: コメント
+      user_prefecture: 県情報
     attributes:
       user:
         name: 名前
         introduction: 自己紹介
-        prefecture2_id: 住んでいる（いた）県
-        prefecture1_id: 住みたい県
       post:
         title: タイトル
         city: 居住地域
@@ -20,3 +19,11 @@ ja:
         body3: 投稿
       post_comment:
         comment: コメント
+      user_prefecture:
+        status: 住んだことがある県、または住んでみたい県へのチェック
+
+  enums:
+    user_prefecture:
+      status:
+        livepast: "住んだことのある県"
+        livefuture: "住んでみたい県"

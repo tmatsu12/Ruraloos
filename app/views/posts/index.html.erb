@@ -2,15 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-9 mt-5">
-        <h1 class="border-bottom border-danger"><%= @prefecture.name %>(<%= @posts.count %>件の投稿)</h1>
-        <h5 class="mt-3 mb-3">住んでいる/いた人 (<%= @residents.count %>人)</h5>
+        <h1 class="border-bottom border-danger"><%= @prefecture.name %></h1>
+        <h5 class="mt-3 mb-3">住んだことのある人 (<%= @residents.count %>人)</h5>
         <% if @residents.exists? %>
           <div class="d-flex flex-wrap">
             <% @residents.each do |resident| %>
               <div class="text-center mr-2">
-                <%= link_to user_path(resident) do %>
-                  <%= attachment_image_tag resident, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br />
-                  <p class="link"><%= resident.name %></p>
+                <%= link_to user_path(resident.user) do %>
+                  <%= attachment_image_tag resident.user, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br />
+                  <p class="link" style="font-size:14px;"><%= resident.user.name %></p>
                 <% end %>
               </div>
             <% end %>
@@ -23,9 +23,9 @@
           <div class="d-flex flex-wrap">
             <% @wannalivings.each do |wannaliving| %>
               <div class="text-center mr-2">
-                <%= link_to user_path(wannaliving) do %>
-                  <%= attachment_image_tag wannaliving, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br>
-                  <p class="link"><%= wannaliving.name %></p>
+                <%= link_to user_path(wannaliving.user) do %>
+                  <%= attachment_image_tag wannaliving.user, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br>
+                  <p class="link" style="font-size:14px;"><%= wannaliving.user.name %></p>
                 <% end %>
               </div>
             <% end %>
@@ -34,11 +34,38 @@
           <p>まだいません</p>
         <% end %>
 
-        <h3 class="mt-4 border-bottom border-success">投稿</h3>
+        <div class="d-flex justify-content-between">
+          <h3 class="mt-4 border-bottom border-success">質問(<%= @posts.count %>件)</h3>
+          <div class="btn-group btn-group-toggle mt-4" data-toggle="buttons">
+            <% if params[:option].to_i == 1 %>
+              <label class="active">
+                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, remote: true, class: "btn btn-light btn-text active" %>
+              </label>
+              <label>
+                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, remote: true, class: "btn btn-light btn-text" %>
+              </label>
+            <% elsif params[:option].to_i == 2 %>
+              <label>
+                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, remote: true, class: "btn btn-light btn-text" %>
+              </label>
+              <label class="active">
+                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, remote: true, class: "btn btn-light btn-text active" %>
+              </label>
+            <% else %>
+            <!--params[:option]がnilの時は0と解釈されるようだ-->
+              <label>
+                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, remote: true, class: "btn btn-light btn-text" %>
+              </label>
+              <label>
+                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, remote: true, class: "btn btn-light btn-text" %>
+              </label>
+            <% end %>
+          </div>
+        </div>
         <% if @posts.exists? %>
           <div class="row row-cols-3">
             <% @posts.each do |post| %>
-              <div class="col-4 mb-3" >
+              <div class="col-4 mb-3">
                 <%= render partial: "posts/post_cards", locals: {post: post} %>
               </div>
             <% end %>

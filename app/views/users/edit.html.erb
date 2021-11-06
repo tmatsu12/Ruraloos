@@ -1,67 +1,53 @@
 <div class="general-visual">
-<div class="container">
-
-  <div class="row">
-
-    <div class="col-9 mt-5">
-
-      <%= render "posts/errors", obj:@user %>
-
-      <h1 class="border-bottom border-danger">ユーザー情報の編集</h1>
-
-      <%= form_with model:@user, local:true do |f| %>
-        <% if @user.name == "ゲスト" %>
+  <div class="container">
+    <div class="row">
+      <div class="col-9 mt-5">
+        <%= render "posts/errors", obj:@user %>
+        <h1 class="border-bottom border-danger">ユーザー情報の編集</h1>
+        <%= form_with model:@user, local:true do |f| %>
+          <% if @user.name == "ゲスト" %>
+            <div class="form-group">
+              <%= f.label :名前 %><br>
+              <%= f.text_field :name, class: "form-control col-5", readonly: true %>
+            </div>
+          <% else %>
+            <div class="form-group">
+              <%= f.label :名前 %><br>
+              <%= f.text_field :name, class: "form-control col-5" %>
+            </div>
+          <% end %>
+          <% if @user.name == "ゲスト" %>
+            <div class="form-group">
+              <%= f.label :プロフィール画像 %><br>
+              <%= f.attachment_field :profile_image, disabled: true %>
+            </div>
+          <% else %>
+            <div class="form-group">
+              <%= f.label :プロフィール画像 %><br>
+              <%= f.attachment_field :profile_image %>
+            </div>
+          <% end %>
+          <!--<div class="form-group">-->
+          <!--  <%#= f.label :住んだことのある県 %><br>-->
+          <!--  <%#= f.collection_select :prefecture2_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>-->
+          <!--</div>-->
+          <!--<div class="form-group">-->
+          <!--  <%#= f.label :住んでみたい県 %><br>-->
+          <!--  <%#= f.collection_select :prefecture1_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>-->
+          <!--</div>-->
           <div class="form-group">
-            <%= f.label :名前 %><br>
-            <%= f.text_field :name, class: "form-control col-5", readonly: true %>
+            <%= f.label :自己紹介 %><br>
+            <%= f.text_area :introduction, rows: 7, class: "form-control col-9" %>
           </div>
-        <% else %>
-          <div class="form-group">
-            <%= f.label :名前 %><br>
-            <%= f.text_field :name, class: "form-control col-5" %>
+          <div class="actions">
+            <%= f.submit "次へ", class: "btn btn-success btn-text rounded-pill" %>
+            <%= link_to "キャンセル", user_path(@user), class: "btn btn-secondary btn-text rounded-pill my-3 ml-3" %>
           </div>
         <% end %>
-        <% if @user.name == "ゲスト" %>
-          <div class="form-group">
-            <%= f.label :プロフィール画像 %><br>
-            <%= f.attachment_field :profile_image, disabled: true %>
-          </div>
-        <% else %>
-          <div class="form-group">
-            <%= f.label :プロフィール画像 %><br>
-            <%= f.attachment_field :profile_image %>
-          </div>
-        <% end %>
-
-        <div class="form-group">
-          <%= f.label :住んだことのある県 %><br>
-          <%= f.collection_select :prefecture2_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :住んでみたい県 %><br>
-          <%= f.collection_select :prefecture1_id, Prefecture.all, :id, :name, include_blank: '選択して下さい' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :自己紹介 %><br>
-          <%= f.text_area :introduction, rows: 7, class: "form-control col-9" %>
-        </div>
-
-        <div class="actions">
-          <%= f.submit "更新", class: "btn btn-success btn-text rounded-pill" %>
-          <%= link_to "キャンセル", user_path(@user), class: "btn btn-secondary btn-text rounded-pill my-3 ml-3" %>
-        </div>
-
-      <% end %>
-
-
+      </div>
+      <div class="col-3 mt-5">
+        <%= render partial: "users/sidebar" %>
+      </div>
     </div>
-
-    <div class="col-3 mt-5">
-      <%= render partial: "users/sidebar" %>
-    </div>
-
   </div>
-</div>
 </div>
