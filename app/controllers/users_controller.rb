@@ -12,6 +12,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def sort
+    @user = User.find(params[:id])
+    if params[:option].to_i == 1
+      @posts = @user.posts.page(params[:page]).order(updated_at: :desc).per(25)
+    else
+      @posts = Kaminari.paginate_array(Post.find(Favorite.where(user_id: @user.id).pluck(:post_id))).page(params[:page]).per(25)
+      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
+    end
+    render :show
+  end
+
   def edit
     @user = User.find(params[:id])
   end

@@ -14,7 +14,11 @@ Rails.application.routes.draw do
     end
     resources :post_comments, only: [:new, :create, :edit, :update, :destroy]
   end
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    member do
+      post :sort, as: "sort"
+    end
+  end
   resource :user_prefectures, only: [:new, :create, :edit, :update]
   get '/search' => "searchs#search"
   resources :news, only: [:index]
