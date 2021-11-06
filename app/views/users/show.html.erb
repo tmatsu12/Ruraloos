@@ -15,13 +15,17 @@
               <% end %>
             <% end %>
             <p class="mt-2">名前：<%= @user.name %></p>
-            <% if @user.prefecture2 %>
-              <p>住んだことのある県：<%= link_to @user.prefecture2.name, posts_path(prefecture_id: @user.prefecture2.id), class: "link" %></p>
+            <% if @user.user_prefectures.where(status: 0).exists? %>
+              <% @user.user_prefectures.where(status: 0).each do |lived| %>
+                <p>住んだことのある県：<%= link_to lived.prefecture.name, posts_path(prefecture_id: lived.prefecture.id), class: "link" %></p>
+              <% end %>
             <% else %>
               <p>住んだことのある県：未入力</p>
             <% end %>
-            <% if @user.prefecture1 %>
-              <p>住んでみたい県：<%= link_to @user.prefecture1.name, posts_path(prefecture_id: @user.prefecture1.id), class: "link" %></p>
+            <% if @user.user_prefectures.where(status: 1).exists? %>
+              <% @user.user_prefectures.where(status: 1).each do |willlive| %>
+                <p>住んでみたい県：<%= link_to willlive.prefecture.name, posts_path(prefecture_id: willlive.prefecture.id), class: "link" %></p>
+              <% end %>
             <% else %>
               <p>住んでみたい県：未入力</p>
             <% end %>
@@ -37,7 +41,7 @@
           </div>
         </div>
         <% if @posts %>
-          <h3 class="mt-5 border-bottom border-secondary">投稿(<%= @posts.count %>件)</h3>
+          <h3 class="mt-5 border-bottom border-secondary">質問(<%= @posts.count %>件)</h3>
           <div class="row row-cols-3">
             <% @posts.each do |post| %>
               <div class="col-4 mb-3" >
@@ -46,7 +50,7 @@
             <% end %>
           </div>
         <% else %>
-          <p>まだ投稿はありません</p>
+          <p>まだ質問はありません</p>
         <% end %>
         <div class="mt-5">
           <%= paginate @posts %>

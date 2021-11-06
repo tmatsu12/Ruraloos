@@ -6,8 +6,8 @@ class PostsController < ApplicationController
     @user = current_user
     @prefecture = Prefecture.find(params[:prefecture_id])
     @posts = @prefecture.posts.page(params[:page]).order(updated_at: :desc)
-    @residents = @prefecture.residents
-    @wannalivings = @prefecture.wannalivings
+    @residents = @prefecture.user_prefectures.where(status: 0)
+    @wannalivings = @prefecture.user_prefectures.where(status: 1)
   end
 
   def all_posts

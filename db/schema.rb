@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_05_063307) do
+ActiveRecord::Schema.define(version: 2021_11_06_012848) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
@@ -61,6 +61,16 @@ ActiveRecord::Schema.define(version: 2021_11_05_063307) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_prefectures", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "prefecture_id"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prefecture_id"], name: "index_user_prefectures_on_prefecture_id"
+    t.index ["user_id"], name: "index_user_prefectures_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -70,13 +80,9 @@ ActiveRecord::Schema.define(version: 2021_11_05_063307) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "prefecture1_id"
-    t.integer "prefecture2_id"
     t.string "profile_image_id"
     t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["prefecture1_id"], name: "index_users_on_prefecture1_id"
-    t.index ["prefecture2_id"], name: "index_users_on_prefecture2_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

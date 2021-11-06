@@ -87,6 +87,8 @@ gem 'rubocop-airbnb'
 
 gem 'news-api'
 
+gem 'enum_help'
+
 group :production do
   gem 'mysql2'
 end
