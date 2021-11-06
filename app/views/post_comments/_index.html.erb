@@ -2,13 +2,13 @@
   <% if !post_comment.parent_id %>
     <div class="card mt-3">
       <div class="row">
-        <div class="col-md-2 ml-3 mr-0 my-3">
+        <div class="col-md-1 ml-3 mr-0 my-3">
       	  <%= link_to user_path(post_comment.user) do %>
       	  	<%= attachment_image_tag post_comment.user, :profile_image, fallback: "no_image.png", size: "35x35" %><br>
-          	<span class="link"><%= post_comment.user.name %></span>
+          	<span class="link" style="font-size:12px;"><%= post_comment.user.name %></span>
       	  <% end %>
       	</div>
-      	<div class="col-md-6">
+      	<div class="col-md-7 ml-4">
       	  <div class="card-body">
       	    <p class="mb-5"><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
       	    <span>役に立ちましたか？(質問者が評価できます)</span>
