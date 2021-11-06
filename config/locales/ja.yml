@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       post: 投稿
       post_comment: コメント
+      user_prefecture: 県情報
     attributes:
       user:
         name: 名前
@@ -18,6 +19,8 @@ ja:
         body3: 投稿
       post_comment:
         comment: コメント
+      user_prefecture:
+        status: 住んだことがある県、または住んでみたい県へのチェック
 
   enums:
     user_prefecture:

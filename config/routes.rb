@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'homes#top'
   get '/about' => 'homes#about'
-  devise_for :users
+  devise_for :users,skip: [:passwords]
   devise_scope :user do
     post 'users/guest_sign_in', to: 'guest_users/sessions#guest_sign_in'
   end
@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     end
     resources :post_comments, only: [:new, :create, :edit, :update, :destroy]
   end
-
   resources :users, only: [:show, :edit, :update]
+  resource :user_prefectures, only: [:new, :create, :edit, :update]
   get '/search' => "searchs#search"
   resources :news, only: [:index]
   resources :notifications, only: [:index, :update] do

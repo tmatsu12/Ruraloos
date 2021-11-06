@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update]
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update, :next_step]
+  before_action :ensure_correct_user, only: [:edit, :update, :next_step]
 
   def show
     if user_signed_in?
@@ -18,18 +18,28 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to user_path(@user)
-      flash[:notice] = "ユーザー情報を更新しました"
+    @user_prefectures = @user.user_prefectures
+    if @user_prefectures.exists?
+      if @user.update(user_params)
+        redirect_to edit_user_prefectures_path
+        # flash[:notice] = "ユーザー情報を更新しました"
+      else
+        render :edit
+      end
     else
-      render :edit
+      if @user.update(user_params)
+        redirect_to new_user_prefectures_path
+        # flash[:notice] = "ユーザー情報を更新しました"
+      else
+        render :edit
+      end
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :profile_image, :prefecture1_id, :prefecture2_id, :introduction)
+    params.require(:user).permit(:name, :profile_image, :introduction)
   end
 
   def ensure_correct_user

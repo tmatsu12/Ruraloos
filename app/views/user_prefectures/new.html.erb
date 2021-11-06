@@ -1,0 +1,31 @@
+<div class="general-visual">
+  <div class="container">
+    <div class="row">
+      <div class="col-9 mt-5">
+        <%= render "posts/errors", obj:@user_prefecture %>
+        <h1 class="border-bottom border-danger">ユーザー情報の編集</h1>
+        <%= form_with model:@user_prefecture, url: user_prefectures_path, local:true do |f| %>
+          <div class="form-group mt-3">
+            <%= f.radio_button :status, :livepast %>
+            <%= f.label :住んだことのある県 %><br>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい', multiple: true %>
+          </div>
+          <div class="form-group mt-4">
+            <%= f.radio_button :status, :livefuture %>
+            <%= f.label :住んでみたい県 %><br>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <%= f.collection_select :prefecture_id, Prefecture.all, :id, :name, include_blank: '選択して下さい', multiple: true %>
+          </div>
+          <div class="actions">
+            <%= f.submit "更新", class: "btn btn-success btn-text rounded-pill" %>
+            <%= link_to "キャンセル", user_path(current_user), class: "btn btn-secondary btn-text rounded-pill my-3 ml-3" %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-3 mt-5">
+        <%= render partial: "users/sidebar" %>
+      </div>
+    </div>
+  </div>
+</div>
