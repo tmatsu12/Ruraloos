@@ -2,39 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-9 mt-5">
-        <!--<div class="d-flex justify-content-between">-->
-          <h3 class="border-bottom border-success">
-            検索結果：
-            <%= link_to posts_path(prefecture_id: @prefecture_id) do %>
-              <%= Prefecture.find(@prefecture_id).name %><%= @content %>
-            <% end %>
-          </h3>
-        <!--  <div class="btn-group btn-group-toggle" data-toggle="buttons">-->
-        <!--    <%# if params[:option].to_i == 1 %>-->
-        <!--      <label class="active">-->
-        <!--        <%#= link_to "新着順", search_sort_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>-->
-        <!--      </label>-->
-        <!--      <label>-->
-        <!--        <%#= link_to "いいね順", search_sort_path(option: 2), method: :post, class: "btn btn-light btn-text" %>-->
-        <!--      </label>-->
-        <!--    <%# elsif params[:option].to_i == 2 %>-->
-        <!--      <label>-->
-        <!--        <%#= link_to "新着順", search_sort_path(option: 1), method: :post, class: "btn btn-light btn-text" %>-->
-        <!--      </label>-->
-        <!--      <label class="active">-->
-        <!--        <%#= link_to "いいね順", search_sort_path(option: 2), method: :post, class: "btn btn-light btn-text active" %>-->
-        <!--      </label>-->
-        <!--    <%# else %>-->
-            <!--params[:option]がnilの時は0と解釈されるようだ-->
-        <!--      <label>-->
-        <!--        <%#= link_to "新着順", search_sort_path(option: 1), method: :post, class: "btn btn-light btn-text" %>-->
-        <!--      </label>-->
-        <!--      <label>-->
-        <!--        <%#= link_to "いいね順", search_sort_path(option: 2), method: :post, class: "btn btn-light btn-text" %>-->
-        <!--      </label>-->
-        <!--    <%# end %>-->
-        <!--  </div>-->
-        <!--</div>-->
+        <h3 class="border-bottom border-success">
+          検索結果：
+          <%= link_to posts_path(prefecture_id: @prefecture_id) do %>
+            <%= Prefecture.find(@prefecture_id).name %><%= @content %>
+          <% end %>
+        </h3>
         <% if @records.exists? %>
           <div class="row row-cols-3">
             <% @records.each do |post| %>
