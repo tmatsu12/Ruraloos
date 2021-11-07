@@ -3,7 +3,7 @@ class SearchsController < ApplicationController
     @content = params[:content]
     @prefecture_id = params[:prefecture_id]
     @method = params[:method]
-    @records = search_for(@content, @prefecture_id, @method)
+    @records = search_for(@content, @prefecture_id, @method).page(params[:page]).order(updated_at: :desc)
   end
 
   private
