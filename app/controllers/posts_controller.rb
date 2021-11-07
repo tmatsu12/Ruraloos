@@ -43,7 +43,7 @@ class PostsController < ApplicationController
       @posts = Kaminari.paginate_array(Post.find(temp_array)).page(params[:page]).per(25)
       #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
     end
-    render :index
+    render :index #sessionでprefecture_idの情報は保持している
   end
 
   def new
@@ -60,6 +60,8 @@ class PostsController < ApplicationController
     #投稿を詳細ページで削除後マイページに飛ぶが、そこから左上の戻るボタンで詳細ページに戻るとエラーになってしまうのでその対策で例外処理
     begin
       @post = Post.find(params[:id])
+      impressionist(@post, nil, :unique => [:params])
+      @page_views = @post.impressionist_count
       @post_comment = PostComment.new
       @prefecture = @post.prefecture
       @user = @post.user
