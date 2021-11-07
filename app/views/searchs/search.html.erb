@@ -5,7 +5,7 @@
         <h3 class="border-bottom border-success">
           検索結果：
           <%= link_to posts_path(prefecture_id: @prefecture_id) do %>
-            <%= Prefecture.find(@prefecture_id).name %><%= @content %>
+            <span class="link"><%= Prefecture.find(@prefecture_id).name %><%= @content %></span>
           <% end %>
         </h3>
         <% if @records.exists? %>
