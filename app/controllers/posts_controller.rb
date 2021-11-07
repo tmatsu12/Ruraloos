@@ -60,7 +60,7 @@ class PostsController < ApplicationController
     #投稿を詳細ページで削除後マイページに飛ぶが、そこから左上の戻るボタンで詳細ページに戻るとエラーになってしまうのでその対策で例外処理
     begin
       @post = Post.find(params[:id])
-      impressionist(@post, nil, :unique => [:params])
+      impressionist(@post, nil, :unique => [:ip_address])
       @page_views = @post.impressionist_count
       @post_comment = PostComment.new
       @prefecture = @post.prefecture
