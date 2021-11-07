@@ -89,6 +89,8 @@ gem 'news-api'
 
 gem 'enum_help'
 
+gem 'impressionist', '~>1.6.1'
+
 group :production do
   gem 'mysql2'
 end
