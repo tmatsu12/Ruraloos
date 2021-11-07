@@ -27,8 +27,8 @@ class PostsController < ApplicationController
 
   def sort_prefecture_posts
     @prefecture = Prefecture.find(session[:prefecture_id])
-    @residents = @prefecture.user_prefectures.where(status: 0)
-    @wannalivings = @prefecture.user_prefectures.where(status: 1)
+    @residents = @prefecture.user_prefectures.where(status: "livepast")
+    @wannalivings = @prefecture.user_prefectures.where(status: "livefuture")
     if params[:option].to_i == 1
       @posts = @prefecture.posts.all.page(params[:page]).order(updated_at: :desc).per(25)
     else

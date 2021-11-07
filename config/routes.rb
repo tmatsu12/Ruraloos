@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
   resource :user_prefectures, only: [:new, :create, :edit, :update]
   get '/search' => "searchs#search"
+  # post '/search/sort' => "searches#sort_search_results"
   resources :news, only: [:index]
   resources :notifications, only: [:index, :update] do
     collection do
