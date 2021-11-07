@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-6">
-        <h1 class="border-bottom">お問い合わせ</h1>
+        <h1 class="border-bottom my-3">お問い合わせ</h1>
 
-        <%= form_with model:@inquiry, url:inquiry_thanks_path do |f| %>
+        <%= form_with model:@inquiry, local: true, url: inquiry_thanks_path do |f| %>
 
           <% if @inquiry.errors.any? %>
             <div class="alert alert-danger" role="alert">
@@ -18,27 +18,27 @@
           <% end %>
 
           <div class="form-group">
-            <%= form.label :name, '名前' %>
+            <%= f.label :name, '名前' %>
             <span class="text-danger">（必須）</span>
-            <%= form.text_field :name, value: @inquiry.name, id: 'name', class: 'form-control-plaintext', :placeholder => '名前' %>
+            <%= f.text_field :name, value: @inquiry.name, id: 'name', class: 'form-control-plaintext', :placeholder => '名前' %>
           </div>
 
           <div class="form-group">
-            <%= form.label :email, 'メールアドレス' %>
+            <%= f.label :email, 'メールアドレス' %>
             <span class="text-danger">（必須）</span>
-            <%= form.text_field :email, value: @inquiry.email, id: 'email', class: 'form-control-plaintext', :placeholder => 'メールアドレス' %>
+            <%= f.text_field :email, value: @inquiry.email, id: 'email', class: 'form-control-plaintext', :placeholder => 'メールアドレス' %>
           </div>
 
           <div class="form-group">
-            <%= form.label :message, 'お問い合わせ内容' %>
+            <%= f.label :message, 'お問い合わせ内容' %>
             <span class="text-danger">（必須）</span>
-            <%= form.text_area :message, value: safe_join(@inquiry.message.split("\n"),tag(:br)), id: 'message', class: 'form-control-plaintext', :placeholder => 'お問い合わせ内容', :rows => '5' %>
+            <%= f.text_area :message, value: safe_join(@inquiry.message.split("\n"),tag(:br)), id: 'message', class: 'form-control-plaintext', :placeholder => 'お問い合わせ内容', :rows => '5' %>
           </div>
 
           <p>この内容で送信します。よろしいですか？</p>
 
           <div class="actions">
-            <%= form.submit "確認", class: "btn btn-dark btn-text" %>
+            <%= f.submit "送信", class: "btn btn-info btn-text mb-5" %>
           </div>
         <% end %>
       </div>

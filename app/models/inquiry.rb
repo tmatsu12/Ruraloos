@@ -5,5 +5,5 @@ class Inquiry
 
   validates :name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, length: { maximum: 30 }
-  validates :content, presence: true, length: { maximum: 500 }
+  validates :message, presence: true, length: { maximum: 500 }
 end

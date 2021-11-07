@@ -17,7 +17,7 @@ class InquiryController < ApplicationController
   def thanks
     # メール送信
     @inquiry = Inquiry.new(inquiry_params)
-    InquiryMailer.send_mail(@inquiry).deliver_now
+    InquiryMailer.send_mail(@inquiry).deliver
     render :action => 'thanks'
   end
 
