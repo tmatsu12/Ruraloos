@@ -39,25 +39,25 @@
           <div class="btn-group btn-group-toggle mt-4" data-toggle="buttons">
             <% if params[:option].to_i == 1 %>
               <label class="active">
-                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, remote: true, class: "btn btn-light btn-text active" %>
+                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>
               </label>
               <label>
-                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, remote: true, class: "btn btn-light btn-text" %>
+                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
               </label>
             <% elsif params[:option].to_i == 2 %>
               <label>
-                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, remote: true, class: "btn btn-light btn-text" %>
+                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
               </label>
               <label class="active">
-                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, remote: true, class: "btn btn-light btn-text active" %>
+                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, class: "btn btn-light btn-text active" %>
               </label>
             <% else %>
             <!--params[:option]がnilの時は0と解釈されるようだ-->
               <label>
-                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, remote: true, class: "btn btn-light btn-text" %>
+                <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
               </label>
               <label>
-                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, remote: true, class: "btn btn-light btn-text" %>
+                <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
               </label>
             <% end %>
           </div>
