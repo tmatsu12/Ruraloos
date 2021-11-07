@@ -11,7 +11,7 @@
       	<div class="col-md-7 ml-4">
       	  <div class="card-body">
       	    <p class="mb-5"><%= safe_join(post_comment.comment.split("\n"),tag(:br)) %></p>
-      	    <span>役に立ちましたか？(質問者が評価できます)</span>
+      	    <span>役に立ちましたか？<span class="text-muted">(質問者が評価できます)</span></span>
       	    <%= form_with(model:[post, post_comment], local: true) do |f| %>
       	      <div class="d-flex">
                 <div class="form-group" id="star-rate-<%= post_comment.id %>">
