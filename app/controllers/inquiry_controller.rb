@@ -17,8 +17,12 @@ class InquiryController < ApplicationController
   def thanks
     # メール送信
     @inquiry = Inquiry.new(inquiry_params)
-    InquiryMailer.send_mail(@inquiry).deliver
-    render :action => 'thanks'
+    if params[:back]
+      render :action => 'index'
+    else
+      InquiryMailer.send_mail(@inquiry).deliver
+      render :action => 'thanks'
+    end
   end
 
   private

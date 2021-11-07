@@ -1,7 +1,7 @@
 <div class="general-visual">
   <div class="container">
     <div class="row">
-      <div class="col-6">
+      <div class="col-6 mx-auto">
         <h1 class="border-bottom my-3">お問い合わせ</h1>
 
         <%= form_with model:@inquiry, local: true, url: inquiry_confirm_path do |f| %>
@@ -30,13 +30,12 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :message, 'お問い合わせ内容' %>
-            <span class="text-danger">（必須）</span>
-            <%= f.text_area :message, id: 'message', class: 'form-control', :placeholder => 'お問い合わせ内容', :rows => '5' %>
+            <%= f.label :message, 'お問い合わせ内容' %><span class="text-danger">（必須）</span>
+            <%= f.text_area :message, id: 'message', class: 'form-control', :placeholder => 'お問い合わせ内容(500文字以内でお願いします)', :rows => '5' %>
           </div>
 
           <div class="actions">
-            <%= f.submit "確認", class: "btn btn-info btn-text mb-5" %>
+            <%= f.submit "確認", class: "btn btn-info btn-text mb-5 rounded-pill" %>
           </div>
         <% end %>
       </div>
