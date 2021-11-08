@@ -5,6 +5,7 @@
       <div class="col-5 mx-auto my-5">
         <h2 class="mb-3">ログイン</h2>
         <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+
           <div class="form-group">
             <%= f.label :email %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
@@ -24,7 +25,7 @@
             <%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: "btn btn-primary btn-text mx-3 mb-3" %>
           </div>
         <% end %>
-        <%= render "devise/shared/links" %>
+        <p class="mt-4">まだ登録がお済みでない方：<%= link_to "こちら", new_user_registration_path, class: "link" %>から新規登録を行ってください。</p>
       </div>
     </div>
   </div>
