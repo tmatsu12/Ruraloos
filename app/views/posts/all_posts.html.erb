@@ -31,11 +31,7 @@
           </div>
         </div>
         <div class="row row-cols-3">
-          <% @posts.each do |post| %>
-            <div class="col-4 mb-3">
-              <%= render partial: "posts/post_cards", locals: {post: post} %>
-            </div>
-          <% end %>
+          <%= render partial: "posts/post", collection: @posts, as: "post" %>
         </div>
         <div class="mt-5">
           <%= paginate @posts %>
