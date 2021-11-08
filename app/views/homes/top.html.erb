@@ -34,10 +34,35 @@
 
 
 
-  <div class="row map-visual">
+  <div class="row map-visual d-flex justify-content-center align-items-center">
 
-    <div class="mx-auto py-5">
+    <div class="ml-5 mr-0 py-5">
       <div id="map-container"></div>
+    </div>
+    <% temp_ids = UserPrefecture.where(status: "livefuture").group(:prefecture_id).order('count(prefecture_id) desc').limit(5).pluck(:prefecture_id) %>
+    <div class="mt-5 mr-5">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th><h5>住みたい県ランキング！</h5></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% temp_ids.each_with_index do |temp_id, i| %>
+          <tr>
+            <td><%= "第#{i+1}位" %></td>
+            <td>
+              <%= link_to posts_path(prefecture_id: Prefecture.find(temp_id).id) do %>
+                <span class="link"><%= Prefecture.find(temp_id).name %></span>
+              <% end %>
+            </td>
+            <td><%= UserPrefecture.where(status: "livefuture").where(prefecture_id: temp_id).count %>人</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
 
   </div>
