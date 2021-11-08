@@ -20,6 +20,11 @@
  @import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Mate+SC&family=Special+Elite&display=swap');
 
+ *{
+  margin:0;
+  padding: 0;
+ }
+
  .ruraloos{
    font-family: 'Special Elite', cursive;
  }
@@ -158,6 +163,14 @@
 .link{
     text-decoration:none;
     color:#022EB0;
+}
+
+.inquiry-button{
+  position:fixed;
+  right:100px;
+  bottom:40px;
+  color:green;
+  z-index:100;
 }
 
 /* ---------------------------- */
