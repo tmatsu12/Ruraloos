@@ -11,6 +11,7 @@ ja:
         introduction: 自己紹介
       post:
         title: タイトル
+        prefecture: 県
         city: 居住地域
         evaluation: 評価
         body: 質問内容
