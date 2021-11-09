@@ -6,14 +6,10 @@ class UserPrefecturesController < ApplicationController
   end
 
   def create
-    @user = current_user
-    params[:user_prefecture][:prefecture_livepast_ids].each do |pref_id|
-      @user.user_prefectures.create!(status: :livepast, prefecture_id: pref_id ) if pref_id.present?
-    end
-    params[:user_prefecture][:prefecture_livefuture_ids].each do |pref_id|
-      @user.user_prefectures.create!(status: :livefuture, prefecture_id: pref_id ) if pref_id.present?
-    end
-    redirect_to user_path(@user)
+    # @user = current_user
+    current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livepast_ids], "livepast")
+    current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livefuture_ids], "livefuture")
+    redirect_to user_path(current_user)
   end
 
   def edit

@@ -37,8 +37,8 @@
         <h4 class="border-bottom mt-5">質問内容</h4>
         <p class="mb-5"><%= safe_join(@post.body.split("\n"),tag(:br)) %></p>
         <div id="post_<%= @post.id %>" class="d-flex">
-          <%= link_to "#{@post.prefecture.name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary btn-text rounded-pill mb-3 mr-3" %>
-          <% if @post.user == current_user %>
+          <%= link_to "#{@post.prefecture_name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary btn-text rounded-pill mb-3 mr-3" %>
+          <% if @post.written_by?(current_user) %>
             <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success btn-text mb-3 mr-3 rounded-pill" %>
             <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger btn-text mb-3 rounded-pill" %>
           <% end %>
