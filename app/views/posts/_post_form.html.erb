@@ -22,7 +22,7 @@
   </div>
 
   <div class="actions">
-    <% if post.body.nil? %>
+    <% if post.body.blank? %>
       <%= f.submit '質問する',class: "btn btn-success btn-text rounded-pill my-3 mr-3" %>
     <% else %>
       <%= f.submit '更新する',class: "btn btn-success btn-text rounded-pill my-3 mr-3" %>

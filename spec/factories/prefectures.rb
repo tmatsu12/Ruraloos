@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :prefecture do
-    id { 36 }
-    name { "香川県" }
+    id { 0 }
+    name { "北海道" }
   end
 end
