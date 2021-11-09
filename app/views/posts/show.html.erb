@@ -40,7 +40,7 @@
           <%= link_to "#{@post.prefecture_name}の投稿一覧に戻る", posts_path(prefecture_id: @post.prefecture_id), class: "btn btn-primary btn-text rounded-pill mb-3 mr-3" %>
           <% if @post.written_by?(current_user) %>
             <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success btn-text mb-3 mr-3 rounded-pill" %>
-            <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger btn-text mb-3 rounded-pill" %>
+            <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger btn-text mb-3 mr-3 rounded-pill" %>
           <% end %>
           <div class="favorite-btn"><%= render "favorites/favorite-btn", post: @post %></div>
         </div>
