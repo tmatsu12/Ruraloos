@@ -46,6 +46,9 @@ describe 'ユーザーログイン後のテスト' do
       it 'titleが正しく更新される' do
         expect(post.reload.title).not_to eq @post_old_title
       end
+      it 'hoge' do
+        expect(post.written_by?(user)).to eq true
+      end
       it 'bodyが正しく更新される' do
         expect(post.reload.body).not_to eq @post_old_body
       end
@@ -61,9 +64,10 @@ describe 'ユーザーログイン後のテスト' do
       fill_in 'post_comment[comment]', with: Faker::Lorem.characters(number: 10)
     end
 
-    context '回答成功のテスト', js: true do
-      it '回答が正しく保存される' do
+    context '回答成功のテスト' do
+      it '回答が正しく保存される', js: true do
         expect { click_button '回答する' }.to change { PostComment.count }.by(1)
+     
       end
     end
   end

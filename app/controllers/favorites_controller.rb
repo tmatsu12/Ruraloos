@@ -10,7 +10,7 @@ class FavoritesController < ApplicationController
 
   def destroy
     @post = Post.find(params[:post_id])
-    unless current_user == @post.user
+    unless @post.written_by?(current_user)
       favorite = current_user.favorites.find_by(post_id: @post.id)
       favorite.destroy
     end

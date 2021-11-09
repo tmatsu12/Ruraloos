@@ -5,4 +5,6 @@ class UserPrefecture < ApplicationRecord
   validates :status, presence: true
 
   enum status: { livepast: 0, livefuture: 1 }
+  
+  
 end
