@@ -47,7 +47,7 @@ class Post < ApplicationRecord
 
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
-    
+
     temp = Notification.where(["visiter_id = ? and visited_id = ? and post_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
     # いいねされていない場合のみ、通知レコードを作成
     if temp.blank?
@@ -63,11 +63,12 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-  
+
   def written_by?(current_user)
      user == current_user
+    # 左辺のself.は省略できる
   end
-  
+
   def prefecture_name
     prefecture.name
   end
