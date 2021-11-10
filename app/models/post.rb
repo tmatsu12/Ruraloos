@@ -7,11 +7,6 @@ class Post < ApplicationRecord
 
   is_impressionable
 
-  def favorited_by?(user)
-    favorites.where(user_id: user.id).exists?
-  end
-
-  attachment :image
   geocoded_by :address
 
   validates :title, presence: true
@@ -19,6 +14,23 @@ class Post < ApplicationRecord
   validates :title, length: { maximum: 28 }
   validates :city, length: { maximum: 20 }
   validates :body, length: { maximum: 1000 }
+
+  def written_by?(current_user)
+    user == current_user
+    # 左辺のself.は省略できる
+  end
+
+  def prefecture_name
+    prefecture.name
+  end
+
+  def favorites_count
+    favorites.count
+  end
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 
   def create_notification_comment!(current_user, post_comment_id)
     # 自分以外に回答している人をすべて取得し、全員に通知を送る=>必要ないと判断
@@ -64,12 +76,5 @@ class Post < ApplicationRecord
     end
   end
 
-  def written_by?(current_user)
-     user == current_user
-    # 左辺のself.は省略できる
-  end
 
-  def prefecture_name
-    prefecture.name
-  end
 end
