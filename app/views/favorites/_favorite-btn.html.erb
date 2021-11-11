@@ -2,18 +2,18 @@
 <% if user_signed_in? && !post.written_by?(current_user) %>
   <% if post.favorited_by?(current_user) %>
     <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-      <i class="fas fa-heart like-btn ml-5 mt-2" ></i><span class="text-dark"><%= post.favorites_count %>いいね</span>
+      <i class="fas fa-heart like-btn ml-5 mt-2"></i><span class="text-dark"><%= post.favorites_count %>いいね</span>
     <% end %>
   <% else %>
     <%= link_to post_favorites_path(post), method: :post, remote: true do %>
-      <i class="fas fa-heart unlike-btn ml-5 mt-2" ></i><span class="text-dark"><%= post.favorites_count %>いいね</span>
+      <i class="fas fa-heart unlike-btn ml-5 mt-2"></i><span class="text-dark"><%= post.favorites_count %>いいね</span>
     <% end %>
   <% end %>
 <% else %>
 <!--ログインしていない場合や投稿者本人の場合は表示するだけにする-->
   <% if post.favorites.count == 0 %>
-    <i class="fas fa-heart unlike-btn ml-2 mt-2" ></i><span class="text-dark mt-2"><%= post.favorites_count %></span>
+    <i class="fas fa-heart unlike-btn ml-2 mt-2"></i><span class="text-dark mt-2"><%= post.favorites_count %></span>
   <% else %>
-    <i class="fas fa-heart like-btn ml-2 mt-2" ></i><span class="text-dark mt-2"><%= post.favorites_count %></span>
+    <i class="fas fa-heart like-btn ml-2 mt-2"></i><span class="text-dark mt-2"><%= post.favorites_count %></span>
   <% end %>
 <% end %>

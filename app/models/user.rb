@@ -29,6 +29,14 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 20 }
   validates :introduction, length: { maximum: 800 }
 
+  def find_prefectures(status)
+    user_prefectures.where(status: status)
+  end
+
+  def be_identical?(user)
+    self == user
+  end
+
   def create_user_prefecture_by_status!(ids, status)
     if status == "livepast"
       create_user_prefecture!(self, ids, status)
@@ -36,14 +44,14 @@ class User < ApplicationRecord
       create_user_prefecture!(self, ids, status)
     end
   end
-  
+
   private
-  
+
   def create_user_prefecture!(user, ids, status)
     ids.each do |pref_id|
       user.user_prefectures.create!(status: status, prefecture_id: pref_id ) if pref_id.present?
     end
   end
-  
-  
+
+
 end

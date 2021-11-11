@@ -1,0 +1,78 @@
+<!--遷移元のurlによって、postリクエスト先を分けている-->
+<% if url.include?("all_posts") %>
+<!--①：すべての質問ページにおいて-->
+  <% if obj == 1 %>
+    <label class="active">
+      <%= link_to "新着順", sort_all_posts_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>
+    </label>
+    <label>
+      <%= link_to "いいね順", sort_all_posts_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+  <% elsif obj == 2 %>
+    <label>
+      <%= link_to "新着順", sort_all_posts_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+    <label class="active">
+      <%= link_to "いいね順", sort_all_posts_path(option: 2), method: :post, class: "btn btn-light btn-text active" %>
+    </label>
+  <% else %>
+  <!--params[:option]がnilの時は0と解釈されるようだ-->
+    <label>
+      <%= link_to "新着順", sort_all_posts_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+    <label>
+      <%= link_to "いいね順", sort_all_posts_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+  <% end %>
+<% elsif url.include?("posts") %>
+<!--②：各県のページにおいて-->
+  <% if obj == 1 %>
+    <label class="active">
+      <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>
+    </label>
+    <label>
+      <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+  <% elsif obj == 2 %>
+    <label>
+      <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+    <label class="active">
+      <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, class: "btn btn-light btn-text active" %>
+    </label>
+  <% else %>
+  <!--params[:option]がnilの時は0と解釈されるようだ-->
+    <label>
+      <%= link_to "新着順", sort_prefecture_posts_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+    <label>
+      <%= link_to "いいね順", sort_prefecture_posts_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+  <% end %>
+<% else %>
+<!--③：ユーザー詳細ページにおいて-->
+  <% if obj == 1 %>
+    <label class="active">
+      <%= link_to "自分の質問", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>
+    </label>
+    <label>
+      <%= link_to "いいねした質問", sort_user_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+  <% elsif obj == 2 %>
+    <label>
+      <%= link_to "自分の質問", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+    <label class="active">
+      <%= link_to "いいねした質問", sort_user_path(option: 2), method: :post, class: "btn btn-light btn-text active" %>
+    </label>
+  <% else %>
+  <!--params[:option]がnilの時は0と解釈されるようだ-->
+    <label>
+      <%= link_to "自分の質問", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+    <label>
+      <%= link_to "いいねした質問", sort_user_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
+    </label>
+  <% end %>
+<% end %>
+

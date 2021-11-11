@@ -3,7 +3,6 @@
     <div class="row">
       <div class="col-9 mt-5">
         <h1 class="border-bottom">回答の編集</h1>
-
         <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
           <div class="form-group">
             <%= f.label :回答内容 %><span class="text-danger">(必須)</span><br />
