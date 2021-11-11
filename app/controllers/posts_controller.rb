@@ -92,7 +92,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :city, :body, :prefecture_id, :image, :evaluation, :body1, :body2, :body3)
+    params.require(:post).permit(:title, :city, :body, :prefecture_id)
   end
 
   def ensure_correct_user
