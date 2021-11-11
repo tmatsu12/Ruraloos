@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :next_step]
-  before_action :ensure_correct_user, only: [:edit, :update, :next_step]
+  before_action :authenticate_user!, only: [:show, :sort, :edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
 
   def show
     if user_signed_in?
@@ -14,12 +14,7 @@ class UsersController < ApplicationController
 
   def sort
     @user = User.find(params[:id])
-    if params[:option].to_i == 1
-      @posts = @user.posts.page(params[:page]).order(updated_at: :desc).per(25)
-    else
-      @posts = Kaminari.paginate_array(Post.find(Favorite.where(user_id: @user.id).pluck(:post_id))).page(params[:page]).per(25)
-      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
-    end
+    @posts = @user.sort_users_posts(params[:option].to_i, params[:page]) #独自のメソッドを定義
     render :show
   end
 
@@ -33,14 +28,12 @@ class UsersController < ApplicationController
     if @user_prefectures.exists?
       if @user.update(user_params)
         redirect_to edit_user_prefectures_path
-        # flash[:notice] = "ユーザー情報を更新しました"
       else
         render :edit
       end
     else
       if @user.update(user_params)
         redirect_to new_user_prefectures_path
-        # flash[:notice] = "ユーザー情報を更新しました"
       else
         render :edit
       end
@@ -55,7 +48,7 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find(params[:id])
-    if @user != current_user
+    if !@user.be_identical?(current_user)
       flash[:notice] = "他のユーザーの情報は変更できません"
       redirect_to user_path(current_user)
     end

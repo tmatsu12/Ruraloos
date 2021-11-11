@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @user = current_user
     @prefecture = Prefecture.find(params[:prefecture_id])
     session[:prefecture_id] = params[:prefecture_id] #sort_prefecture_postsアクションで使うため
     @posts = @prefecture.posts.page(params[:page]).order(updated_at: :desc)
@@ -16,6 +15,7 @@ class PostsController < ApplicationController
   end
 
   def sort_all_posts
+    
     if params[:option].to_i == 1
       @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
     else

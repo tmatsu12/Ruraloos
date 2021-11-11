@@ -12,8 +12,7 @@ class UserPrefecturesController < ApplicationController
   end
 
   def edit
-    @user = current_user
-    @user_prefecture = UserPrefecture.find_by(user_id: @user.id)
+    @user_prefecture = UserPrefecture.find_by(user_id: current_user.id)
   end
 
   def update
