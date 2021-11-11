@@ -9,7 +9,7 @@ class UserPrefecture < ApplicationRecord
   def prefecture_name
     prefecture.name
   end
-  
+
   def prefecture_id
     prefecture.id
   end

@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy], notice: "ログインしてください（ゲストログインが便利です）"
+  include PostsHelper
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @user = current_user
     @prefecture = Prefecture.find(params[:prefecture_id])
     session[:prefecture_id] = params[:prefecture_id] #sort_prefecture_postsアクションで使うため
     @posts = @prefecture.posts.page(params[:page]).order(updated_at: :desc)
-    @residents = @prefecture.find_people("livepast")
-    @wannalivings = @prefecture.find_people("livefuture")
+    @residents = @prefecture.find_people("livepast") #prefecture.rbで定義
+    @wannalivings = @prefecture.find_people("livefuture") #同上
   end
 
   def all_posts
@@ -16,12 +16,7 @@ class PostsController < ApplicationController
   end
 
   def sort_all_posts
-    if params[:option].to_i == 1
-      @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
-    else
-      @posts = Kaminari.paginate_array(Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))).page(params[:page]).per(25)
-      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
-    end
+    @posts = sort_posts(params[:option].to_i, params[:page]) #PostsHelperに定義
     render :all_posts
   end
 
@@ -29,35 +24,18 @@ class PostsController < ApplicationController
     @prefecture = Prefecture.find(session[:prefecture_id])
     @residents = @prefecture.find_people("livepast")
     @wannalivings = @prefecture.find_people("livefuture")
-
-    if params[:option].to_i == 1
-      @posts = @prefecture.posts.all.page(params[:page]).order(updated_at: :desc).per(25)
-    else
-      temp_ids = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
-      temp_array = []
-      temp_ids.each do |temp_id|
-        if Post.find(temp_id).prefecture.id == @prefecture.id
-          temp_array << temp_id
-        end
-      end
-      @posts = Kaminari.paginate_array(Post.find(temp_array)).page(params[:page]).per(25)
-      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
-    end
+    @posts = @prefecture.sort_pref_posts(params[:option].to_i, params[:page]) #prefecture.rbに定義
     render :index #sessionでprefecture_idの情報は保持している
   end
 
   def new
-    if user_signed_in?
-      @post = Post.new
-      @user = current_user
-    else
-      flash[:notice] = "ログインして下さい（ゲストログインが便利です！）"
-      redirect_to new_user_session_path
-    end
+    @post = Post.new
+    @user = current_user
+    redirect_to new_user_session_path, flash: {notice: "ログインして下さい（ゲストログインが便利です！）" } unless user_signed_in?
   end
 
   def show
-    #投稿を詳細ページで削除後マイページに飛ぶが、そこから左上の戻るボタンで詳細ページに戻るとエラーになってしまうのでその対策で例外処理
+    #投稿を詳細ページで削除後マイページに飛ぶが、そこから左上の戻るボタンで詳細ページに戻るとエラーになるのでその対策で例外処理
     begin
       @post = Post.find(params[:id])
       impressionist(@post, nil, :unique => [:session_hash.to_s])
@@ -107,7 +85,6 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-
     @post.destroy
     redirect_to user_path(@post.user)
   end
@@ -115,14 +92,11 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :city, :body, :prefecture_id, :image, :evaluation, :body1, :body2, :body3)
+    params.require(:post).permit(:title, :city, :body, :prefecture_id)
   end
 
   def ensure_correct_user
     @post = Post.find(params[:id])
-    if @post.user != current_user
-      flash[:notice] = "他のユーザーの情報は変更できません"
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user), flash: { notice: "他のユーザーの情報は変更できません" } if !current_user.be_identical?(@post.user)
   end
 end

@@ -33,7 +33,7 @@
           </div>
         </div>
         <% if !@posts.blank? %>
-        <!--いいね順の時のKaminariのせいでexists?が使えなくなったためblank?に変更-->
+        <!--いいね順並び替え時のKaminariのせいで@postsが配列になりexists?が使えなくなったためblank?に変更-->
           <div class="row row-cols-3">
             <%= render partial: "posts/post", collection: @posts, as: "post" %>
           </div>
