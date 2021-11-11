@@ -1,0 +1,6 @@
+<div class="text-center mr-2">
+  <%= link_to user_path(people.user) do %>
+    <%= attachment_image_tag people.user, :profile_image, class:"rounded-lg", fallback: "no_image.png", size: "50x50" %><br />
+    <p class="link" style="font-size:14px;"><%= people.user_name %></p>
+  <% end %>
+</div>

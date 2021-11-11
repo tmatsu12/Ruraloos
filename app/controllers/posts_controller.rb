@@ -7,8 +7,8 @@ class PostsController < ApplicationController
     @prefecture = Prefecture.find(params[:prefecture_id])
     session[:prefecture_id] = params[:prefecture_id] #sort_prefecture_postsアクションで使うため
     @posts = @prefecture.posts.page(params[:page]).order(updated_at: :desc)
-    @residents = @prefecture.user_prefectures.where(status: "livepast")
-    @wannalivings = @prefecture.user_prefectures.where(status: "livefuture")
+    @residents = @prefecture.find_people("livepast")
+    @wannalivings = @prefecture.find_people("livefuture")
   end
 
   def all_posts
@@ -27,8 +27,8 @@ class PostsController < ApplicationController
 
   def sort_prefecture_posts
     @prefecture = Prefecture.find(session[:prefecture_id])
-    @residents = @prefecture.user_prefectures.where(status: "livepast")
-    @wannalivings = @prefecture.user_prefectures.where(status: "livefuture")
+    @residents = @prefecture.find_people("livepast")
+    @wannalivings = @prefecture.find_people("livefuture")
 
     if params[:option].to_i == 1
       @posts = @prefecture.posts.all.page(params[:page]).order(updated_at: :desc).per(25)
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
       @post_comment = PostComment.new
       @prefecture = @post.prefecture
       @user = @post.user
-      @address = @post.prefecture.name + @post.city
+      @address = @post.prefecture_name + @post.city
       begin
         results = Geocoder.search(@address)
         @latlng = results.first.coordinates
@@ -107,7 +107,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    
+
     @post.destroy
     redirect_to user_path(@post.user)
   end

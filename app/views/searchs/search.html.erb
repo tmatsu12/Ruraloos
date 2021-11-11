@@ -15,6 +15,9 @@
         <% else %>
           <p>該当する質問はありません</p>
         <% end %>
+        <div class="mt-5">
+          <%= paginate @records %>
+        </div>
       </div>
       <div class="col-3 mt-5">
         <%= render partial: "users/sidebar" %>
