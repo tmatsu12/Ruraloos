@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :sort, :edit, :update]
+  include UsersHelper
+  before_action :authenticate_user!, only: [:sort, :edit, :update]
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def show
-    if user_signed_in?
-      @user = User.find(params[:id])
-      @posts = @user.posts.page(params[:page]).order(updated_at: :desc)
-    else
-      flash[:notice] = "ログインして下さい（ゲストログインが便利です！）"
-      redirect_to new_user_session_path
-    end
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page]).order(updated_at: :desc)
+    redirect_to new_user_session_path, flash: { notice: 'ログインして下さい（ゲストログインが便利です！）' } unless user_signed_in?
   end
 
   def sort
@@ -25,19 +22,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user_prefectures = @user.user_prefectures
-    if @user_prefectures.exists?
-      if @user.update(user_params)
-        redirect_to edit_user_prefectures_path
-      else
-        render :edit
-      end
-    else
-      if @user.update(user_params)
-        redirect_to new_user_prefectures_path
-      else
-        render :edit
-      end
-    end
+    update_depending_on_condition(@user_prefectures, @user, user_params) #users_helperに定義
   end
 
   private
@@ -48,9 +33,6 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find(params[:id])
-    if !@user.be_identical?(current_user)
-      flash[:notice] = "他のユーザーの情報は変更できません"
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user), flash: { notice: "他のユーザーの情報は変更できません" } if !@user.be_identical?(current_user)
   end
 end

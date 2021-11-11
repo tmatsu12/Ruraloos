@@ -17,7 +17,6 @@ class Post < ApplicationRecord
 
   def written_by?(current_user)
     user == current_user
-    # 左辺のself.は省略できる
   end
 
   def prefecture_name
