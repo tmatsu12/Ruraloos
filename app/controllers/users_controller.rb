@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def sort
     @user = User.find(params[:id])
-    @posts = @user.sort_users_posts(params[:option].to_i, params[:page]) #独自のメソッドを定義
+    @posts = @user.sort_users_posts(params[:option].to_i, params[:page]) #user.rbに定義
     render :show
   end
 

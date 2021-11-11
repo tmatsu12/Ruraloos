@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include PostsHelper
   before_action :authenticate_user!, only: [:create, :edit, :update, :destroy], notice: "ログインしてください（ゲストログインが便利です）"
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
@@ -15,13 +16,7 @@ class PostsController < ApplicationController
   end
 
   def sort_all_posts
-    
-    if params[:option].to_i == 1
-      @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
-    else
-      @posts = Kaminari.paginate_array(Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))).page(params[:page]).per(25)
-      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
-    end
+    @posts = sort_posts(params[:option].to_i, params[:page]) #PostsHelperに定義
     render :all_posts
   end
 
@@ -29,20 +24,7 @@ class PostsController < ApplicationController
     @prefecture = Prefecture.find(session[:prefecture_id])
     @residents = @prefecture.find_people("livepast")
     @wannalivings = @prefecture.find_people("livefuture")
-
-    if params[:option].to_i == 1
-      @posts = @prefecture.posts.all.page(params[:page]).order(updated_at: :desc).per(25)
-    else
-      temp_ids = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
-      temp_array = []
-      temp_ids.each do |temp_id|
-        if Post.find(temp_id).prefecture.id == @prefecture.id
-          temp_array << temp_id
-        end
-      end
-      @posts = Kaminari.paginate_array(Post.find(temp_array)).page(params[:page]).per(25)
-      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
-    end
+    @posts = @prefecture.sort_pref_posts(params[:option].to_i, params[:page]) #prefecture.rbに定義
     render :index #sessionでprefecture_idの情報は保持している
   end
 
