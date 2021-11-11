@@ -16,7 +16,7 @@ class UserPrefecturesController < ApplicationController
   end
 
   def update
-    current_user.user_prefectures.delete_all
+    current_user.user_prefectures.delete_all #一旦リセットする
     current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livepast_ids], "livepast")
     current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livefuture_ids], "livefuture")
     redirect_to user_path(current_user)
