@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include UsersHelper
-  before_action :authenticate_user!, only: [:sort, :edit, :update, :finish]
-  before_action :ensure_correct_user, only: [:edit, :update, :finish]
+  before_action :authenticate_user!, only: [:sort, :edit, :update]
+  before_action :ensure_correct_user, only: [:edit, :update]
 
   def show
     @user = User.find(params[:id])

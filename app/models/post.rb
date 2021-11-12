@@ -32,14 +32,14 @@ class Post < ApplicationRecord
   end
 
   def create_notification_comment!(current_user, post_comment_id)
-    # 自分以外に回答している人をすべて取得し、全員に通知を送る=>必要ないと判断
+    # 自分以外に回答(返信も含む)している人をすべて取得し、全員に通知を送る => #一旦保留
     # temp_ids = PostComment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
     # temp_ids.each do |temp_id|
     #   save_notification_comment!(current_user, post_comment_id, temp_id['user_id'])
     # end
 
-    # 回答者に通知を送る
-    save_notification_comment!(current_user, post_comment_id, user_id)
+    # 質問者に回答があったと通知を送る(ただし、回答への返信時は除く)
+    save_notification_comment!(current_user, post_comment_id, user_id) unless PostComment.find(post_comment_id).be_reply?
   end
 
   def save_notification_comment!(current_user, post_comment_id, visited_id)
