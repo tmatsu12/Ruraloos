@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-9 mt-5">
-        <h1 class="border-bottom border-danger"><%= @prefecture.name %></h1>
+        <div class="d-flex justify-content-start">
+          <h1 class="border-bottom border-danger"><%= @prefecture.name %></h1>
+          <p class="ml-5 mt-3">県公式サイト：<%= render partial: "official_links", locals: { prefecture_id: @prefecture.id } %></p>
+        </div>
         <div class="d-flex">
           <div class="col-6">
             <h5 class="mt-3 mb-3">住んだことのある人 (<%= @residents.count %>人)</h5>

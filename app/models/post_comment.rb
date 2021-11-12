@@ -7,4 +7,20 @@ class PostComment < ApplicationRecord
 
   validates :comment, presence: true
   validates :comment, length: { maximum: 1000 }
+
+  def be_reply?
+    parent_id.present?
+  end
+
+  def replies?
+    replies.exists?
+  end
+
+  def user_name
+    user.name
+  end
+
+  def written_by?(current_user)
+    user == current_user
+  end
 end
