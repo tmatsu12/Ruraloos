@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'homes#top'
   get '/about' => 'homes#about'
-  devise_for :users,skip: [:passwords]
+  devise_for :users, skip: [:passwords]
   devise_scope :user do
     post 'users/guest_sign_in', to: 'guest_users/sessions#guest_sign_in'
   end
@@ -28,8 +28,7 @@ Rails.application.routes.draw do
       delete :destroy_all
     end
   end
-  get 'inquiry'         => 'inquiry#index'     # 入力画面
+  get 'inquiry' => 'inquiry#index'     # 入力画面
   post 'inquiry/confirm' => 'inquiry#confirm'   # 確認画面
   post 'inquiry/thanks'  => 'inquiry#thanks'    # 送信完了画面
 end
-

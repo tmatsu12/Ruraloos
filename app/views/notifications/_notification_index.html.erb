@@ -13,7 +13,9 @@
         	  	<%= attachment_image_tag notification.visiter, :profile_image, fallback: "no_image.png", size: "35x35" %>
         	  	<span class="link"><%= notification.visiter.name %>さん</span>
         	  <% end %>
-        	  があなたの質問に回答しました。
+        	  が
+        	  <%= link_to "あなたの質問", post_path(notification.post), class: "link" %>
+        	  に回答しました。
         	</div>
         	<div class="col-3 mt-1"><%= time_ago_in_words(notification.created_at) %>前</div>
         	<div class="col-9 mt-2">
@@ -34,7 +36,9 @@
         	  <%= link_to user_path(notification.visiter) do %>
         	  	<%= attachment_image_tag notification.visiter, :profile_image, fallback: "no_image.png", size: "35x35" %><span class="link"><%= notification.visiter.name %>さん</span>
         	  <% end %>
-        	  があなたの質問にいいねしました。
+        	  が
+        	  <%= link_to "あなたの質問", post_path(notification.post), class: "link" %>
+        	  にいいねしました。
         	</div>
         	<div class="col-3 mt-1"><%= time_ago_in_words(notification.created_at) %>前
         	  <p><%= link_to "既読にする", notification_path(notification), method: :patch, class: "link" %></p>

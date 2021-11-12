@@ -8,7 +8,7 @@ class SearchsController < ApplicationController
 
   private
 
-  def search_for(content, prefecture_id , method)
+  def search_for(content, prefecture_id, method)
     if method == 'perfect'
       if content != ""
         Post.where(city: content)

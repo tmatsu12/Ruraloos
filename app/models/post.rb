@@ -44,7 +44,7 @@ class Post < ApplicationRecord
 
   def save_notification_comment!(current_user, post_comment_id, visited_id)
     notification = current_user.active_notifications.new(
-      post_id: self.id,
+      post_id: id,
       post_comment_id: post_comment_id,
       visited_id: visited_id,
       action: 'comment'
@@ -74,6 +74,4 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-
-
 end
