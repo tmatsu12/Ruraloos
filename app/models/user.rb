@@ -27,10 +27,10 @@ class User < ApplicationRecord
 
   def sort_users_posts(option, page)
     if option == 1
-      self.posts.page(page).order(updated_at: :desc).per(25)
+      posts.page(page).order(updated_at: :desc).per(25)
     else
-      Kaminari.paginate_array(Post.find(Favorite.where(user_id: self.id).pluck(:post_id))).page(page).per(25)
-      #Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
+      Kaminari.paginate_array(Post.find(Favorite.where(user_id: id).pluck(:post_id))).page(page).per(25)
+      # Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
     end
   end
 
@@ -53,9 +53,7 @@ class User < ApplicationRecord
 
   def create_user_prefecture!(user, ids, status)
     ids.each do |pref_id|
-      user.user_prefectures.create!(status: status, prefecture_id: pref_id ) if pref_id.present?
+      user.user_prefectures.create!(status: status, prefecture_id: pref_id) if pref_id.present?
     end
   end
-
-
 end

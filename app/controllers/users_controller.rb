@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
   def sort
     @user = User.find(params[:id])
-    @posts = @user.sort_users_posts(params[:option].to_i, params[:page]) #user.rbに定義
+    @posts = @user.sort_users_posts(params[:option].to_i, params[:page]) # user.rbに定義
     render :show
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user_prefectures = @user.user_prefectures
-    update_depending_on_condition(@user_prefectures, @user, user_params) #users_helperに定義
+    update_depending_on_condition(@user_prefectures, @user, user_params) # users_helperに定義
   end
 
   private

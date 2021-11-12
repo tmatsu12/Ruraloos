@@ -36,6 +36,7 @@ describe 'ユーザーログイン前のテスト' do
         fill_in 'user[password]', with: user.password
         click_button 'ログイン'
       end
+
       it 'ログイン後のリダイレクト先が、ログインしたユーザの詳細画面になっている' do
         expect(current_path).to eq '/users/' + user.id.to_s
       end
@@ -47,6 +48,7 @@ describe 'ユーザーログイン前のテスト' do
         fill_in 'user[password]', with: ''
         click_button 'ログイン'
       end
+
       it 'ログインに失敗し、ログイン画面にリダイレクトされる' do
         expect(current_path).to eq '/users/sign_in'
       end
@@ -104,4 +106,3 @@ describe 'ユーザーログイン前のテスト' do
     end
   end
 end
-
