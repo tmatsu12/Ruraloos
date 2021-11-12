@@ -4,7 +4,7 @@
       <div class="col-9 mt-5">
         <div class="d-flex justify-content-start">
           <h1 class="border-bottom border-danger"><%= @prefecture.name %></h1>
-          <p class="ml-5 mt-3">県公式サイト：<%= render partial: "official_links", locals: { prefecture_id: @prefecture.id } %></p>
+          <p class="ml-5 mt-4"><%= render partial: "official_links", locals: { prefecture_id: @prefecture.id } %></p>
         </div>
         <div class="d-flex">
           <div class="col-6">
