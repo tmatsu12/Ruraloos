@@ -35,7 +35,7 @@ https://qiita.com/TakuMatsunaga
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
+- フレームワーク：Ruby on Rails 5.2.5
 - JSライブラリ：jQuery
 - IDE：Cloud9
 
