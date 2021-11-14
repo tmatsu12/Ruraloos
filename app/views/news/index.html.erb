@@ -4,6 +4,88 @@
       <h2 class="border-bottom mb-3">地方移住に関する最新のニュース</h2>
       <h5>Powered by <%= link_to "https://newsapi.org" do %><span class="link">News API</span><% end %></h5>
     </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <i class="fas fa-chevron-left fa-3x arrow btn" onclick="downData();"></i>
+      <div id="japan-map" class="my-5"></div>
+      <i class="fas fa-chevron-right fa-3x arrow btn" onclick="upData();"></i>
+    </div>
     <%= render partial: "data", collection: @news, as: "news" %>
   </div>
 </div>
+
+<script>
+  var prefecture_data = [];
+  <% @prefecture_data.each_with_index do | pref, x | %>
+    prefecture_data[<%= x %>] = <%= pref.to_s.html_safe %>;
+  <% end %>
+  var i = 0;
+  function upData() {
+    i += 1;
+    main(); // ボタンを押したときに地図を読み込む
+  }
+  function downData() {
+    i -= 1;
+    main();
+  }
+
+  // ヒートマップで表現する数値データを定義している部分
+  function defineData(){
+    const data = {
+      "prefectures" : prefecture_data[Math.abs(i % prefecture_data.length)]
+    }
+    return data
+  }
+
+  // 表示する色を作っている部分
+  function prefecturesConvertRGB(prefecture){
+    function heatMapColorforValue(value){
+      var h = (1.0 - value) * 240
+      return "hsl(" + h + ", 100%, 50%)";
+    }
+    return heatMapColorforValue(prefecture)
+  }
+
+  // 今回の数値データを0〜1の範囲に変換している部分
+  function nomalizePrefectures(prefectures){
+    const max = Math.max(...prefectures)
+    const prefs = prefectures.map(function(x){
+      return x / max;
+    })
+    return prefs
+  }
+
+  // {"code": ... , "color": ...}のjsonオブジェクトの配列を作成している部分
+  function defineAreas(data){
+    let areas = []
+    const prefectures = nomalizePrefectures(data.prefectures)
+    for (let i=1;i<=47;i++) {
+      areas.push(
+        {
+          "code": i,
+          "color": prefecturesConvertRGB(prefectures[i-1])
+        }
+      )
+    }
+    return areas
+  }
+
+  // ヒートマップを表示する部分
+  function main(){
+    document.getElementById("japan-map").innerHTML = ''; // 一旦初期化する
+    const data = defineData()
+    const areas = defineAreas(data)
+
+    const d = new jpmap.japanMap(document.getElementById("japan-map"), {
+      areas: areas,
+      width: 800,
+      lineWidth: 0,
+      drawsBoxLine : false,
+      movesIslands : true,
+      onSelect: function(data){
+        alert(data.name);
+      }
+    });
+  }
+
+  main()
+</script>
