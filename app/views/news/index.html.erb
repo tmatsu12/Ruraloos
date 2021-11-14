@@ -31,7 +31,7 @@
   // ヒートマップで表現する数値データを定義している部分
   function defineData(){
     const data = {
-      "prefectures" : prefecture_data[Math.abs(i % prefecture_data.length)]
+      "prefectures" : prefecture_data[Math.abs(i % prefecture_data.length)] // @prefecture_dataは渡せない
     }
     return data
   }
@@ -40,7 +40,7 @@
   function prefecturesConvertRGB(prefecture){
     function heatMapColorforValue(value){
       var h = (1.0 - value) * 240
-      return "hsl(" + h + ", 100%, 50%)";
+      return "hsl(" + h + ", 80%, 50%)";
     }
     return heatMapColorforValue(prefecture)
   }
