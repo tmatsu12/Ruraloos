@@ -5,23 +5,33 @@
       <h5>Powered by <%= link_to "https://newsapi.org" do %><span class="link">News API</span><% end %></h5>
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <i class="fas fa-chevron-left fa-3x arrow" size="5x"></i>
+      <i class="fas fa-chevron-left fa-3x arrow btn" onclick="downData();"></i>
       <div id="japan-map" class="my-5"></div>
-      <i class="fas fa-chevron-right fa-3x arrow"></i>
+      <i class="fas fa-chevron-right fa-3x arrow btn" onclick="upData();"></i>
     </div>
     <%= render partial: "data", collection: @news, as: "news" %>
   </div>
 </div>
 
 <script>
+  var prefecture_data = [];
+  <% @prefecture_data.each_with_index do | pref, x | %>
+    prefecture_data[<%= x %>] = <%= pref.to_s.html_safe %>;
+  <% end %>
+  var i = 0;
+  function upData() {
+    i += 1;
+    main(); // ボタンを押したときに地図を読み込む
+  }
+  function downData() {
+    i -= 1;
+    main();
+  }
+
   // ヒートマップで表現する数値データを定義している部分
   function defineData(){
     const data = {
-      "date" : "2020/08/27",
-      "total_patient_person_number": 65769,
-      "new_patient_person_number": 865,
-      "prefectures" : <%= @prefecture_data[0].map{ |n| n.to_i } %>
-      // [10,2,0,1,0,0,7,8,1,18,69,45,250,66,1,8,13,13,0,6,2,12,39,6,5,27,94,22,4,0,0,0,1,1,6,4,0,0,0,64,2,7,6,1,1,2,36]
+      "prefectures" : prefecture_data[Math.abs(i % prefecture_data.length)]
     }
     return data
   }
@@ -36,7 +46,7 @@
   }
 
   // 今回の数値データを0〜1の範囲に変換している部分
-  function nomalizePrefectures(prefectures, new_patient_person_number){
+  function nomalizePrefectures(prefectures){
     const max = Math.max(...prefectures)
     const prefs = prefectures.map(function(x){
       return x / max;
@@ -47,7 +57,7 @@
   // {"code": ... , "color": ...}のjsonオブジェクトの配列を作成している部分
   function defineAreas(data){
     let areas = []
-    const prefectures = nomalizePrefectures(data.prefectures, data.new_patient_person_number)
+    const prefectures = nomalizePrefectures(data.prefectures)
     for (let i=1;i<=47;i++) {
       areas.push(
         {
@@ -61,6 +71,7 @@
 
   // ヒートマップを表示する部分
   function main(){
+    document.getElementById("japan-map").innerHTML = ''; // 一旦初期化する
     const data = defineData()
     const areas = defineAreas(data)
 

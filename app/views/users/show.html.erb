@@ -14,21 +14,21 @@
                 <% end %>
               <% end %>
             <% end %>
-            <p class="mt-3 mb-4">名前：<%= @user.name %></p>
-            <span>住んだことのある県：</span>
+            <h5 class="mt-3 mb-4">名前：<%= @user.name %></h5>
+            <h5>住んだことのある県：</h5>
             <% if @user.find_prefectures("livepast").exists? %>
               <% @user.find_prefectures("livepast").each do |pref_live_past| %>
-                <%= link_to pref_live_past.prefecture_name, posts_path(prefecture_id: pref_live_past.prefecture_id), class: "link" %>
+                <%= link_to pref_live_past.prefecture_name, posts_path(prefecture_id: pref_live_past.prefecture_id), class: "link pref" %>
               <% end %>
             <% else %>
               <span>未入力</span>
             <% end %>
             <br>
             <br>
-            <span>住んでみたい県：</span>
+            <h5>住んでみたい県：</h5>
             <% if @user.find_prefectures("livefuture").exists? %>
               <% @user.find_prefectures("livefuture").each do |pref_live_future| %>
-                <%= link_to pref_live_future.prefecture_name, posts_path(prefecture_id: pref_live_future.prefecture_id), class: "link" %>
+                <%= link_to pref_live_future.prefecture_name, posts_path(prefecture_id: pref_live_future.prefecture_id), class: "link pref" %>
               <% end %>
             <% else %>
               <span>未入力</span>
