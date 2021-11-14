@@ -4,8 +4,10 @@
       <h2 class="border-bottom mb-3">地方移住に関する最新のニュース</h2>
       <h5>Powered by <%= link_to "https://newsapi.org" do %><span class="link">News API</span><% end %></h5>
     </div>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-between align-items-center">
+      <i class="fas fa-chevron-left fa-3x arrow" size="5x"></i>
       <div id="japan-map" class="my-5"></div>
+      <i class="fas fa-chevron-right fa-3x arrow"></i>
     </div>
     <%= render partial: "data", collection: @news, as: "news" %>
   </div>
