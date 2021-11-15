@@ -1,30 +1,189 @@
 <div class="general-visual">
-  <div class="container pt-5">
+  <div class="container-fluid pt-5 px-5">
     <div class="d-flex justify-content-between">
-      <h2 class="border-bottom mb-3">地方移住に関する最新のニュース</h2>
+      <h2 class="border-bottom mb-3">地方移住に役立つ情報</h2>
       <h5>Powered by <%= link_to "https://newsapi.org" do %><span class="link">News API</span><% end %></h5>
     </div>
     <div class="d-flex justify-content-between align-items-center">
-      <i class="fas fa-chevron-left fa-3x arrow btn" onclick="downData();"></i>
-      <div id="japan-map" class="my-5"></div>
-      <i class="fas fa-chevron-right fa-3x arrow btn" onclick="upData();"></i>
+      <div class="d-flex justify-content-between align-items-center">
+        <i class="fas fa-chevron-left fa-3x arrow btn" onclick="downData();"></i>
+        <div id="japan-map" class="my-5"></div>
+        <i class="fas fa-chevron-right fa-3x arrow btn" onclick="upData();"></i>
+      </div>
+      <table class="table table-striped ml-4">
+        <thead>
+          <tr><th colspan="2"><h5 id="title">title1</h5></th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="ranking" style="font-size:24px;">
+              <span class="text-danger font-weight-bold">第1位</span>
+            </td>
+            <td class="ranking text-danger font-weight-bold" style="font-size:23px;">
+              <span id="pref1" class="mr-4"><%= @temp_array_rank1[0] %></span>
+              <span id="rank1"><%= @prefecture_sort_data[0][0] %></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="ranking" style="font-size:23px;">
+              <span class="text-danger font-weight-bold">第2位</span>
+            </td>
+            <td class="ranking text-danger font-weight-bold" style="font-size:23px;">
+              <span id="pref2" class="mr-4"><%= @temp_array_rank2[0] %></span>
+              <span id="rank2"><%= @prefecture_sort_data[0][1] %></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="ranking" style="font-size:22px;">
+              <span class="text-danger font-weight-bold">第3位</span>
+            </td>
+            <td class="ranking text-danger font-weight-bold" style="font-size:22px;">
+              <span id="pref3" class="mr-4"><%= @temp_array_rank3[0] %></span>
+              <span id="rank3"><%= @prefecture_sort_data[0][2] %></span>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">・・・</td>
+          </tr>
+          <tr>
+            <td class="ranking" style="font-size:20px;">
+              <span class="text-primary font-weight-bold">第45位</span>
+            </td>
+            <td class="ranking text-primary font-weight-bold" style="font-size:20px;">
+              <span id="pref45" class="mr-4"><%= @temp_array_rank45[0] %></span>
+              <span id="rank45"><%= @prefecture_sort_data[0][44] %></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="ranking" style="font-size:19px;">
+              <span class="text-primary font-weight-bold">第46位</span>
+            </td>
+            <td class="ranking text-primary font-weight-bold" style="font-size:19px;">
+              <span id="pref46" class="mr-4"><%= @temp_array_rank46[0] %></span>
+              <span id="rank46"><%= @prefecture_sort_data[0][45] %></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="ranking" style="font-size:18px;">
+              <span class="text-primary font-weight-bold">第47位</span>
+            </td>
+            <td class="ranking text-primary font-weight-bold" style="font-size:18px;">
+              <span id="pref47" class="mr-4"><%= @temp_array_rank47[0] %></span>
+              <span id="rank47"><%= @prefecture_sort_data[0][46] %></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
     <%= render partial: "data", collection: @news, as: "news" %>
   </div>
 </div>
 
 <script>
   var prefecture_data = [];
-  <% @prefecture_data.each_with_index do | pref, x | %>
+  var prefecture_sort_data = [];
+
+  var temp_array_rank1 = [];
+  var temp_array_rank2 = [];
+  var temp_array_rank3 = [];
+  var temp_array_rank45 = [];
+  var temp_array_rank46 = [];
+  var temp_array_rank47 = [];
+
+  <% @prefecture_data.each_with_index do |pref, x| %>
     prefecture_data[<%= x %>] = <%= pref.to_s.html_safe %>;
   <% end %>
+  <% @prefecture_sort_data.each_with_index do |pref, x| %>
+    prefecture_sort_data[<%= x %>] = <%= pref.to_s.html_safe %>;
+  <% end %>
+
+  <% @temp_array_rank1.each_with_index do |rank1, x| %>
+    temp_array_rank1[<%= x %>] = "<%= rank1.to_s.html_safe %>";
+  <% end %>
+  <% @temp_array_rank2.each_with_index do |rank2, x| %>
+    temp_array_rank2[<%= x %>] = "<%= rank2.to_s.html_safe %>";
+  <% end %>
+  <% @temp_array_rank3.each_with_index do |rank3, x| %>
+    temp_array_rank3[<%= x %>] = "<%= rank3.to_s.html_safe %>";
+  <% end %>
+  <% @temp_array_rank45.each_with_index do |rank45, x| %>
+    temp_array_rank45[<%= x %>] = "<%= rank45.to_s.html_safe %>";
+  <% end %>
+  <% @temp_array_rank46.each_with_index do |rank46, x| %>
+    temp_array_rank46[<%= x %>] = "<%= rank46.to_s.html_safe %>";
+  <% end %>
+  <% @temp_array_rank47.each_with_index do |rank47, x| %>
+    temp_array_rank47[<%= x %>] = "<%= rank47.to_s.html_safe %>";
+  <% end %>
+
   var i = 0;
+  // 右矢印を押した時
   function upData() {
     i += 1;
+
+    document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref2").innerHTML = temp_array_rank2[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref3").innerHTML = temp_array_rank3[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref45").innerHTML = temp_array_rank45[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref46").innerHTML = temp_array_rank46[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref47").innerHTML = temp_array_rank47[Math.abs(i % prefecture_data.length)];
+
+    document.getElementById("rank1").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][0];
+    document.getElementById("rank2").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][1];
+    document.getElementById("rank3").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][2];
+    document.getElementById("rank45").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][44];
+    document.getElementById("rank46").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][45];
+    document.getElementById("rank47").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][46];
+
+    const title = document.getElementById("title");
+    switch(Math.abs(i % prefecture_data.length)){
+      case 1:
+        title.textContent = "title2";
+        break;
+      case 2:
+        title.textContent = "title3";
+        break;
+      case 3:
+        title.textContent = "title4";
+        break;
+      default:
+        title.textContent = "title1";
+    }
     main(); // ボタンを押したときに地図を読み込む
   }
+
   function downData() {
     i -= 1;
+
+    document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref2").innerHTML = temp_array_rank2[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref3").innerHTML = temp_array_rank3[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref45").innerHTML = temp_array_rank45[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref46").innerHTML = temp_array_rank46[Math.abs(i % prefecture_data.length)];
+    document.getElementById("pref47").innerHTML = temp_array_rank47[Math.abs(i % prefecture_data.length)];
+
+    document.getElementById("rank1").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][0];
+    document.getElementById("rank2").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][1];
+    document.getElementById("rank3").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][2];
+    document.getElementById("rank45").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][44];
+    document.getElementById("rank46").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][45];
+    document.getElementById("rank47").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][46];
+
+    const title = document.getElementById("title");
+    switch(Math.abs(i % prefecture_data.length)){
+      case 1:
+        title.textContent = "title2";
+        break;
+      case 2:
+        title.textContent = "title3";
+        break;
+      case 3:
+        title.textContent = "title4";
+        break;
+      default:
+        title.textContent = "title1";
+    }
     main();
   }
 
@@ -40,7 +199,7 @@
   function prefecturesConvertRGB(prefecture){
     function heatMapColorforValue(value){
       var h = (1.0 - value) * 240
-      return "hsl(" + h + ", 80%, 50%)";
+      return "hsl(" + h + ", 70%, 60%)";
     }
     return heatMapColorforValue(prefecture)
   }
@@ -69,6 +228,7 @@
     return areas
   }
 
+
   // ヒートマップを表示する部分
   function main(){
     document.getElementById("japan-map").innerHTML = ''; // 一旦初期化する
@@ -76,13 +236,21 @@
     const areas = defineAreas(data)
 
     const d = new jpmap.japanMap(document.getElementById("japan-map"), {
+      width: 850,
+      selection: "prefecture",
       areas: areas,
-      width: 800,
-      lineWidth: 0,
-      drawsBoxLine : false,
+      borderLineWidth : 0.25,
+      lineColor : "#a0a0a0",
+      lineWidth: 1,
+      drawsBoxLine: false,
+      showsPrefectureName: true,
+      prefectureNameType: "short",
       movesIslands : true,
-      onSelect: function(data){
-        alert(data.name);
+      font : "MS Mincho",
+      fontSize : 10,
+      fontShadowColor : "#fff",
+      onSelect : function(data){
+          alert(data.name);
       }
     });
   }
