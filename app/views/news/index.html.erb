@@ -96,7 +96,7 @@
     prefecture_sort_data[<%= x %>] = <%= pref.to_s.html_safe %>;
   <% end %>
   <% @temp_array_rank1.each_with_index do |rank1, x| %>
-    <%# binding.pry %>
+    <% binding.pry %>
     temp_array_rank1[<%= x %>] = rank1;
   <% end %>
   <%# binding.pry %>
