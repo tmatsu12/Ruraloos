@@ -121,7 +121,7 @@
   // 右矢印を押した時
   function upData() {
     i += 1;
-
+    main(); // ボタンを押したときに地図を読み込む
     document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref2").innerHTML = temp_array_rank2[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref3").innerHTML = temp_array_rank3[Math.abs(i % prefecture_data.length)];
@@ -150,12 +150,12 @@
       default:
         title.textContent = "title1";
     }
-    main(); // ボタンを押したときに地図を読み込む
+
   }
 
   function downData() {
     i -= 1;
-
+    main();
     document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref2").innerHTML = temp_array_rank2[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref3").innerHTML = temp_array_rank3[Math.abs(i % prefecture_data.length)];
@@ -184,7 +184,7 @@
       default:
         title.textContent = "title1";
     }
-    main();
+
   }
 
   // ヒートマップで表現する数値データを定義している部分
