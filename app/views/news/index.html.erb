@@ -10,14 +10,14 @@
         <div id="japan-map" class="my-5"></div>
         <i class="fas fa-chevron-right fa-3x arrow btn" onclick="upData();"></i>
       </div>
-      <table class="table table-striped">
+      <table class="table table-striped ml-4">
         <thead>
           <tr><th colspan="2"><h5 id="title">title1</h5></th></tr>
         </thead>
         <tbody>
           <tr>
             <td class="ranking" style="font-size:24px;">
-              <span class="text-danger font-weight-bold"><%= "第1位" %></span>
+              <span class="text-danger font-weight-bold">第1位</span>
             </td>
             <td class="ranking text-danger font-weight-bold" style="font-size:23px;">
               <span id="pref1" class="mr-4"><%= @temp_array_rank1[0] %></span>
@@ -26,7 +26,7 @@
           </tr>
           <tr>
             <td class="ranking" style="font-size:23px;">
-              <span class="text-danger font-weight-bold"><%= "第2位" %></span>
+              <span class="text-danger font-weight-bold">第2位</span>
             </td>
             <td class="ranking text-danger font-weight-bold" style="font-size:23px;">
               <span id="pref2" class="mr-4"><%= @temp_array_rank2[0] %></span>
@@ -35,7 +35,7 @@
           </tr>
           <tr>
             <td class="ranking" style="font-size:22px;">
-              <span class="text-danger font-weight-bold"><%= "第3位" %></span>
+              <span class="text-danger font-weight-bold">第3位</span>
             </td>
             <td class="ranking text-danger font-weight-bold" style="font-size:22px;">
               <span id="pref3" class="mr-4"><%= @temp_array_rank3[0] %></span>
@@ -47,7 +47,7 @@
           </tr>
           <tr>
             <td class="ranking" style="font-size:20px;">
-              <span class="text-primary font-weight-bold"><%= "第45位" %></span>
+              <span class="text-primary font-weight-bold">第45位</span>
             </td>
             <td class="ranking text-primary font-weight-bold" style="font-size:20px;">
               <span id="pref45" class="mr-4"><%= @temp_array_rank45[0] %></span>
@@ -56,7 +56,7 @@
           </tr>
           <tr>
             <td class="ranking" style="font-size:19px;">
-              <span class="text-primary font-weight-bold"><%= "第46位" %></span>
+              <span class="text-primary font-weight-bold">第46位</span>
             </td>
             <td class="ranking text-primary font-weight-bold" style="font-size:19px;">
               <span id="pref46" class="mr-4"><%= @temp_array_rank46[0] %></span>
@@ -65,7 +65,7 @@
           </tr>
           <tr>
             <td class="ranking" style="font-size:18px;">
-              <span class="text-primary font-weight-bold"><%= "第47位" %></span>
+              <span class="text-primary font-weight-bold">第47位</span>
             </td>
             <td class="ranking text-primary font-weight-bold" style="font-size:18px;">
               <span id="pref47" class="mr-4"><%= @temp_array_rank47[0] %></span>
@@ -75,6 +75,7 @@
         </tbody>
       </table>
     </div>
+
     <%= render partial: "data", collection: @news, as: "news" %>
   </div>
 </div>
@@ -82,6 +83,7 @@
 <script>
   var prefecture_data = [];
   var prefecture_sort_data = [];
+
   var temp_array_rank1 = [];
   var temp_array_rank2 = [];
   var temp_array_rank3 = [];
@@ -95,6 +97,7 @@
   <% @prefecture_sort_data.each_with_index do |pref, x| %>
     prefecture_sort_data[<%= x %>] = <%= pref.to_s.html_safe %>;
   <% end %>
+
   <% @temp_array_rank1.each_with_index do |rank1, x| %>
     temp_array_rank1[<%= x %>] = "<%= rank1.to_s.html_safe %>";
   <% end %>
@@ -116,7 +119,7 @@
 
   var i = 0;
   // 右矢印を押した時
-  function upData() { 
+  function upData() {
     i += 1;
 
     document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
@@ -132,7 +135,7 @@
     document.getElementById("rank45").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][44];
     document.getElementById("rank46").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][45];
     document.getElementById("rank47").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][46];
-    
+
     const title = document.getElementById("title");
     switch(Math.abs(i % prefecture_data.length)){
       case 1:
@@ -149,7 +152,7 @@
     }
     main(); // ボタンを押したときに地図を読み込む
   }
-  
+
   function downData() {
     i -= 1;
 
@@ -166,7 +169,7 @@
     document.getElementById("rank45").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][44];
     document.getElementById("rank46").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][45];
     document.getElementById("rank47").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][46];
-    
+
     const title = document.getElementById("title");
     switch(Math.abs(i % prefecture_data.length)){
       case 1:
@@ -233,7 +236,7 @@
     const areas = defineAreas(data)
 
     const d = new jpmap.japanMap(document.getElementById("japan-map"), {
-      width: 700,
+      width: 850,
       selection: "prefecture",
       areas: areas,
       borderLineWidth : 0.25,
