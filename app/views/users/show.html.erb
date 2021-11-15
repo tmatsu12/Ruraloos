@@ -33,15 +33,16 @@
             <% else %>
               <span>未入力</span>
             <% end %>
-            <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary btn-text w-100 mt-4 rounded-pill" %>
-          </div>
-          <div class="col-7" id="notification_area">
-            <h1 class="border-bottom border-danger">自己紹介</h1>
+            <h5 class="border-bottom border-danger">自己紹介</h5>
             <% if @user.introduction.present? %>
               <p><%= safe_join(@user.introduction.split("\n"),tag(:br)) %></p>
             <% else %>
               <p>まだ未入力です。</p>
             <% end %>
+            <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary btn-text w-100 mt-4 rounded-pill" %>
+          </div>
+          <div class="col-7" id="notification_area">
+            <div id="japan-map" class="my-5"></div>
           </div>
         </div>
         <div class="d-flex justify-content-between mb-2">
@@ -67,3 +68,96 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  var temp_array_live_past = [];
+  var temp_array_live_future = [];
+  var prefecture_data = [];
+
+  <% @user.find_prefectures("livepast").each_with_index do |pref_live_past, x| %>
+    temp_array_live_past[<%= x %>] = <%= pref_live_past.prefecture_id %>;
+  <% end %>
+
+  <% @user.find_prefectures("livefuture").each_with_index do |pref_live_future, x| %>
+    temp_array_live_future[<%= x %>] = <%= pref_live_future.prefecture_id %>;
+  <% end %>
+
+  for (let i=0;i<=46;i++) {
+    if (temp_array_live_past.includes(i)) {
+      prefecture_data[i] = 0;
+      continue;
+    } else if (temp_array_live_future.includes(i)) {
+      prefecture_data[i] = 1;
+      continue;
+    } else {
+      prefecture_data[i] = 0.5;
+    }
+  }
+
+  // ヒートマップで表現する数値データを定義している部分
+  function defineData(){
+    console.log(prefecture_data);
+    const data = {
+      "prefectures" : prefecture_data
+    }
+    return data
+  }
+
+  // 表示する色を作っている部分
+  function prefecturesConvertRGB(prefecture){
+    function heatMapColorforValue(value){
+      var h = (1.0 - value) * 180
+      return "hsl(" + h + ", 70%, 60%)";
+    }
+    return heatMapColorforValue(prefecture)
+  }
+
+  // 今回の数値データを0〜1の範囲に変換している部分
+  function nomalizePrefectures(prefectures){
+    const max = Math.max(...prefectures)
+    const prefs = prefectures.map(function(x){
+      return x / max;
+    })
+    return prefs
+  }
+
+  // {"code": ... , "color": ...}のjsonオブジェクトの配列を作成している部分
+  function defineAreas(data){
+    let areas = []
+    const prefectures = nomalizePrefectures(data.prefectures)
+    for (let i=1;i<=47;i++) {
+      areas.push(
+        {
+          "code": i,
+          "color": prefecturesConvertRGB(prefectures[i-1])
+        }
+      )
+    }
+    return areas
+  }
+
+
+  // ヒートマップを表示する部分
+  function main(){
+    const data = defineData()
+    const areas = defineAreas(data)
+
+    const d = new jpmap.japanMap(document.getElementById("japan-map"), {
+      width: 500,
+      selection: "prefecture",
+      areas: areas,
+      borderLineWidth : 0.25,
+      lineColor : "#a0a0a0",
+      lineWidth: 1,
+      drawsBoxLine: false,
+      showsPrefectureName: false,
+      movesIslands : true,
+      onSelect : function(data){
+          alert(data.name);
+      }
+    });
+  }
+
+  main()
+</script>
