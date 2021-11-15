@@ -5,10 +5,9 @@ class NewsController < ApplicationController
     # @news = news.get_everything(q: '%E5%9C%B0%E6%96%B9%E7%A7%BB%E4%BD%8F', qInTitle: '%E5%9C%B0%E6%96%B9%E7%A7%BB%E4%BD%8F', sortBy: 'relevancy', pageSize: '5')
     @news = []
     require 'csv'
-    @prefecture_data = CSV.read("PrefectureData.csv")
-    # @initial_data = @prefecture_data[0].sort{|a,b| a.to_i <=> b.to_i }.reverse
-    @prefecture_sort_data = []
-    @temp_array_rank1 = []
+    @prefecture_data = CSV.read("PrefectureData.csv") # 各種データを配列として要素にもつ二重配列
+    @prefecture_sort_data = [] # 降順に並び替えた配列を要素にもつ二重配列
+    @temp_array_rank1 = [] # 各データで最大値を持つ県名を要素にもつ配列
     @temp_array_rank2 = []
     @temp_array_rank3 = []
     @temp_array_rank45 = []
@@ -23,6 +22,5 @@ class NewsController < ApplicationController
       @temp_array_rank46 << Prefecture.find(pref.index(@prefecture_sort_data[i][45])).name
       @temp_array_rank47 << Prefecture.find(pref.index(@prefecture_sort_data[i][46])).name
     end
-    # binding.pry
   end
 end

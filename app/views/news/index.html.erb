@@ -19,7 +19,7 @@
             <td class="ranking" style="font-size:24px;">
               <span class="text-danger font-weight-bold"><%= "第1位" %></span>
             </td>
-            <td class="ranking text-danger font-weight-bold" style="font-size:24px;">
+            <td class="ranking text-danger font-weight-bold" style="font-size:23px;">
               <span id="pref1" class="mr-4"><%= @temp_array_rank1[0] %></span>
               <span id="rank1"><%= @prefecture_sort_data[0][0] %></span>
             </td>
@@ -96,42 +96,43 @@
     prefecture_sort_data[<%= x %>] = <%= pref.to_s.html_safe %>;
   <% end %>
   <% @temp_array_rank1.each_with_index do |rank1, x| %>
-    <% binding.pry %>
-    temp_array_rank1[<%= x %>] = rank1;
+    temp_array_rank1[<%= x %>] = "<%= rank1.to_s.html_safe %>";
   <% end %>
-  <%# binding.pry %>
   <% @temp_array_rank2.each_with_index do |rank2, x| %>
-    temp_array_rank2[<%= x %>] = rank2;
+    temp_array_rank2[<%= x %>] = "<%= rank2.to_s.html_safe %>";
   <% end %>
   <% @temp_array_rank3.each_with_index do |rank3, x| %>
-    temp_array_rank3[<%= x %>] = rank3;
+    temp_array_rank3[<%= x %>] = "<%= rank3.to_s.html_safe %>";
   <% end %>
   <% @temp_array_rank45.each_with_index do |rank45, x| %>
-    temp_array_rank45[<%= x %>] = rank45;
+    temp_array_rank45[<%= x %>] = "<%= rank45.to_s.html_safe %>";
   <% end %>
   <% @temp_array_rank46.each_with_index do |rank46, x| %>
-    temp_array_rank46[<%= x %>] = rank46;
+    temp_array_rank46[<%= x %>] = "<%= rank46.to_s.html_safe %>";
   <% end %>
   <% @temp_array_rank47.each_with_index do |rank47, x| %>
-    temp_array_rank47[<%= x %>] = rank47;
+    temp_array_rank47[<%= x %>] = "<%= rank47.to_s.html_safe %>";
   <% end %>
 
   var i = 0;
-  function upData() {
+  // 右矢印を押した時
+  function upData() { 
     i += 1;
-    main(); // ボタンを押したときに地図を読み込む
+
     document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref2").innerHTML = temp_array_rank2[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref3").innerHTML = temp_array_rank3[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref45").innerHTML = temp_array_rank45[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref46").innerHTML = temp_array_rank46[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref47").innerHTML = temp_array_rank47[Math.abs(i % prefecture_data.length)];
+
     document.getElementById("rank1").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][0];
     document.getElementById("rank2").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][1];
     document.getElementById("rank3").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][2];
     document.getElementById("rank45").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][44];
     document.getElementById("rank46").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][45];
     document.getElementById("rank47").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][46];
+    
     const title = document.getElementById("title");
     switch(Math.abs(i % prefecture_data.length)){
       case 1:
@@ -146,22 +147,26 @@
       default:
         title.textContent = "title1";
     }
+    main(); // ボタンを押したときに地図を読み込む
   }
+  
   function downData() {
     i -= 1;
-    main();
+
     document.getElementById("pref1").innerHTML = temp_array_rank1[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref2").innerHTML = temp_array_rank2[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref3").innerHTML = temp_array_rank3[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref45").innerHTML = temp_array_rank45[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref46").innerHTML = temp_array_rank46[Math.abs(i % prefecture_data.length)];
     document.getElementById("pref47").innerHTML = temp_array_rank47[Math.abs(i % prefecture_data.length)];
+
     document.getElementById("rank1").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][0];
     document.getElementById("rank2").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][1];
     document.getElementById("rank3").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][2];
     document.getElementById("rank45").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][44];
     document.getElementById("rank46").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][45];
     document.getElementById("rank47").innerHTML = prefecture_sort_data[Math.abs(i % prefecture_data.length)][46];
+    
     const title = document.getElementById("title");
     switch(Math.abs(i % prefecture_data.length)){
       case 1:
@@ -176,6 +181,7 @@
       default:
         title.textContent = "title1";
     }
+    main();
   }
 
   // ヒートマップで表現する数値データを定義している部分
