@@ -53,14 +53,14 @@
 <!--③：ユーザー詳細ページにおいて-->
   <% if obj == 1 %>
     <label class="active">
-      <%= link_to "新着順", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>
+      <%= link_to "新しい順", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text active" %>
     </label>
     <label>
       <%= link_to "いいねした質問", sort_user_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
     </label>
   <% elsif obj == 2 %>
     <label>
-      <%= link_to "新着順", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+      <%= link_to "新しい順", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
     </label>
     <label class="active">
       <%= link_to "いいねした質問", sort_user_path(option: 2), method: :post, class: "btn btn-light btn-text active" %>
@@ -68,7 +68,7 @@
   <% else %>
   <!--params[:option]がnilの時は0と解釈されるようだ-->
     <label>
-      <%= link_to "新着順", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
+      <%= link_to "新しい順", sort_user_path(option: 1), method: :post, class: "btn btn-light btn-text" %>
     </label>
     <label>
       <%= link_to "いいねした質問", sort_user_path(option: 2), method: :post, class: "btn btn-light btn-text" %>
