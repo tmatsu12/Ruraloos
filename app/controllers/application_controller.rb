@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
+    notification = Notification.new(visiter_id: 1, visited_id: current_user.id, action: "new")
+    notification.save
     user_path(current_user.id)
   end
 
