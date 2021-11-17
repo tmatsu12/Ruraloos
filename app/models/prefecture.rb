@@ -13,7 +13,7 @@ class Prefecture < ApplicationRecord
       temp_ids = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
       temp_array = []
       temp_ids.each do |temp_id|
-        if Post.find(temp_id).prefecture.id == id
+        if Post.find(temp_id).prefecture.id == id # 目的の県に関する質問だけを取り出す
           temp_array << temp_id
         end
       end

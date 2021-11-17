@@ -34,7 +34,7 @@ class Post < ApplicationRecord
   def create_notification_comment!(current_user, post_comment_id)
     # 自分以外に回答(返信も含む)している人をすべて取得し、全員に通知を送る => #一旦保留
     # temp_ids = PostComment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
-    # temp_ids.each do |temp_id|
+    # temp_ids.each do |temp_id| # この時点でtemp_idsはオブジェクトを要素にもつ配列である
     #   save_notification_comment!(current_user, post_comment_id, temp_id['user_id'])
     # end
 

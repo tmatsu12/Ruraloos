@@ -16,7 +16,7 @@
           <li class="list-inline-item"><%= link_to '質問する', new_post_path, class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to '全ての質問', all_posts_path, class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to 'マイページ', user_path(current_user), class: 'btn btn-header btn-text' %></li>
-          <li class="list-inline-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'btn btn-header btn-text' %></li>
+          <li class="list-inline-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-header btn-text' %></li>
         <% else %>
           <li class="list-inline-item"><%= link_to 'About', about_path, class: 'btn btn-header btn-text' %></li>
           <li class="list-inline-item"><%= link_to '全ての質問', all_posts_path, class: 'btn btn-header btn-text' %></li>
