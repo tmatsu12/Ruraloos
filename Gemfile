@@ -93,6 +93,8 @@ gem 'enum_help'
 
 gem 'impressionist', '~>1.6.1'
 
+gem 'whenever', require: false
+
 group :production do
   gem 'mysql2'
 end
