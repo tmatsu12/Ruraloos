@@ -20,11 +20,11 @@ every 1.minutes do ##ここを追加
   runner "ScheduledProcessingMailer.high_pv_mail.deliver_now"
 end
 
-every 1.minutes do
+every 1.days do
    runner "Batch::DataReset.notifications_clear"
 end
 
-every 1.minutes do
+every 3.days do
    runner "Batch::DataReset.guest_introduction_clear"
 end
 
