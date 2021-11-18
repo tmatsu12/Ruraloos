@@ -12,11 +12,11 @@ set :output, 'log/cron.log'
 # ジョブの実行環境の指定
 set :environment, :production
 #
-every 1.minutes do ##ここを追加
+every 1.days do
   runner "ScheduledProcessingMailer.check_notice_mail.deliver_now"
 end
 
-every 1.minutes do ##ここを追加
+every 10.days do
   runner "ScheduledProcessingMailer.high_pv_mail.deliver_now"
 end
 
