@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'オリジナル関数のテスト' do # ランキング・通知機能関連のメソッドのテストは断念した
+describe 'ユーザー定義メソッドのテスト' do # ランキング・通知機能関連のメソッドのテストは断念した
   let!(:user) { create(:user) }
   let!(:prefecture) { create(:prefecture) }
   let!(:user_prefecture) { create(:user_prefecture, user: user, prefecture: prefecture) }
