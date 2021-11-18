@@ -34,4 +34,12 @@ Rails.application.routes.draw do
   get 'inquiry' => 'inquiry#index'     # 入力画面
   post 'inquiry/confirm' => 'inquiry#confirm'   # 確認画面
   post 'inquiry/thanks'  => 'inquiry#thanks'    # 送信完了画面
+
+  namespace :admin do
+    root to: "homes#top"
+  end
+
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
 end
