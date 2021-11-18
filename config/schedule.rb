@@ -13,10 +13,19 @@ set :output, 'log/cron.log'
 set :environment, :production
 #
 every 1.minutes do ##ここを追加
-# every 1.days, at: '9:00 am' do　##ここをコメントアウト
-
-# Rails内のメソッド実行
   runner "ScheduledProcessingMailer.check_notice_mail.deliver_now"
+end
+
+every 1.minutes do ##ここを追加
+  runner "ScheduledProcessingMailer.high_pv_mail.deliver_now"
+end
+
+every 1.minutes do
+   runner "Batch::DataReset.notifications_clear"
+end
+
+every 1.minutes do
+   runner "Batch::DataReset.guest_introduction_clear"
 end
 
 # Learn more: http://github.com/javan/whenever
