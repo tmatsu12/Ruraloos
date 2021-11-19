@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h1 class="mt-3">SQL</h1>
+      <h1 class="mt-3">SQL<span class="text-muted ml-3" style="font-size:16px;">find_by_sql等を使用</span></h1>
       <div class="card sql-card">
         <h5 class="card-header">ユーザー名の取得</h5>
         <div class="card-body">
           <h5 class="card-title">select name from users;</h5>
-          <p><%= @res1_sql.to_a %></p>
+          <p><%= @res1_sql.to_a.map{|k| k["name"]} %></p>
         </div>
       </div>
     </div>
