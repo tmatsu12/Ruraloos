@@ -20,130 +20,137 @@
  @import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&family=Mate+SC&family=Special+Elite&display=swap');
 
- *{
-  margin:0;
-  padding: 0;
+ @mixin like($color){
+   width: 25px;
+   height: 30px;
+   font-size: 25px;
+   color: $color;
  }
 
- .ruraloos{
-   font-family: 'Special Elite', cursive;
+ @mixin visual{
+   width:100%;
+   height:750px;
+   background-size:cover;
+   background-position:center;
  }
 
- .sidebar{
-   font-family: 'Mate SC', serif;
+ @mixin visual_content($color,$alpha){
+   width:100%;
+   height:100%;
+   color:$color;
+   background-color: rgba(255,255,255,$alpha);
  }
 
- h1,h2,h3,h4,h5,.btn-text,.rubi,small,.ranking,.pref{
-   font-family: 'Kaisei Opti', serif;
- }
-
- .navbar{
-  background: linear-gradient(.25turn, #0d2835, 50%, white);
- }
-
- .btn-header{
-   background-color:#c8d599;
+ @mixin shadow{
    box-shadow: 2.5px 2.5px #000000;
  }
 
- .btn-header:active{
+ @mixin shadow_active{
    position:relative;
    top: 2.5px;
    left: 2.5px;
    box-shadow:none;
+ }
+
+ @mixin notice{
+   color:tomato;
+   background-color:white;
+   text-align:center;
+   margin-bottom:0px;
+   font-family: 'Kaisei Opti', serif;
+ }
+
+ $font_type1: 'Special Elite', cursive;
+ $font_type2: 'Mate SC', serif;
+ $font_type3: 'Kaisei Opti', serif;
+
+ *{
+   margin:0;
+   padding: 0;
+ }
+
+ .ruraloos{
+   font-family: $font_type1;
+ }
+
+ .sidebar{
+   font-family: $font_type2;
+ }
+
+ h1,h2,h3,h4,h5,.btn-text,.rubi,small,.ranking,.pref{
+   font-family: $font_type3;
+ }
+
+ .navbar{
+   background: linear-gradient(.25turn, #0d2835, 50%, white);
+ }
+
+ .btn-header{
+   @include shadow;
+   background-color:#c8d599;
+   &:active{
+     @include shadow_active
+   }
  }
 
  .btn-text{
-    box-shadow: 2.5px 2.5px #000000;
- }
-
- .btn-text:active{
-   position:relative;
-   top: 2.5px;
-   left: 2.5px;
-   box-shadow:none;
+   box-shadow: 2.5px 2.5px #000000;
+   &:active{
+     @include shadow_active
+   }
  }
 
  .main-visual{
-  width:100%;
-  height:750px;
-  background-image: image-url("mountains.jpg");
-  background-size:cover;
-  background-position:center;
+   @include visual;
+   background-image: image-url("mountains.jpg");
  }
 
  .main-visual-content{
-  width:100%;
-  height:100%;
-  background-color: rgba(255,255,255,0.7);
+   width:100%;
+   height:100%;
+   background-color: rgba(255,255,255,0.7);
  }
 
  .sub-visual{
-  width:100%;
-  height:750px;
-  background-image: image-url("lake.jpg");
-  background-size:cover;
-  background-position:center;
+   @include visual;
+   background-image: image-url("lake.jpg");
  }
 
  .sub-visual-content{
-  width:100%;
-  height:100%;
-  color:black;
-  background-color: rgba(255,255,255,0.1);
+   @include visual_content(black, 0.1);
  }
 
  .map-visual{
-    background: linear-gradient(-90deg, white, 50%, #b9d0b1);
+   background: linear-gradient(-90deg, white, 50%, #b9d0b1);
  }
 
  .general-visual{
-    background-color: rgba(185,208,177,0.3);
+   background-color: rgba(185,208,177,0.3);
  }
 
  .about-visual{
-  width:100%;
-  height:750px;
-  background-image: image-url("yozora.jpg");
-  background-size:cover;
-  background-position:center;
+   @include visual;
+   background-image: image-url("yozora.jpg");
  }
 
  .about-visual-content{
-  width:100%;
-  height:100%;
-  color:#000;
-  background-color: rgba(255,255,255,0.3);
+  @include visual_content(#000, 0.3);
  }
 
  #notice{
-  color:tomato;
-  background-color:white;
-  text-align:center;
-  margin-bottom:0px;
-  font-family: 'Kaisei Opti', serif;
+   @include notice;
  }
 
  #notice1{
-  color:tomato;
-  background-color:white;
-  text-align:center;
-  margin-bottom:0px;
-  font-family: 'Kaisei Opti', serif;
+   @include notice;
  }
 
  .like-btn{
-   width: 25px;
-   height: 30px;
-   font-size: 25px;
-   color: #e54747;
+   @include like(#e54747);
  }
 
  .unlike-btn {
-   width: 25px;
-   height: 30px;
-   font-size: 25px;
-   color: #808080;
+   @include like(#808080);
  }
 
  td a {
@@ -153,16 +160,16 @@
 
  #error_explanation {
   color: red;
-  font-family: 'Kaisei Opti', serif;
+  font-family: $font_type3;
 }
 
 .post-cards{
-    min-height: 550px;
+  min-height: 550px;
 }
 
 .link{
-    text-decoration:none;
-    color:#022EB0;
+  text-decoration:none;
+  color:#022EB0;
 }
 
 .inquiry-button{
