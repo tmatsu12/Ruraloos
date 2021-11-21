@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def all_posts
-    @posts = Post.all.page(params[:page]).order(updated_at: :desc).per(25)
+    @posts = Post.all.includes(:prefecture, :user).page(params[:page]).order(updated_at: :desc).per(25)
   end
 
   def sort_all_posts

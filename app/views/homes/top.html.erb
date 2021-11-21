@@ -35,7 +35,6 @@
     <div class="ml-5 mr-0 py-5">
       <div id="map-container"></div>
     </div>
-    <% temp_ids = UserPrefecture.where(status: "livefuture").group(:prefecture_id).order('count(prefecture_id) desc').limit(3).pluck(:prefecture_id) %>
     <div class="mt-5 mr-5">
       <table class="table table-striped">
         <thead>
@@ -44,7 +43,7 @@
           </tr>
         </thead>
         <tbody>
-          <% temp_ids.each_with_index do |temp_id, i| %>
+          <% @temp_ids.each_with_index do |temp_id, i| %>
           <tr>
             <% case i %>
             <% when 0 %>
