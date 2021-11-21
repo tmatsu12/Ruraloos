@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).order(updated_at: :desc)
+    @posts = @user.posts.includes(:prefecture).page(params[:page]).order(updated_at: :desc)
     redirect_to new_user_session_path, flash: { notice: 'ログインして下さい（ゲストログインが便利です！）' } unless user_signed_in?
   end
 

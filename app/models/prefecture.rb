@@ -3,12 +3,12 @@ class Prefecture < ApplicationRecord
   has_many :user_prefectures, dependent: :destroy
 
   def find_people(status)
-    user_prefectures.where(status: status)
+    user_prefectures.includes(:user).where(status: status)
   end
 
   def sort_pref_posts(option, page)
     if option == 1
-      posts.all.page(page).order(updated_at: :desc).per(25)
+      posts.all.includes(:user).page(page).order(updated_at: :desc).per(25)
     else
       temp_ids = Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id)
       temp_array = []

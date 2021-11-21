@@ -1,4 +1,4 @@
-<% post.post_comments.order(created_at: :desc).each do |post_comment| %>
+<% post.post_comments.includes(:user).order(created_at: :desc).each do |post_comment| %>
   <% if !post_comment.be_reply? %>
     <div class="card mt-3">
       <div class="row">
