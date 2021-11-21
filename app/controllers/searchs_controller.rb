@@ -11,15 +11,15 @@ class SearchsController < ApplicationController
   def search_for(content, prefecture_id, method)
     if method == 'perfect'
       if content != ""
-        Post.where(city: content)
+        Post.includes(:prefecture, :user).where(city: content)
       else
-        Post.where(prefecture_id: prefecture_id)
+        Post.includes(:prefecture, :user).where(prefecture_id: prefecture_id)
       end
     else
       if content != ""
-        Post.where('city LIKE ?', "%#{content}%")
+        Post.includes(:prefecture, :user).where('city LIKE ?', "%#{content}%")
       else
-        Post.where(prefecture_id: prefecture_id)
+        Post.includes(:prefecture, :user).where(prefecture_id: prefecture_id)
       end
     end
   end

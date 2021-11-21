@@ -18,7 +18,7 @@ class User < ApplicationRecord
   validates :introduction, length: { maximum: 800 }
 
   def find_prefectures(status)
-    user_prefectures.where(status: status)
+    user_prefectures.includes(:prefecture).where(status: status)
   end
 
   def be_identical?(user)
@@ -27,9 +27,9 @@ class User < ApplicationRecord
 
   def sort_users_posts(option, page)
     if option == 1
-      posts.page(page).order(updated_at: :desc).per(25)
+      posts.includes(:prefecture).page(page).order(updated_at: :desc).per(25)
     else
-      Kaminari.paginate_array(Post.find(Favorite.where(user_id: id).pluck(:post_id))).page(page).per(25)
+      Kaminari.paginate_array(Post.includes(:prefecture, :user).find(Favorite.where(user_id: id).pluck(:post_id))).page(page).per(25)
       # Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
     end
   end
