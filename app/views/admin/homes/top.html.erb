@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-6">
-      <h1 class="mt-3">SQL<span class="text-muted ml-3" style="font-size:16px;">find_by_sql等を使用</span></h1>
+      <h1 class="mt-3 text-danger">SQL<span class="text-muted ml-3" style="font-size:16px;">find_by_sql等を使用</span></h1>
 
       <div class="card sql-card">
         <h5 class="card-header">ユーザー名の取得</h5>
@@ -13,16 +13,26 @@
       </div>
 
       <div class="card sql-card">
-        <h5 class="card-header">各ユーザーの質問数(JOINする方法)</h5>
+        <h5 class="card-header">各ユーザーの質問数(名前で表示)</h5>
         <div class="card-body">
           <h5 class="card-title">SELECT users.name, COUNT(*) FROM posts INNER JOIN users ON users.id = posts.user_id GROUP BY users.name;</h5>
+          <!--<p><%#= @res2_sql.map{|h| [h["name"],h["COUNT(*)"]]}.to_h %></p>-->
           <p><%= @res2_sql.to_a %></p>
+        </div>
+      </div>
+
+      <div class="card sql-card">
+        <h5 class="card-header">質問数が多い順に並べる</h5>
+        <div class="card-body">
+          <h5 class="card-title">SELECT users.name, COUNT(*) FROM posts INNER JOIN users ON users.id = posts.user_id GROUP BY users.name ORDER BY COUNT(*) DESC;</h5>
+          <!--<p><%#= @res2_sql.map{|h| [h["name"],h["COUNT(*)"]]}.to_h %></p>-->
+          <p><%= @res3_sql.to_a %></p>
         </div>
       </div>
 
     </div>
     <div class="col-6">
-      <h1 class="mt-3">ActiveRecord</h1>
+      <h1 class="mt-3 text-danger">ActiveRecord</h1>
 
       <div class="card ar-card">
         <h5 class="card-header">ユーザー名の取得</h5>
@@ -34,11 +44,20 @@
       </div>
 
       <div class="card ar-card">
-        <h5 class="card-header">各ユーザーの質問数(JOINする方法)</h5>
+        <h5 class="card-header">各ユーザーの質問数(名前で表示)</h5>
         <div class="card-body">
           <h5 class="card-title">Post.joins(:user).group("users.name").count</h5>
           <p><%= @res2_AR %></p>
           <p class="text-muted">Memo：Post.group(:user_id).countとするとuser_idで表示されるので誰が何個か分かりにくい。joinsの必要性を理解できた。</p>
+        </div>
+      </div>
+
+      <div class="card ar-card">
+        <h5 class="card-header">質問数が多い順に並べる</h5>
+        <div class="card-body">
+          <h5 class="card-title">Post.joins(:user).group("users.name").order("count_all desc").count</h5>
+          <p><%= @res2_AR %></p>
+          <p class="text-muted">Memo：RailsはCOUNT(*)にcount_allという名前をつけている。</p>
         </div>
       </div>
 
