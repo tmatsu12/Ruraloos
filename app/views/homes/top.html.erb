@@ -1,8 +1,6 @@
 <div class="container-fluid">
   <p id="notice"><%= flash[:notice] %></p>
-
   <div class="row">
-
     <div class="main-visual">
       <div class="main-visual-content d-flex justify-content-center align-items-center flex-column">
         <h1 class="mb-0 mx-auto font-weight-bold ruraloos"><%= image_tag "favicon.ico", size: '55x55' %> Ruraloos <%= image_tag "favicon.ico", size: '55x55' %></h1>
@@ -11,11 +9,8 @@
         <a class="btn btn-dark btn-lg rounded-pill mt-3 go-map btn-text", href="#map-container">興味のある地域を選ぶ</a>
       </div>
     </div>
-
   </div>
-
   <div class="row">
-
       <div class="sub-visual">
         <div class="sub-visual-content">
           <h2 class="pt-4 text-center font-weight-bold">新着の質問</h2>
@@ -25,13 +20,8 @@
           <p class="text-center"><%= link_to "全ての質問を見る", all_posts_path, class: "btn btn-header btn-text", style: "font-size:18px;" %></p>
         </div>
       </div>
-
   </div>
-
-
-
   <div class="row map-visual d-flex justify-content-center align-items-center">
-
     <div class="ml-5 mr-0 py-5">
       <div id="map-container"></div>
     </div>
@@ -43,44 +33,22 @@
           </tr>
         </thead>
         <tbody>
-          <% @temp_ids.each_with_index do |temp_id, i| %>
+          <% @prefs_livefuture.each_with_index do |pref_livefuture, i| %>
           <tr>
-            <% case i %>
-            <% when 0 %>
-              <td class="ranking" style="font-size:24px;"><span class="text-danger font-weight-bold"><%= "第#{i+1}位" %></span></td>
-              <td class="ranking" style="font-size:24px;">
-                <%= link_to posts_path(prefecture_id: Prefecture.find(temp_id).id) do %>
-                  <span class="link"><%= Prefecture.find(temp_id).name %></span>
-                  <span class="link ml-3"><%= UserPrefecture.where(status: "livefuture").where(prefecture_id: temp_id).count %>人</span>
-                <% end %>
-              </td>
-            <% when 1 %>
-              <td class="ranking" style="font-size:20px;"><%= "第#{i+1}位" %></td>
-              <td class="ranking" style="font-size:20px;">
-                <%= link_to posts_path(prefecture_id: Prefecture.find(temp_id).id) do %>
-                  <span class="link"><%= Prefecture.find(temp_id).name %></span>
-                  <span class="link ml-3"><%= UserPrefecture.where(status: "livefuture").where(prefecture_id: temp_id).count %>人</span>
-                <% end %>
-              </td>
-            <% else %>
-              <td class="ranking" style="font-size:18px;"><%= "第#{i+1}位" %></td>
-              <td class="ranking" style="font-size:18px;">
-                <%= link_to posts_path(prefecture_id: Prefecture.find(temp_id).id) do %>
-                  <span class="link"><%= Prefecture.find(temp_id).name %></span>
-                  <span class="link ml-3"><%= UserPrefecture.where(status: "livefuture").where(prefecture_id: temp_id).count %>人</span>
-                <% end %>
-              </td>
-            <% end %>
+            <td class="ranking_<%= i+1 %>"><span class="text-danger font-weight-bold"><%= "第#{i+1}位" %></span></td>
+            <td class="ranking_<%= i+1 %>">
+              <%= link_to posts_path(prefecture_id: Prefecture.find_by(name: pref_livefuture[0]).id) do %>
+                <span class="link"><%= pref_livefuture[0] %></span>
+                <span class="link ml-3"><%= pref_livefuture[1] %>人</span>
+              <% end %>
+            </td>
           </tr>
           <% end %>
         </tbody>
       </table>
     </div>
-
   </div>
-
 </div>
-
 
 <script>
   $(function(){

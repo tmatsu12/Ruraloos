@@ -60,6 +60,12 @@
    font-family: 'Kaisei Opti', serif;
  }
 
+ @mixin button{
+   position:fixed;
+   bottom:40px;
+   z-index:100;
+ }
+
  $font_type1: 'Special Elite', cursive;
  $font_type2: 'Mate SC', serif;
  $font_type3: 'Kaisei Opti', serif;
@@ -173,11 +179,15 @@
 }
 
 .inquiry-button{
-  position:fixed;
+  @include button;
   right:100px;
-  bottom:40px;
   color:green;
-  z-index:100;
+}
+
+.admin-button{
+  @include button;
+  right:30px;
+  color:blue;
 }
 
 .arrow{
@@ -189,6 +199,21 @@
 }
 
 .sql-card, .ar-card{
-  min-height: 220px;
+  min-height: 320px;
   margin-bottom: 20px;
+}
+
+.ranking_1{
+  font-size: 24px;
+  font-family: $font_type3;
+}
+
+.ranking_2{
+  font-size: 20px;
+  font-family: $font_type3;
+}
+
+.ranking_3{
+  font-size: 18px;
+  font-family: $font_type3;
 }
