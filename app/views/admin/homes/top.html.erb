@@ -22,11 +22,28 @@
       </div>
 
       <div class="card sql-card">
-        <h5 class="card-header">質問数が多い順に並べる</h5>
+        <h5 class="card-header">質問数が多い順に並び替える</h5>
         <div class="card-body">
           <h5 class="card-title">SELECT users.name, COUNT(*) FROM posts INNER JOIN users ON users.id = posts.user_id GROUP BY users.name ORDER BY COUNT(*) DESC;</h5>
           <!--<p><%#= @res2_sql.map{|h| [h["name"],h["COUNT(*)"]]}.to_h %></p>-->
           <p><%= @res3_sql.to_a %></p>
+        </div>
+      </div>
+
+      <div class="card sql-card">
+        <h5 class="card-header">いいねが多い順に質問を並び替える</h5>
+        <div class="card-body">
+          <h5 class="card-title">SELECT posts.id, COUNT(*) FROM posts INNER JOIN favorites ON favorites.post_id = posts.id GROUP BY posts.id ORDER BY COUNT(*) DESC;</h5>
+          <!--<p><%#= @res2_sql.map{|h| [h["name"],h["COUNT(*)"]]}.to_h %></p>-->
+          <p><%= @res4_sql.to_a %></p>
+        </div>
+      </div>
+
+      <div class="card sql-card">
+        <h5 class="card-header">住みたい県ランキング</h5>
+        <div class="card-body">
+          <h5 class="card-title">SELECT prefectures.name, COUNT(*) FROM prefectures INNER JOIN user_prefectures ON user_prefectures.prefecture_id = prefectures.id WHERE user_prefectures.status = 1 GROUP BY prefectures.name ORDER BY COUNT(*) DESC LIMIT 3;</h5>
+          <p><%= @res5_sql.to_a %></p>
         </div>
       </div>
 
@@ -53,11 +70,27 @@
       </div>
 
       <div class="card ar-card">
-        <h5 class="card-header">質問数が多い順に並べる</h5>
+        <h5 class="card-header">質問数が多い順に並び替える</h5>
         <div class="card-body">
           <h5 class="card-title">Post.joins(:user).group("users.name").order("count_all desc").count</h5>
-          <p><%= @res2_AR %></p>
+          <p><%= @res3_AR %></p>
           <p class="text-muted">Memo：RailsはCOUNT(*)にcount_allという名前をつけている。</p>
+        </div>
+      </div>
+
+      <div class="card ar-card">
+        <h5 class="card-header">いいねが多い順に質問を並び替える</h5>
+        <div class="card-body">
+          <h5 class="card-title">Post.joins(:favorites).group("posts.id").order("count_all desc").count</h5>
+          <p><%= @res4_AR %></p>
+        </div>
+      </div>
+
+      <div class="card ar-card">
+        <h5 class="card-header">住みたい県ランキング</h5>
+        <div class="card-body">
+          <h5 class="card-title">Prefecture.joins(:user_prefectures).where("user_prefectures.status": "livefuture").group("prefectures.name").order("count_all desc").limit(3).count</h5>
+          <p><%= @res5_AR %></p>
         </div>
       </div>
 
