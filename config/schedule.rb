@@ -11,7 +11,7 @@ env :PATH, ENV['PATH']
 set :output, 'log/cron.log'
 # ジョブの実行環境の指定
 set :environment, :production
-#
+
 every 1.days do
   runner "ScheduledProcessingMailer.check_notice_mail.deliver_now"
 end
@@ -21,11 +21,11 @@ every 10.days do
 end
 
 every 1.days do
-   runner "Batch::DataReset.notifications_clear"
+  runner "Batch::DataReset.notifications_clear"
 end
 
-every 3.days do
-   runner "Batch::DataReset.guest_introduction_clear"
+every 1.days do
+  runner "Batch::DataReset.guest_introduction_clear"
 end
 
 # Learn more: http://github.com/javan/whenever

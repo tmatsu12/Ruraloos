@@ -1,2 +1,5 @@
 require:
   - rubocop-airbnb
+
+LineLength:
+  Max: 300
