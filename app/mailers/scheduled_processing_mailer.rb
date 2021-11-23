@@ -13,7 +13,7 @@ class ScheduledProcessingMailer < ApplicationMailer
     @url = "https://ruraloos.com/users/sign_in"
     temp_users = []
     Post.all.each do |post|
-      temp_users << post.user if (post.impressionist_count >=100) && !(temp_users.include?(post.user)) # 重複を防いでいる
+      temp_users << post.user if (post.impressionist_count >= 100) && !(temp_users.include?(post.user)) # 重複を防いでいる
     end
     users_with_high_pv_mails = temp_users.pluck(:email)
     mail(from: '"Ruraloos" <noreply@yoursite.com>', subject: "あなたの質問が注目されています！", bcc: users_with_high_pv_mails)

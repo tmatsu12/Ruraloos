@@ -13,7 +13,7 @@ class NewsController < ApplicationController
     @temp_array_rank46 = []
     @temp_array_rank47 = []
     @prefecture_data.each_with_index do |pref, i|
-      @prefecture_sort_data << pref.sort{|a,b| a.to_i <=> b.to_i }.reverse
+      @prefecture_sort_data << pref.sort { |a, b| a.to_i <=> b.to_i }.reverse
       @temp_array_rank1 << Prefecture.find(pref.index(@prefecture_sort_data[i][0])).name
       @temp_array_rank2 << Prefecture.find(pref.index(@prefecture_sort_data[i][1])).name
       @temp_array_rank3 << Prefecture.find(pref.index(@prefecture_sort_data[i][2])).name
