@@ -92,6 +92,8 @@
         <div class="card-body">
           <h5 class="card-title">Prefecture.joins(:user_prefectures).where("user_prefectures.status": "livefuture").group("prefectures.name").order("count_all desc").limit(3).count</h5>
           <p><%= @res5_ar %></p>
+          <p class="text-muted">Memo：temp_ids = UserPrefecture.where(status: "livefuture").group(:prefecture_id).order('count(prefecture_id) desc').limit(3).pluck(:prefecture_id)
+          を使うよりスマートな気がする</p>
         </div>
       </div>
 
