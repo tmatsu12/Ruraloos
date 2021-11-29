@@ -18,7 +18,7 @@
 地方移住に関心を持っていて移住先についての情報を収集したい方々
 
 ### 主な利用シーン
-地方移住を検討していて、移住先について感じた素朴な疑問を住民や元住民に回答してもらいたい時に活用できます。
+地方移住を検討している人が、興味のある地域について感じた素朴な疑問を住民や元住民に回答してもらいたい時に活用できます。
 
 ## サイトのURL
 https://ruraloos.com
@@ -37,5 +37,6 @@ https://docs.google.com/spreadsheets/d/1a_vUPd7vdDsOCu1KyNnjjT7fMnrHqLz43_Om3dcw
 - IDE：Cloud9
 
 ## 使用素材
-サイト内の写真はぱくたそから使用しました。https://www.pakutaso.com/
+サイト内の写真はぱくたそから使用しました。
+https://www.pakutaso.com/
 
