@@ -24,7 +24,10 @@
 https://ruraloos.com
 
 ## 設計書
+・ER図
 https://docs.google.com/spreadsheets/d/12vmDUvk9DnIxvdSTvy-FUXT6FdFGmMZMeTtDEVJZgz0/edit?usp=sharing
+・AWS（インフラ）
+https://docs.google.com/spreadsheets/d/1VeGjp9CCiSDWeUaJQpYPak1qyczDGKK7tYoD459Ux3w/edit?usp=sharing
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1a_vUPd7vdDsOCu1KyNnjjT7fMnrHqLz43_Om3dcwibk/edit?usp=sharing
