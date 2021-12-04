@@ -25,6 +25,7 @@ https://ruraloos.com
 
 ## 設計書
 ・ER図
+
 https://docs.google.com/spreadsheets/d/12vmDUvk9DnIxvdSTvy-FUXT6FdFGmMZMeTtDEVJZgz0/edit?usp=sharing
 
 ・AWS（インフラ）：仮想ネットワークを構築し、その上にポートフォリオをデプロイし、公開しています。
