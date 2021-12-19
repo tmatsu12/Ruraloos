@@ -42,18 +42,19 @@ class User < ApplicationRecord
   end
 
   def create_user_prefecture_by_status!(ids, status)
-    if status == "livepast"
-      create_user_prefecture!(self, ids, status)
-    else
-      create_user_prefecture!(self, ids, status)
+    ids.each do |pref_id|
+      next if pref_id.blank?
+      user_prefectures.create!(status: status, prefecture_id: pref_id)
     end
   end
 
-  private
+  def create_user_prefecture!(prefecture_livepast_ids:, prefecture_livefuture_ids:)
+    if prefecture_livepast_ids.present?
+      create_user_prefecture_by_status!(prefecture_livepast_ids, 'livepast')
+    end
 
-  def create_user_prefecture!(user, ids, status)
-    ids.each do |pref_id|
-      user.user_prefectures.create!(status: status, prefecture_id: pref_id) if pref_id.present?
+    if prefecture_livefuture_ids.present?
+      create_user_prefecture_by_status!(prefecture_livefuture_ids, 'livefuture')
     end
   end
 end
