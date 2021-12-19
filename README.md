@@ -43,4 +43,3 @@ https://docs.google.com/spreadsheets/d/1a_vUPd7vdDsOCu1KyNnjjT7fMnrHqLz43_Om3dcw
 ## 使用素材
 サイト内の写真はぱくたそから使用しました。
 https://www.pakutaso.com/
-

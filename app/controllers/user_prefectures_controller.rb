@@ -6,10 +6,16 @@ class UserPrefecturesController < ApplicationController
   end
 
   def create
-    # models/user.rbに定義
-    current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livepast_ids], "livepast")
-    current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livefuture_ids], "livefuture")
-    redirect_to user_path(current_user)
+    begin
+    current_user.create_user_prefecture!(
+      prefecture_livepast_ids: params[:user_prefecture][:prefecture_livepast_ids],
+      prefecture_livefuture_ids: params[:user_prefecture][:prefecture_livefuture_ids]
+    )
+    rescue ActiveRecord::RecordInvalid => e
+      logger.error e.full_messages
+    ensure
+      redirect_to user_path(current_user)
+    end
   end
 
   def edit
@@ -19,9 +25,8 @@ class UserPrefecturesController < ApplicationController
   def update
     # 一旦リセットする
     current_user.user_prefectures.delete_all
-    current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livepast_ids], "livepast")
-    current_user.create_user_prefecture_by_status!(params[:user_prefecture][:prefecture_livefuture_ids], "livefuture")
-    redirect_to user_path(current_user)
+    # createと同じ処理
+    create
   end
 
   private
