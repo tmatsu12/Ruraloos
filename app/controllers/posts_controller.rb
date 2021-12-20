@@ -27,8 +27,8 @@ class PostsController < ApplicationController
 
   def sort_prefecture_posts
     @prefecture = Prefecture.find(session[:prefecture_id])
-    @residents = @prefecture.find_people("livepast")
-    @wannalivings = @prefecture.find_people("livefuture")
+    @residents = @prefecture.find_people_livepast
+    @wannalivings = @prefecture.find_people_livefuture
     # sort_pref_postsメソッドはprefecture.rbに定義
     if @prefecture.sort_pref_posts(params[:option]).class == Array
       @posts = Kaminari.paginate_array(@prefecture.sort_pref_posts(params[:option])).page(params[:page]).per(25)
