@@ -5,13 +5,13 @@
         <%= render "posts/errors", obj:@user_prefecture %>
         <h1 class="border-bottom border-danger mb-3">ユーザー情報の編集</h1>
         <span>住んだことのある県(更新前)：</span>
-        <% current_user.find_prefectures("livepast").each do |pref_live_past| %>
+        <% current_user.find_prefectures_livepast.each do |pref_live_past| %>
           <%= pref_live_past.prefecture_name %>
         <% end %>
         <br>
         <br>
         <span>住んでみたい県(更新前)：</span>
-        <% current_user.find_prefectures("livefuture").each do |pref_live_future| %>
+        <% current_user.find_prefectures_livefuture.each do |pref_live_future| %>
           <%= pref_live_future.prefecture_name %>
         <% end %>
         <div class="d-flex">
@@ -33,11 +33,11 @@
   var temp_array_live_future = [];
   var prefecture_data = [];
 
-  <% current_user.find_prefectures("livepast").each_with_index do |pref_live_past, x| %>
+  <% current_user.find_prefectures_livepast.each_with_index do |pref_live_past, x| %>
     temp_array_live_past[<%= x %>] = <%= pref_live_past.prefecture_id %>;
   <% end %>
 
-  <% current_user.find_prefectures("livefuture").each_with_index do |pref_live_future, x| %>
+  <% current_user.find_prefectures_livefuture.each_with_index do |pref_live_future, x| %>
     temp_array_live_future[<%= x %>] = <%= pref_live_future.prefecture_id %>;
   <% end %>
 

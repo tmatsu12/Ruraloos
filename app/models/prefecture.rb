@@ -2,11 +2,11 @@ class Prefecture < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :user_prefectures, dependent: :destroy
 
-  def livepast_prefectures
+  def find_people_livepast
     user_prefectures.includes(:user).livepast
   end
 
-  def livefuture_prefectures
+  def find_people_livefuture
     user_prefectures.includes(:user).livefuture
   end
 

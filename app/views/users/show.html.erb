@@ -16,8 +16,8 @@
             <% end %>
             <h5 class="mt-3 mb-4">名前：<%= @user.name %></h5>
             <h5 style="color:hsl(180, 70%, 45%);">住んだことのある県：</h5>
-            <% if @user.find_prefectures("livepast").exists? %>
-              <% @user.find_prefectures("livepast").each do |pref_live_past| %>
+            <% if @user.find_prefectures_livepast.exists? %>
+              <% @user.find_prefectures_livepast.each do |pref_live_past| %>
                 <%= link_to pref_live_past.prefecture_name, posts_path(prefecture_id: pref_live_past.prefecture_id), class: "link pref" %>
               <% end %>
             <% else %>
@@ -26,8 +26,8 @@
             <br>
             <br>
             <h5 style="color:hsl(0, 70%, 45%);">住んでみたい県：</h5>
-            <% if @user.find_prefectures("livefuture").exists? %>
-              <% @user.find_prefectures("livefuture").each do |pref_live_future| %>
+            <% if @user.find_prefectures_livefuture.exists? %>
+              <% @user.find_prefectures_livefuture.each do |pref_live_future| %>
                 <%= link_to pref_live_future.prefecture_name, posts_path(prefecture_id: pref_live_future.prefecture_id), class: "link pref" %>
               <% end %>
             <% else %>
@@ -76,11 +76,11 @@
   var temp_array_live_future = [];
   var prefecture_data = [];
 
-  <% @user.find_prefectures("livepast").each_with_index do |pref_live_past, x| %>
+  <% @user.find_prefectures_livepast.each_with_index do |pref_live_past, x| %>
     temp_array_live_past[<%= x %>] = <%= pref_live_past.prefecture_id %>;
   <% end %>
 
-  <% @user.find_prefectures("livefuture").each_with_index do |pref_live_future, x| %>
+  <% @user.find_prefectures_livefuture.each_with_index do |pref_live_future, x| %>
     temp_array_live_future[<%= x %>] = <%= pref_live_future.prefecture_id %>;
   <% end %>
 
