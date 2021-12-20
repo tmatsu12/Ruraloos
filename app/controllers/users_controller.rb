@@ -11,7 +11,12 @@ class UsersController < ApplicationController
 
   def sort
     @user = User.find(params[:id])
-    @posts = @user.sort_users_posts(params[:option].to_i, params[:page]) # user.rbに定義
+    # sort_users_postsメソッドはuser.rbに定義
+    if @user.sort_users_posts(params[:option]).class == Array
+      @posts = Kaminari.paginate_array(@user.sort_users_posts(params[:option])).page(params[:page]).per(25)
+    else
+      @posts = @user.sort_users_posts(params[:option]).page(params[:page]).per(25)
+    end
     render :show
   end
 
