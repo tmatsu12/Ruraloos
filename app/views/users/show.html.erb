@@ -39,7 +39,9 @@
             <% else %>
               <p>まだ未入力です。</p>
             <% end %>
-            <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary btn-text w-100 mt-4 rounded-pill" %>
+            <% if @user.be_identical?(current_user) %>
+              <%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary btn-text w-100 mt-4 rounded-pill" %>
+            <% end %>
           </div>
           <div class="col-7" id="notification_area">
             <h5 class="mt-4"><%= @user.name %>さんの<span style="color:hsl(180, 70%, 45%);">住んだことのある県</span>と<span style="color:hsl(0, 70%, 45%);">住んでみたい県</span></h5>
