@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between">
           <h1 class="border-bottom">全ての質問(<%= @posts.count %>件)</h1>
           <div class="btn-group btn-group-toggle">
-            <%= render partial: 'btn_group', locals: { obj: params[:option].to_i, url: request.path } %>
+            <%= render partial: 'btn_group', locals: { obj: params[:option], url: request.path } %>
           </div>
         </div>
         <div class="row row-cols-3">

@@ -25,16 +25,15 @@ class User < ApplicationRecord
     self == user
   end
 
-  def sort_users_posts(option, page)
-    if option == 1
-      posts.includes(:prefecture).page(page).order(updated_at: :desc).per(25)
+  def sort_users_posts(option)
+    if option == "SortByOrder"
+      posts.includes(:prefecture).order(updated_at: :desc)
     else
-      Kaminari.paginate_array(Post.includes(:prefecture, :user).find(Favorite.where(user_id: id).pluck(:post_id))).page(page).per(25)
-      # Post.find(~)は配列になっていて、配列に対してkaminariを使うには上記のようになる
+      Post.includes(:prefecture, :user).find(Favorite.where(user_id: id).pluck(:post_id))
     end
   end
 
-  def self.guest # チェリー本「クラスメソッドの定義について：そのクラスに関連は深いものの、各インスタンスに含まれるデータは使わないメソッドを定義したい場合もある」
+  def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲスト"

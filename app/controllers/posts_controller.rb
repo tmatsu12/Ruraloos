@@ -16,7 +16,12 @@ class PostsController < ApplicationController
   end
 
   def sort_all_posts
-    @posts = sort_posts(params[:option].to_i, params[:page]) # PostsHelperに定義
+    # sort_postsメソッドはposts_helper.rbに定義
+    if sort_posts(params[:option]).class == Array
+      @posts = Kaminari.paginate_array(sort_posts(params[:option])).page(params[:page]).per(25)
+    else
+      @posts = sort_posts(params[:option]).page(params[:page]).per(25)
+    end
     render :all_posts
   end
 
@@ -24,7 +29,12 @@ class PostsController < ApplicationController
     @prefecture = Prefecture.find(session[:prefecture_id])
     @residents = @prefecture.find_people("livepast")
     @wannalivings = @prefecture.find_people("livefuture")
-    @posts = @prefecture.sort_pref_posts(params[:option].to_i, params[:page]) # prefecture.rbに定義
+    # sort_pref_postsメソッドはprefecture.rbに定義
+    if @prefecture.sort_pref_posts(params[:option]).class == Array
+      @posts = Kaminari.paginate_array(@prefecture.sort_pref_posts(params[:option])).page(params[:page]).per(25)
+    else
+      @posts = @prefecture.sort_pref_posts(params[:option]).page(params[:page]).per(25)
+    end
     render :index # sessionでprefecture_idの情報は保持している
   end
 

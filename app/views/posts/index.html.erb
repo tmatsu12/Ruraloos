@@ -32,11 +32,11 @@
         <div class="d-flex justify-content-between mb-2">
           <h3 class="mt-4 border-bottom border-success">質問(<%= @posts.count %>件)</h3>
           <div class="btn-group btn-group-toggle mt-4">
-            <%= render partial: 'btn_group', locals: { obj: params[:option].to_i, url: request.path } %>
+            <%= render partial: 'btn_group', locals: { obj: params[:option], url: request.path } %>
           </div>
         </div>
         <% if !@posts.blank? %>
-        <!--いいね順並び替え時のKaminariのせいで@postsが配列になりexists?が使えなくなったためblank?に変更-->
+        <!--いいね順並び替え時のKaminariによって@postsが配列になりexists?が使えなくなったためblank?に変更-->
           <div class="row row-cols-3">
             <%= render partial: "posts/post", collection: @posts, as: "post" %>
           </div>
