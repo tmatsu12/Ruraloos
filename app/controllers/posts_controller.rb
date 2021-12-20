@@ -7,8 +7,8 @@ class PostsController < ApplicationController
     @prefecture = Prefecture.find(params[:prefecture_id])
     session[:prefecture_id] = params[:prefecture_id] # sort_prefecture_postsアクションで使うため
     @posts = @prefecture.posts.includes(:user).page(params[:page]).order(updated_at: :desc)
-    @residents = @prefecture.find_people("livepast") # prefecture.rbで定義
-    @wannalivings = @prefecture.find_people("livefuture") # 同上
+    @residents = @prefecture.livepast_prefectures # prefecture.rbで定義
+    @wannalivings = @prefecture.livefuture_prefectures # 同上
   end
 
   def all_posts
