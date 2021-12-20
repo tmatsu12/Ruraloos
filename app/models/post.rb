@@ -74,4 +74,28 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  def self.search_for(content, prefecture_id, method)
+    if method == 'perfect'
+      search_by_prefecture_or_city(prefecture_id, content)
+    else
+      search_by_prefecture_or_city_like(prefecture_id, content)
+    end
+  end
+
+  def self.search_by_prefecture_or_city(prefecture_id, content)
+    if content.present?
+      includes(:prefecture, :user).where(city: content)
+    else
+      includes(:prefecture, :user).where(prefecture_id: prefecture_id)
+    end
+  end
+
+  def self.search_by_prefecture_or_city_like(prefecture_id, content)
+    if content.present?
+      includes(:prefecture, :user).where('city LIKE ?', "%#{content}%")
+    else
+      includes(:prefecture, :user).where(prefecture_id: prefecture_id)
+    end
+  end
 end
