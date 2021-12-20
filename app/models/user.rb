@@ -17,8 +17,12 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 20 }
   validates :introduction, length: { maximum: 800 }
 
-  def find_prefectures(status)
-    user_prefectures.includes(:prefecture).where(status: status)
+  def find_prefectures_livepast
+    user_prefectures.includes(:prefecture).livepast
+  end
+
+  def find_prefectures_livefuture
+    user_prefectures.includes(:prefecture).livefuture
   end
 
   def be_identical?(user)
