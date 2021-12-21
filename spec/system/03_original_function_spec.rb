@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 describe 'ユーザー定義メソッドのテスト' do
-  # let, let!及びcreateとbuildの使い分けを意識した。
-  # ランキング・通知機能関連のメソッドのテストはややこしいので保留
+  # let, let!及びcreateとbuildの使い分けを意識した
+  # 通知機能関連のメソッドのテストはややこしいので保留
   let(:user) { build(:user) }
   let(:prefecture) { build(:prefecture) }
-  # 9行目：letだとダメ。16,22行目でnilに対して.firstをすることになりエラーとなる
+  # 9行目：letだとダメ。findのテストの左辺でnilに対して.firstをすることになりエラーとなる
   let!(:user_prefecture) { create(:user_prefecture, user: user, prefecture: prefecture) }
   let(:post) { build(:post, user: user, prefecture: prefecture) }
   let!(:post_comment) { create(:post_comment, user: user, post: post) }
@@ -13,6 +13,8 @@ describe 'ユーザー定義メソッドのテスト' do
 
   describe 'find_prefectures_livepastのテスト' do
     it '中間テーブルUserPrefectureを介して県名を正しく表示する' do
+      # 18行目も9行目のuserと同じuserがよばれる。少し混乱した
+      # letはあくまで遅延させるだけでよばれる度に別のインスタンスを作るわけではないようだ
       expect(user.find_prefectures_livepast.first.prefecture_name).to eq "北海道"
     end
   end

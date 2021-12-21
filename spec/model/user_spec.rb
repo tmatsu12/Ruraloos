@@ -4,7 +4,9 @@ RSpec.describe 'Userモデルのテスト', type: :model do
   describe 'バリデーションのテスト' do
     subject { user.valid? }
 
-    let!(:other_user) { create(:user) }
+    # 7行目はletでもlet!でもOKだが、buildにするとダメになる
+    # これはother_userのemailがDBに保存されていないため34行目で失敗することによる
+    let(:other_user) { create(:user) }
     let(:user) { build(:user) }
 
     context 'nameカラム' do
@@ -26,8 +28,6 @@ RSpec.describe 'Userモデルのテスト', type: :model do
       end
     end
 
-    # 7行目はletでもlet!でもOKだが、buildにするとダメになる
-    # これはother_userのemailがDBに保存されていないことによる
     context 'emailカラム' do
       it '一意であること' do
         user.email = other_user.email

@@ -6,7 +6,7 @@ RSpec.describe 'Postモデルのテスト', type: :model do
 
     let(:user) { create(:user) }
     let(:prefecture) { create(:prefecture) }
-    let!(:post) { build(:post, user: user, prefecture: prefecture) }
+    let(:post) { build(:post, user: user, prefecture: prefecture) }
 
     context 'titleカラム' do
       it '空欄でないこと' do
