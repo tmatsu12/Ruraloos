@@ -11,14 +11,14 @@ describe 'ユーザー定義メソッドのテスト' do
   let!(:post_comment) { create(:post_comment, user: user, post: post) }
   let!(:reply) { create(:post_comment, user: user, post: post, parent_id: post_comment.id) }
 
-  describe 'find_prefectures(status)のテスト' do
-    it '中間テーブルUserPrefを介して県名を正しく表示する' do
+  describe 'find_prefectures_livepastのテスト' do
+    it '中間テーブルUserPrefectureを介して県名を正しく表示する' do
       expect(user.find_prefectures_livepast.first.prefecture_name).to eq "北海道"
     end
   end
 
-  describe 'find_people(status)のテスト' do
-    it '中間テーブルUserPrefを介してユーザー名を正しく表示する' do
+  describe 'find_people_livepastのテスト' do
+    it '中間テーブルUserPrefectureを介してユーザー名を正しく表示する' do
       expect(prefecture.find_people_livepast.first.user_name).to eq user.name
     end
   end
