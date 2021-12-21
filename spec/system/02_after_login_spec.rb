@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'ユーザーログイン後のテスト' do
-  let!(:user) { create(:user) }
   let!(:prefecture) { create(:prefecture) }
-  let!(:post) { create(:post, user: user, prefecture: prefecture) }
+  let(:user) { create(:user) }
+  let(:post) { create(:post, user: user, prefecture: prefecture) }
 
   before do
     visit new_user_session_path
@@ -49,9 +49,6 @@ describe 'ユーザーログイン後のテスト' do
       it 'bodyが正しく更新される' do
         expect(post.reload.body).not_to eq @post_old_body
       end
-      # it 'hoge' do
-      #   expect(post.written_by?(user)).to eq true
-      # end
       it 'リダイレクト先が、更新した質問の詳細画面になっている' do
         expect(current_path).to eq '/posts/' + post.id.to_s
       end

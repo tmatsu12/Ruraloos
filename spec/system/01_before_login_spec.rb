@@ -56,9 +56,9 @@ describe 'ユーザーログイン前のテスト' do
   end
 
   describe 'ユーザー認証のテスト' do
-    let!(:user) { create(:user) }
-    let!(:prefecture) { create(:prefecture) }
-    let!(:post) { create(:post, user: user, prefecture: prefecture) }
+    let(:prefecture) { build(:prefecture) }
+    let(:user) { create(:user) }
+    let(:post) { create(:post, user: user, prefecture: prefecture) }
 
     context 'ユーザー認証失敗のテスト' do
       it '新規質問ページにアクセスできなく、ログイン画面にリダイレクトされる' do
