@@ -45,25 +45,25 @@ class PostsController < ApplicationController
   end
 
   def show
-    # 投稿を詳細ページで削除後マイページに飛ぶが、そこから左上の戻るボタンで詳細ページに戻るとエラーになるのでその対策で例外処理
+    @post = Post.find(params[:id])
+    impressionist(@post, nil, :unique => [:session_hash.to_s])
+    @page_views = @post.impressionist_count
+    @post_comment = PostComment.new
+    @prefecture = @post.prefecture
+    @user = @post.user
+    @address = @post.prefecture_name + @post.city
     begin
-      @post = Post.find(params[:id])
-      impressionist(@post, nil, :unique => [:session_hash.to_s])
-      @page_views = @post.impressionist_count
-      @post_comment = PostComment.new
-      @prefecture = @post.prefecture
-      @user = @post.user
-      @address = @post.prefecture_name + @post.city
-      begin
-        results = Geocoder.search(@address)
-        @latlng = results.first.coordinates
-      rescue
-        @latlng = [40.7828, -73.9653] # おかしな地名が入力された場合はNewYorkを表示
-        flash[:notice] = "#{@prefecture.name}内の市町村ですか？市町村名を間違っていませんか？"
-      end
+      results = Geocoder.search(@address)
+      @latlng = results.first.coordinates
+    rescue
+      @latlng = [40.7828, -73.9653] # おかしな地名が入力された場合はNewYorkを表示
+      flash[:notice] = "#{@prefecture.name}内の市町村ですか？市町村名を間違っていませんか？"
+    end
+    # 投稿を詳細ページで削除してマイページに飛んだ後、左上の戻るボタンで
+    # 詳細ページに戻りリロードするとエラーになるのでその対策が必要
+    # これは例外処理のbegin/endを省略できるケースに当たる
     rescue
       redirect_to all_posts_path
-    end
   end
 
   def create
