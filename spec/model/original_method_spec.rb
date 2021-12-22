@@ -13,8 +13,6 @@ describe 'ユーザー定義メソッドのテスト' do
 
   describe 'find_prefectures_livepastのテスト' do
     it '中間テーブルUserPrefectureを介して県名を正しく表示する' do
-      # 18行目も9行目のuserと同じuserがよばれる。少し混乱した
-      # letはあくまで遅延させるだけでよばれる度に別のインスタンスを作るわけではないようだ
       expect(user.find_prefectures_livepast.first.prefecture_name).to eq "北海道"
     end
   end
@@ -22,6 +20,16 @@ describe 'ユーザー定義メソッドのテスト' do
   describe 'find_people_livepastのテスト' do
     it '中間テーブルUserPrefectureを介してユーザー名を正しく表示する' do
       expect(prefecture.find_people_livepast.first.user_name).to eq user.name
+    end
+  end
+
+  describe 'create_user_prefecture_by_status!のテスト' do
+    it '複数のuser_prefectureインスタンスを正しく保存できるか確認する' do
+      n = 5
+      # create_listで生成されるインスタンスは一意とは限らないのでたまに失敗する
+      ids = create_list(:prefecture, n).map(&:id)
+      user.create_user_prefecture_by_status!(ids, 'livepast')
+      expect(UserPrefecture.count).to eq (n + 1)
     end
   end
 
