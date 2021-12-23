@@ -13,20 +13,31 @@ describe 'ユーザーログイン後のテスト' do
   end
 
   describe '新規質問するテスト' do
-    before do
-      visit new_post_path
-      fill_in 'post[title]', with: Faker::Lorem.characters(number: 5)
-      select prefecture.name, from: 'post[prefecture_id]'
-      fill_in 'post[body]', with: Faker::Lorem.characters(number: 5)
-    end
-
     context '新規質問成功のテスト' do
+      before do
+        visit new_post_path
+        fill_in 'post[title]', with: Faker::Lorem.characters(number: 5)
+        select prefecture.name, from: 'post[prefecture_id]'
+        fill_in 'post[body]', with: Faker::Lorem.characters(number: 5)
+      end
+
       it '新規質問が正しく保存される' do
         expect { click_button '質問する' }.to change { Post.count }.by(1)
       end
       it 'リダイレクト先が、保存できた質問の詳細画面になっている' do
         click_button '質問する'
         expect(current_path).to eq '/posts/' + Post.last.id.to_s
+      end
+    end
+
+    context '新規質問失敗のテスト' do
+      before do
+        visit new_post_path
+        click_button '質問する'
+      end
+
+      it 'バリデーションエラーが表示される' do
+        expect(page).to have_content "エラーが発生"
       end
     end
   end
