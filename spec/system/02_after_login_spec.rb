@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'ユーザーログイン後のテスト' do
   let!(:prefecture) { create(:prefecture) }
   let(:user) { create(:user) }
-  let(:post) { create(:post, user: user, prefecture: prefecture) }
+  let!(:post) { create(:post, user: user, prefecture: prefecture) }
 
   before do
     visit new_user_session_path
@@ -73,7 +73,7 @@ describe 'ユーザーログイン後のテスト' do
     end
 
     context '回答成功のテスト' do
-      xit '回答が正しく保存される', js: true do
+      it '回答が正しく保存される', js: true do
         expect { click_button '回答する' }.to change { PostComment.count }.by(1)
       end
     end
