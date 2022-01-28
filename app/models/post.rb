@@ -83,6 +83,7 @@ class Post < ApplicationRecord
     end
   end
 
+  # 完全一致の場合のメソッド
   def self.search_by_prefecture_or_city(prefecture_id, content)
     if content.present?
       includes(:prefecture, :user).where(city: content)
@@ -91,6 +92,7 @@ class Post < ApplicationRecord
     end
   end
 
+  # 部分一致の場合のメソッド
   def self.search_by_prefecture_or_city_like(prefecture_id, content)
     if content.present?
       includes(:prefecture, :user).where('city LIKE ?', "%#{content}%")

@@ -3,6 +3,7 @@ module PostsHelper
     if option == "SortByOrder"
       Post.all.includes(:prefecture, :user).order(updated_at: :desc)
     else
+      # findの引数が配列なので、sort_postsの戻り値も配列になる
       Post.includes(:prefecture, :user).find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))
     end
   end
