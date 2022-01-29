@@ -2,6 +2,8 @@ class PostCommentsController < ApplicationController
   before_action :authenticate_user!
 
   def new
+    # _index.html.erb中の返信ボタンを押すと、非同期通信によってnew.js.erbがよばれる。
+    # jQueryによって返信フォームが返信コメントの下に表示される。
     @post = Post.find(params[:post_id])
     @post_comment = @post.post_comments.new(parent_id: params[:parent_id])
   end
