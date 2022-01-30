@@ -7,12 +7,16 @@ class UserPrefecturesController < ApplicationController
 
   def create
     begin
+    # user.rbにcreate_user_prefecture!を定義
+    # 内部でcreate_user_prefecture_by_status!がよびだされる
     current_user.create_user_prefecture!(
       prefecture_livepast_ids: params[:user_prefecture][:prefecture_livepast_ids],
       prefecture_livefuture_ids: params[:user_prefecture][:prefecture_livefuture_ids]
     )
+    # バリデーションに失敗した時に例外処理させる
     rescue ActiveRecord::RecordInvalid => e
       logger.error e.full_messages
+    # 例外処理発生の有無に関わらずredirectさせる
     ensure
       redirect_to user_path(current_user)
     end
