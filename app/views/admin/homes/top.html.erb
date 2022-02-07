@@ -84,6 +84,7 @@
         <div class="card-body">
           <h5 class="card-title">Post.joins(:favorites).group("posts.id").order("count_all desc").count</h5>
           <p><%= @res4_ar %></p>
+          <p class="text-muted">Memo: Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))より分かりやすい</p>
         </div>
       </div>
 
@@ -92,8 +93,8 @@
         <div class="card-body">
           <h5 class="card-title">Prefecture.joins(:user_prefectures).where("user_prefectures.status": "livefuture").group("prefectures.name").order("count_all desc").limit(3).count</h5>
           <p><%= @res5_ar %></p>
-          <p class="text-muted">Memo：temp_ids = UserPrefecture.where(status: "livefuture").group(:prefecture_id).order('count(prefecture_id) desc').limit(3).pluck(:prefecture_id)
-          を使うよりスマートな気がする</p>
+          <p class="text-muted">Memo: temp_ids = UserPrefecture.where(status: "livefuture").group(:prefecture_id).order('count(prefecture_id) desc').limit(3).pluck(:prefecture_id)
+          という配列を求めるより良い</p>
         </div>
       </div>
 
