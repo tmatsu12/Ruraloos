@@ -84,7 +84,7 @@
         <div class="card-body">
           <h5 class="card-title">Post.joins(:favorites).group("posts.id").order("count_all desc").count</h5>
           <p><%= @res4_ar %></p>
-          <p class="text-muted">Memo: Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))より分かりやすい</p>
+          <p class="text-muted">Memo: Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))よりクエリ発行回数が少なくて済む</p>
         </div>
       </div>
 
